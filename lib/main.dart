@@ -1,4 +1,7 @@
+import 'package:countries_app/screens/login/login_screen.dart';
 import 'package:flutter/material.dart';
+
+import 'screens/verfication/verfication_screen.dart';
 
 void main() {
   runApp(const MainApp());
@@ -9,12 +12,6 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
-        ),
-      ),
-    );
+    return const MaterialApp(home: LoginScreen());
   }
 }
