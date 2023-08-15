@@ -1,11 +1,11 @@
 import 'package:countries_app/locater.dart';
 import 'package:countries_app/screens/login/login_screen.dart';
 import 'package:countries_app/screens/startup/startup_bloc.dart';
+import 'package:countries_app/screens/startup/widgets/list_tile_widget.dart';
 import 'package:countries_app/services/hive.dart';
 import 'package:flutter/material.dart';
 import '../../constants.dart';
 import '../../main.dart';
-import '../../services/api.dart';
 
 class StartupScreen extends StatefulWidget {
   const StartupScreen({super.key});
@@ -19,8 +19,7 @@ class _StartupScreenState extends State<StartupScreen> {
 
   @override
   void initState() {
-    print(startupBloc.countries);
-
+    startupBloc.getCountries();
     super.initState();
   }
 
@@ -54,8 +53,6 @@ class _StartupScreenState extends State<StartupScreen> {
                             boxName: languageHiveBox,
                             key: languageHiveKey,
                             value: startupBloc.language!);
-                        print(startupBloc.language);
-                        await locator<ApiService>().getCountriesData;
                         if (mounted) MainApp.of(context)?.rebuild();
                         setState(() {});
                         fun();
@@ -85,7 +82,6 @@ class _StartupScreenState extends State<StartupScreen> {
                             boxName: languageHiveBox,
                             key: languageHiveKey,
                             value: startupBloc.language!);
-                        print(startupBloc.language);
 
                         if (mounted) MainApp.of(context)?.rebuild();
                         setState(() {});
@@ -104,27 +100,26 @@ class _StartupScreenState extends State<StartupScreen> {
               ),
             ),
             Expanded(
-              child: ListView.builder(
-                itemCount: startupBloc.countries.length,
-                itemBuilder: (context, index) {
-                  return GestureDetector(
-                    onTap: () {
-                      // Handle item click
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => LoginScreen(
-                              country: startupBloc.countries[index]),
-                        ),
-                      );
-                    },
-                    child: ListTile(
-                      title: Text(startupBloc.countries[index].name!),
-                      // trailing: Text(startupBloc.countries[index].flag),
-                    ),
-                  );
-                },
-              ),
+              child: StreamBuilder<Object>(
+                  stream: startupBloc.countriesStreamController.stream,
+                  builder: (context, snapshot) {
+                    return ListView.builder(
+                      itemCount: startupBloc.countries.length,
+                      itemBuilder: (context, index) {
+                        return ListTileWidget(
+                          pushNextScreen: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => LoginScreen(
+                                      country: startupBloc.countries[index]),
+                                ));
+                          },
+                          country: startupBloc.countries[index],
+                        );
+                      },
+                    );
+                  }),
             ),
           ],
         ));
