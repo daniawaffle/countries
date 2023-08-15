@@ -1,7 +1,12 @@
+import 'package:countries_app/locater.dart';
 import 'package:countries_app/screens/startup/startup_bloc.dart';
+import 'package:countries_app/services/hive.dart';
 import 'package:flutter/material.dart';
+import 'package:localization/localization.dart';
 
 import '../../constants.dart';
+import '../../main.dart';
+import '../../services/api.dart';
 
 class StartupScreen extends StatefulWidget {
   const StartupScreen({super.key});
@@ -12,15 +17,13 @@ class StartupScreen extends StatefulWidget {
 
 class _StartupScreenState extends State<StartupScreen> {
   StartupBloc startupBloc = StartupBloc();
-  List<Country> countries = [
-    Country(name: 'USA', flag: '🇺🇸'),
-    Country(name: 'Canada', flag: '🇨🇦'),
-    Country(name: 'Australia', flag: '🇦🇺'),
-    Country(name: 'France', flag: '🇫🇷'),
-    Country(name: 'Germany', flag: '🇩🇪'),
-    Country(name: 'Japan', flag: '🇯🇵'),
-    Country(name: 'China', flag: '🇨🇳'),
-  ];
+
+  @override
+  void initState() {
+    print(startupBloc.countries);
+    startupBloc.getCountries();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,13 +47,22 @@ class _StartupScreenState extends State<StartupScreen> {
                             ? Colors.blue
                             : Colors.white,
                       ),
-                      onPressed: () {
+                      onPressed: () async {
                         startupBloc.language = "English";
 
+                        await locator<HiveService>().setValue<String>(
+                            boxName: languageHiveBox,
+                            key: languageHiveKey,
+                            value: startupBloc.language!);
+                        print(startupBloc.language);
+                        await locator<ApiService>().getCountriesData;
+                        if (mounted) MainApp.of(context)?.rebuild();
                         setState(() {});
+                        fun();
                       },
                       child: Text(
-                        "English",
+                        // 'english-text'.i18n(),
+                        'Abed-text'.i18n(),
                         style: TextStyle(
                             color: startupBloc.language == "English"
                                 ? Colors.white
@@ -66,13 +78,21 @@ class _StartupScreenState extends State<StartupScreen> {
                             ? Colors.blue
                             : Colors.white,
                       ),
-                      onPressed: () {
+                      onPressed: () async {
                         startupBloc.language = "Arabic";
 
+                        await locator<HiveService>().setValue<String>(
+                            boxName: languageHiveBox,
+                            key: languageHiveKey,
+                            value: startupBloc.language!);
+                        print(startupBloc.language);
+
+                        if (mounted) MainApp.of(context)?.rebuild();
                         setState(() {});
+                        fun();
                       },
                       child: Text(
-                        "Arabic",
+                        'arabic-text'.i18n(),
                         style: TextStyle(
                             color: startupBloc.language == "Arabic"
                                 ? Colors.white
@@ -85,20 +105,16 @@ class _StartupScreenState extends State<StartupScreen> {
             ),
             Expanded(
               child: ListView.builder(
-                itemCount: countries.length,
+                itemCount: startupBloc.countries.length,
                 itemBuilder: (context, index) {
                   return GestureDetector(
                     onTap: () {
                       // Handle item click
-                      print('Clicked: ${countries[index].name}');
+                      print('Clicked: ${startupBloc.countries[index].name}');
                     },
                     child: ListTile(
-                      title: Text(
-                        startupBloc.language == languagesList[0]
-                            ? countries[index].name
-                            : getArabicCountryName(countries[index].name),
-                      ),
-                      trailing: Text(countries[index].flag),
+                      title: Text(startupBloc.countries[index].name!),
+                      // trailing: Text(startupBloc.countries[index].flag),
                     ),
                   );
                 },
@@ -108,23 +124,7 @@ class _StartupScreenState extends State<StartupScreen> {
         ));
   }
 
-  String getArabicCountryName(String englishName) {
-    // You can implement your own translation logic here
-    // This is just a placeholder
-    if (englishName == 'USA') return 'الولايات المتحدة';
-    if (englishName == 'Canada') return 'كندا';
-    if (englishName == 'Australia') return 'أستراليا';
-    if (englishName == 'France') return 'فرنسا';
-    if (englishName == 'Germany') return 'ألمانيا';
-    if (englishName == 'Japan') return 'اليابان';
-    if (englishName == 'China') return 'الصين';
-    return englishName;
+  void fun() {
+    setState(() {});
   }
-}
-
-class Country {
-  final String name;
-  final String flag;
-
-  Country({required this.name, required this.flag});
 }

@@ -1,9 +1,19 @@
-import 'package:countries_app/screens/startup/startup.dart';
+import 'package:countries_app/constants.dart';
+import 'package:countries_app/screens/startup/startup_screen.dart';
+import 'package:countries_app/services/hive.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:hive_flutter/adapters.dart';
 import 'package:localization/localization.dart';
 
-void main() {
+import 'locater.dart';
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Hive.initFlutter();
+  setupLocator();
+  await locator<HiveService>().openBoxes();
   runApp(const MainApp());
 }
 
@@ -21,12 +31,21 @@ class MainAppState extends State<MainApp> {
   String? locale;
   @override
   void initState() {
-    rebuild();
+    LocalJsonLocalization.delegate.directories = ['lib/i18n/'];
+    locale = getAppLocaleFromLanguage(locator<HiveService>().getValue<String>(
+          boxName: languageHiveBox,
+          key: languageHiveKey,
+        ) ??
+        "en");
+
+    print("====== $locale");
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    print("====== $locale");
+    LocalJsonLocalization.delegate.directories = ['lib/i18n/'];
     return MaterialApp(
         locale: Locale(locale ?? "en"),
         localizationsDelegates: [
@@ -35,14 +54,24 @@ class MainAppState extends State<MainApp> {
           GlobalCupertinoLocalizations.delegate,
           LocalJsonLocalization.delegate,
         ],
-        supportedLocales: [Locale(locale ?? "en")],
+        supportedLocales: const [
+          Locale('en', ''),
+          Locale('ar', ''),
+        ],
         debugShowCheckedModeBanner: false,
         home: const StartupScreen());
   }
 
   void rebuild() {
-    var appLanguage = "English";
+    String appLanguage = locator<HiveService>().getValue<String>(
+          boxName: languageHiveBox,
+          key: languageHiveKey,
+        ) ??
+        "English";
+    print("********soso");
+    print(appLanguage);
     locale = getAppLocaleFromLanguage(appLanguage);
+
     setState(() {});
   }
 
@@ -50,8 +79,6 @@ class MainAppState extends State<MainApp> {
     switch (appLanguage) {
       case "Arabic":
         return "ar";
-      case "English":
-        return "en";
       default:
         return "en";
     }
