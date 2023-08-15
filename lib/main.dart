@@ -1,3 +1,4 @@
+
 import 'package:countries_app/constants.dart';
 import 'package:countries_app/screens/startup/startup_screen.dart';
 import 'package:countries_app/services/hive.dart';
@@ -5,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:localization/localization.dart';
+
 
 import 'locater.dart';
 
@@ -14,6 +16,7 @@ Future<void> main() async {
   await Hive.initFlutter();
   setupLocator();
   await locator<HiveService>().openBoxes();
+
   runApp(const MainApp());
 }
 
@@ -44,6 +47,7 @@ class MainAppState extends State<MainApp> {
 
   @override
   Widget build(BuildContext context) {
+
     print("====== $locale");
     LocalJsonLocalization.delegate.directories = ['lib/i18n/'];
     return MaterialApp(
