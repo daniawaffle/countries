@@ -2,7 +2,6 @@ import 'package:countries_app/constants.dart';
 import 'package:countries_app/screens/startup/startup_screen.dart';
 import 'package:countries_app/services/hive.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:localization/localization.dart';
 

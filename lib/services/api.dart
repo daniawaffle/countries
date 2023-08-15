@@ -31,4 +31,60 @@ class ApiService {
       return _countries;
     }
   }
+
+  Future sendOtpRequest(
+      {required String phoneNumber, required int countryId}) async {
+    final response = await _dio.post(
+      'client-auth-debug',
+      data: {
+        'mobile_number': phoneNumber,
+        'os_type': 'iOS',
+        'country_id': 1,
+        'device_type_name': 'iPhone 6',
+        'os_version': '16.1',
+        'app_version': '1.0',
+      },
+    );
+
+    if (response.statusCode == 200) {
+      final responseData = response.data['data'];
+      final lastOtp = responseData['last_otp'];
+      print(response);
+      print('Last OTP: $lastOtp');
+    } else {
+      print(response.statusCode);
+    }
+    return response;
+  }
+
+  Future<void> verifyUser(
+      {required String phoneNumber,
+      required int countryId,
+      required int userId,
+      required String lastOTP}) async {
+    print('$lastOTP 3nd el verify');
+    final response = await _dio.post(
+      'client-auth-verify',
+      data: {
+        "mobile_number": phoneNumber,
+        "user_id": userId,
+        "os_type": "iOS",
+        "country_id": countryId,
+        "device_type_name": "iPhone",
+        "os_version": "16.0",
+        "app_version": "1.0.0",
+        "otp": lastOTP,
+        "api_key": "00101"
+      },
+    );
+
+    if (response.statusCode == 200) {
+      final responseData = response.data['data'];
+      final lastOtp = responseData['last_otp'];
+      print(response);
+      print('Last OTP: $lastOtp'); // Print the last_otp value
+    } else {
+      print(response.statusCode);
+    }
+  }
 }

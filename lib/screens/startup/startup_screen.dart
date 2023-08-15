@@ -110,7 +110,7 @@ class _StartupScreenState extends State<StartupScreen> {
                   return GestureDetector(
                     onTap: () {
                       // Handle item click
-                      Navigator.pushReplacement(
+                      Navigator.push(
                         context,
                         MaterialPageRoute(
                           builder: (context) => LoginScreen(
