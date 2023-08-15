@@ -7,7 +7,8 @@ import 'package:otp_text_field/style.dart';
 import 'package:otp_timer_button/otp_timer_button.dart';
 
 class VerificationScreen extends StatefulWidget {
-  const VerificationScreen({super.key});
+  final lastOTP;
+  const VerificationScreen({super.key, required this.lastOTP});
 
   @override
   State<VerificationScreen> createState() => _VerificationScreenState();
@@ -15,23 +16,27 @@ class VerificationScreen extends StatefulWidget {
 
 class _VerificationScreenState extends State<VerificationScreen> {
   VerificationBloc verBloc = VerificationBloc();
+  String otpp = '';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
         child: SingleChildScrollView(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Image.asset(
-                'assets/earth_logo.jpeg',
+                'assets/globe.png',
                 fit: BoxFit.fitWidth,
-                height: 175,
-                width: 175,
+                height: 50,
+                width: 50,
+              ),
+              const SizedBox(
+                height: 20,
               ),
               OTPTextField(
                   controller: verBloc.otpController,
-                  length: 4,
+                  length: 6,
                   width: MediaQuery.of(context).size.width,
                   textFieldAlignment: MainAxisAlignment.center,
                   fieldWidth: 50,
@@ -43,15 +48,28 @@ class _VerificationScreenState extends State<VerificationScreen> {
                   },
                   onCompleted: (pin) {
                     print("Completed: " + pin);
+
+                    otpp = pin;
                   }),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
-              ElevatedButton(onPressed: () {}, child: const Text('Next')),
+              ElevatedButton(
+                onPressed: () {
+                  if (widget.lastOTP == otpp) {
+                    print('Login success');
+                  } else {
+                    print('login Failed');
+                    print(widget.lastOTP);
+                    print(verBloc.otpController);
+                  }
+                },
+                child: const Text('Login'),
+              ),
               OtpTimerButton(
                 controller: verBloc.resendController,
                 onPressed: () => verBloc.requestOtp(),
-                text: Text('Resend OTP'),
+                text: const Text('Resend OTP'),
                 duration: 60,
               ),
             ],

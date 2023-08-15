@@ -8,8 +8,14 @@ class VerificationBloc {
 
   requestOtp() {
     resendController.loading();
-    Future.delayed(Duration(seconds: 2), () {
+    Future.delayed(const Duration(seconds: 2), () {
       resendController.startTimer();
     });
+  }
+
+  bool isLoading = false;
+
+  Future<void> login() async {
+    isLoading = true;
   }
 }
