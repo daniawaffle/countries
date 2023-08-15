@@ -1,9 +1,8 @@
 import 'package:countries_app/locater.dart';
+import 'package:countries_app/screens/login/login_screen.dart';
 import 'package:countries_app/screens/startup/startup_bloc.dart';
 import 'package:countries_app/services/hive.dart';
 import 'package:flutter/material.dart';
-import 'package:localization/localization.dart';
-
 import '../../constants.dart';
 import '../../main.dart';
 import '../../services/api.dart';
@@ -21,12 +20,13 @@ class _StartupScreenState extends State<StartupScreen> {
   @override
   void initState() {
     print(startupBloc.countries);
-    startupBloc.getCountries();
+
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    startupBloc.getCountries();
     return Scaffold(
         appBar: AppBar(
           title: const Text('Country API'),
@@ -62,7 +62,7 @@ class _StartupScreenState extends State<StartupScreen> {
                       },
                       child: Text(
                         // 'english-text'.i18n(),
-                        'Abed-text'.i18n(),
+                        "English",
                         style: TextStyle(
                             color: startupBloc.language == "English"
                                 ? Colors.white
@@ -92,7 +92,7 @@ class _StartupScreenState extends State<StartupScreen> {
                         fun();
                       },
                       child: Text(
-                        'arabic-text'.i18n(),
+                        "Arabic",
                         style: TextStyle(
                             color: startupBloc.language == "Arabic"
                                 ? Colors.white
@@ -110,7 +110,13 @@ class _StartupScreenState extends State<StartupScreen> {
                   return GestureDetector(
                     onTap: () {
                       // Handle item click
-                      print('Clicked: ${startupBloc.countries[index].name}');
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => LoginScreen(
+                              country: startupBloc.countries[index]),
+                        ),
+                      );
                     },
                     child: ListTile(
                       title: Text(startupBloc.countries[index].name!),

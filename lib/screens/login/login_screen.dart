@@ -1,3 +1,4 @@
+import 'package:countries_app/models/country_model.dart';
 import 'package:countries_app/screens/verfication/verfication_screen.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +8,7 @@ import '../../model.dart';
 import 'login_bloc.dart';
 
 class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+  const LoginScreen({required Country country, super.key});
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
