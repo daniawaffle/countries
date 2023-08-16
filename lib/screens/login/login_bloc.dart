@@ -1,4 +1,5 @@
-import 'package:countries_app/constants.dart';
+
+import 'package:countries_app/models/country_model.dart';
 import 'package:countries_app/services/api.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +8,9 @@ import '../../locater.dart';
 
 class LoginBLoc {
   final formKey = GlobalKey<FormState>();
-  String? selectedDialCode;
+
+  late Country selectedCountry;
+  final ApiService apiService = ApiService();
 
   TextEditingController numberController = TextEditingController();
 
