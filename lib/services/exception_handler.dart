@@ -15,21 +15,19 @@ class HttpExceptionHandler {
       final response = error.response;
       print(response!.statusCode);
 
-      if (response != null) {
-        switch (response.statusCode) {
-          case 401:
-          case 402:
-          case 403:
-            return HttpResultStatus.unauthorized;
-          case 404:
-            return HttpResultStatus.notFound;
-          case 429:
-            return HttpResultStatus.tooManyRequests;
-          case 500:
-            return HttpResultStatus.serverError;
-          default:
-            return HttpResultStatus.undefined;
-        }
+      switch (response.statusCode) {
+        case 401:
+        case 402:
+        case 403:
+          return HttpResultStatus.unauthorized;
+        case 404:
+          return HttpResultStatus.notFound;
+        case 429:
+          return HttpResultStatus.tooManyRequests;
+        case 500:
+          return HttpResultStatus.serverError;
+        default:
+          return HttpResultStatus.undefined;
       }
     }
     return HttpResultStatus.undefined;

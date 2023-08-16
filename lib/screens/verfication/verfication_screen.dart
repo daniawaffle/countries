@@ -56,7 +56,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
                     style: const TextStyle(fontSize: 17),
                     onChanged: (pin) {},
                     onCompleted: (pin) {
-                      print("Completed: " + pin);
+                      print("Completed: $pin");
 
                       otpp = pin;
                     }),
