@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:otp_text_field/otp_field.dart';
 import 'package:otp_text_field/style.dart';
 import 'package:otp_timer_button/otp_timer_button.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class VerificationScreen extends StatefulWidget {
   final String phoneNumber;
@@ -42,21 +43,24 @@ class _VerificationScreenState extends State<VerificationScreen> {
               const SizedBox(
                 height: 20,
               ),
-              OTPTextField(
-                  controller: verBloc.otpController,
-                  length: 6,
-                  width: MediaQuery.of(context).size.width,
-                  textFieldAlignment: MainAxisAlignment.center,
-                  fieldWidth: 50,
-                  fieldStyle: FieldStyle.box,
-                  outlineBorderRadius: 2,
-                  style: const TextStyle(fontSize: 17),
-                  onChanged: (pin) {},
-                  onCompleted: (pin) {
-                    print("Completed: " + pin);
+              Directionality(
+                textDirection: TextDirection.ltr,
+                child: OTPTextField(
+                    controller: verBloc.otpController,
+                    length: 6,
+                    width: MediaQuery.of(context).size.width,
+                    textFieldAlignment: MainAxisAlignment.center,
+                    fieldWidth: 50,
+                    fieldStyle: FieldStyle.box,
+                    outlineBorderRadius: 2,
+                    style: const TextStyle(fontSize: 17),
+                    onChanged: (pin) {},
+                    onCompleted: (pin) {
+                      print("Completed: " + pin);
 
-                    otpp = pin;
-                  }),
+                      otpp = pin;
+                    }),
+              ),
               const SizedBox(
                 height: 20,
               ),
@@ -68,14 +72,14 @@ class _VerificationScreenState extends State<VerificationScreen> {
                       userId: widget.userId,
                       lastOTP: otpp);
                 },
-                child: const Text('Login'),
+                child: Text(AppLocalizations.of(context)!.loginText),
               ),
               OtpTimerButton(
                 controller: verBloc.resendController,
                 onPressed: () => verBloc.requestNewOtp(
                     phoneNumber: widget.phoneNumber,
                     countryId: widget.countryId),
-                text: const Text('Resend OTP'),
+                text: Text(AppLocalizations.of(context)!.resendOtpText),
                 duration: 60,
               ),
             ],

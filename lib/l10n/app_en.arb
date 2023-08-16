@@ -3,6 +3,10 @@
 
     "englishText":"English",
     "arabicText":"Arabic",
-    "setupText":"Setup"
+    "setupText":"Setup",
+    "loginText":"Login",
+    "resendOtpText":"Resend OTP",
+    "enterNumText":"Enter your number",
+    "nextText":"Next"
 
 }

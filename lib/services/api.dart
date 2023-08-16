@@ -1,6 +1,7 @@
 import 'package:countries_app/constants.dart';
 import 'package:countries_app/locater.dart';
 import 'package:countries_app/models/country_model.dart';
+import 'package:countries_app/services/exception_handler.dart';
 import 'package:countries_app/services/hive.dart';
 import 'package:dio/dio.dart';
 
@@ -27,6 +28,7 @@ class ApiService {
         return _countries;
       }
     } catch (e) {
+      HttpExceptionHandler.handleException(e);
       print(e);
       return _countries;
     }
@@ -39,7 +41,7 @@ class ApiService {
       data: {
         'mobile_number': phoneNumber,
         'os_type': 'iOS',
-        'country_id': 1,
+        'country_id': countryId,
         'device_type_name': 'iPhone 6',
         'os_version': '16.1',
         'app_version': '1.0',
