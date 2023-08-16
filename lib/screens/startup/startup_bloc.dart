@@ -1,11 +1,8 @@
 import 'dart:async';
-
 import 'package:countries_app/locater.dart';
 import 'package:countries_app/models/country_model.dart';
 import 'package:countries_app/services/hive.dart';
 import 'package:dio/dio.dart';
-import 'package:intl/intl.dart';
-
 import '../../constants.dart';
 import '../../services/api.dart';
 
@@ -17,9 +14,6 @@ class StartupBloc {
           .getValue(boxName: languageHiveBox, key: languageHiveKey) ??
       "en";
   List<Country> countries = [];
-  void printLocale() {
-    print(Intl.defaultLocale);
-  }
 
   Future<List<Country>> getCountries() async {
     final responbse = await locator<ApiService>().apiRequest(
@@ -36,5 +30,12 @@ class StartupBloc {
     }
     countriesStreamController.sink.add(countries);
     return countries;
+  }
+
+  Future<void> saveLanguageToHive(localLanguage) async {
+    language = localLanguage;
+
+    await locator<HiveService>().setValue<String>(
+        boxName: languageHiveBox, key: languageHiveKey, value: language!);
   }
 }

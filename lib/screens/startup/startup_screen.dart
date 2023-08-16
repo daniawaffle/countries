@@ -1,12 +1,10 @@
-import 'package:countries_app/locater.dart';
 import 'package:countries_app/screens/login/login_screen.dart';
 import 'package:countries_app/screens/startup/startup_bloc.dart';
 import 'package:countries_app/screens/startup/widgets/list_tile_widget.dart';
-import 'package:countries_app/services/hive.dart';
 import 'package:flutter/material.dart';
 import '../../constants.dart';
-import '../../main.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'widgets/language_button.dart';
 
 class StartupScreen extends StatefulWidget {
   const StartupScreen({super.key});
@@ -28,7 +26,9 @@ class _StartupScreenState extends State<StartupScreen> {
   Widget build(BuildContext context) {
     startupBloc.getCountries();
     return Scaffold(
+        backgroundColor: secendaryColor,
         appBar: AppBar(
+          backgroundColor: primaryColor,
           title: Text(AppLocalizations.of(context)!.setupText),
           centerTitle: true,
         ),
@@ -41,61 +41,15 @@ class _StartupScreenState extends State<StartupScreen> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: startupBloc.language == enLocale
-                              ? Colors.blue
-                              : Colors.white,
-                        ),
-                        onPressed: () async {
-                          startupBloc.language = enLocale;
-
-                          await locator<HiveService>().setValue<String>(
-                              boxName: languageHiveBox,
-                              key: languageHiveKey,
-                              value: startupBloc.language!);
-                          if (mounted) MainApp.of(context)?.rebuild();
-                          startupBloc.printLocale();
-                        },
-                        child: Text(
-                          // 'english-text'.i18n(),
-                          AppLocalizations.of(context)!.englishText,
-                          style: TextStyle(
-                              color: startupBloc.language == enLocale
-                                  ? Colors.white
-                                  : Colors.blue),
-                        ),
-                      ),
+                    LanguageButton(
+                      label: AppLocalizations.of(context)!.englishText,
+                      startupBloc: startupBloc,
+                      localLanguage: enLocale,
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: startupBloc.language == arLocale
-                              ? Colors.blue
-                              : Colors.white,
-                        ),
-                        onPressed: () async {
-                          startupBloc.language = arLocale;
-
-                          await locator<HiveService>().setValue<String>(
-                              boxName: languageHiveBox,
-                              key: languageHiveKey,
-                              value: startupBloc.language!);
-
-                          if (mounted) MainApp.of(context)?.rebuild();
-                          startupBloc.printLocale();
-                        },
-                        child: Text(
-                          AppLocalizations.of(context)!.arabicText,
-                          style: TextStyle(
-                              color: startupBloc.language == arLocale
-                                  ? Colors.white
-                                  : Colors.blue),
-                        ),
-                      ),
+                    LanguageButton(
+                      label: AppLocalizations.of(context)!.arabicText,
+                      startupBloc: startupBloc,
+                      localLanguage: arLocale,
                     ),
                   ],
                 ),
