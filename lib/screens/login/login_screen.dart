@@ -27,7 +27,7 @@ class _LoginScreenState extends State<LoginScreen>
   @override
   void initState() {
     super.initState();
-    loginBLoc.selectedDialCode = widget.country.dialCode;
+    loginBLoc.selectedCountry = widget.country;
     _controller = AnimationController(
       vsync: this,
       duration: const Duration(seconds: 5), // Adjust the duration as needed
@@ -35,8 +35,8 @@ class _LoginScreenState extends State<LoginScreen>
   }
 
   _validateNumber(String value) {
-    if (value.length != widget.country.minLength) {
-      return 'Please enter 9 digits number';
+    if (value.length != loginBLoc.selectedCountry.minLength) {
+      return 'Please enter ${loginBLoc.selectedCountry.minLength} digits number';
     } else {
       setState(() {
         isDisabled = false;
@@ -53,7 +53,6 @@ class _LoginScreenState extends State<LoginScreen>
 
   @override
   Widget build(BuildContext context) {
-    print('eliana');
     return Scaffold(
       appBar: AppBar(),
       body: Padding(
@@ -81,17 +80,17 @@ class _LoginScreenState extends State<LoginScreen>
                       // Text(widget.country.dialCode!),
 
                       DropdownButton(
-                        value: loginBLoc.selectedDialCode,
+                        value: loginBLoc.selectedCountry,
                         icon: const Icon(Icons.keyboard_arrow_down),
                         items: widget.countries.map((Country country) {
-                          return DropdownMenuItem<String>(
-                            value: country.dialCode,
+                          return DropdownMenuItem<Country>(
+                            value: country,
                             child: Text(country.dialCode!),
                           );
                         }).toList(),
                         onChanged: (newValue) {
                           setState(() {
-                            loginBLoc.selectedDialCode = newValue!;
+                            loginBLoc.selectedCountry = newValue!;
                           });
                         },
                       ),
@@ -102,7 +101,7 @@ class _LoginScreenState extends State<LoginScreen>
                           key: loginBLoc.formKey,
                           child: TextFormField(
                             controller: loginBLoc.numberController,
-                            maxLength: widget.country.maxLength,
+                            maxLength: loginBLoc.selectedCountry.maxLength,
                             onChanged: (String value) {
                               _validateNumber(value);
                               loginBLoc.numberController.text = value;
@@ -141,9 +140,10 @@ class _LoginScreenState extends State<LoginScreen>
                                 MaterialPageRoute(
                                   builder: (context) => VerificationScreen(
                                     loginOTP: response.data['data']['last_otp'],
-                                    countryId: widget.country.id!,
-                                    phoneNumber: widget.country.dialCode! +
-                                        loginBLoc.numberController.text,
+                                    countryId: loginBLoc.selectedCountry.id!,
+                                    phoneNumber:
+                                        loginBLoc.selectedCountry.dialCode! +
+                                            loginBLoc.numberController.text,
                                     userId: response.data['data']['id'],
                                   ),
                                 ),
