@@ -15,7 +15,7 @@ dependencies:
 
   flutter_localizations: 
     sdk: flutter
-  localization: ^2.1.0
+  intl: any
   hive:
   hive_flutter: 
   locator: ^0.0.0-dev.2
@@ -37,3 +37,4 @@ flutter:
   assets:
     - assets/
     - lib/i18n/
+    - lib/l10n/

@@ -6,6 +6,7 @@ import 'package:countries_app/services/hive.dart';
 import 'package:flutter/material.dart';
 import '../../constants.dart';
 import '../../main.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class StartupScreen extends StatefulWidget {
   const StartupScreen({super.key});
@@ -28,7 +29,7 @@ class _StartupScreenState extends State<StartupScreen> {
     startupBloc.getCountries();
     return Scaffold(
         appBar: AppBar(
-          title: const Text('Country API'),
+          title: Text(AppLocalizations.of(context)!.setupText),
           centerTitle: true,
         ),
         body: Column(
@@ -59,7 +60,7 @@ class _StartupScreenState extends State<StartupScreen> {
                       },
                       child: Text(
                         // 'english-text'.i18n(),
-                        "English",
+                        AppLocalizations.of(context)!.englishText,
                         style: TextStyle(
                             color: startupBloc.language == "English"
                                 ? Colors.white
@@ -88,7 +89,7 @@ class _StartupScreenState extends State<StartupScreen> {
                         fun();
                       },
                       child: Text(
-                        "Arabic",
+                        AppLocalizations.of(context)!.arabicText,
                         style: TextStyle(
                             color: startupBloc.language == "Arabic"
                                 ? Colors.white
