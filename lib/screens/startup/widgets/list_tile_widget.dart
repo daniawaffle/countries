@@ -15,45 +15,42 @@ class ListTileWidget extends StatelessWidget {
         pushNextScreen();
       },
       child: Card(
-        elevation: 0, // Set the card elevation
-        margin: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(80),
+          //set border radius more than 50% of height and width to make circle
+        ),
+        elevation: 0,
+        margin: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 5.0),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
           child: Row(
             children: [
               Container(
                 padding: const EdgeInsets.only(right: 12.0),
-                decoration: BoxDecoration(
-                  border: Border(
-                    right: BorderSide(
-                      width: 1.0,
-                      color: Colors.grey.shade400,
-                    ),
+                child: CircleAvatar(
+                  radius: 20.0,
+                  backgroundColor: Colors.transparent,
+                  backgroundImage: NetworkImage(
+                    imageBaseUrl + country.flagImage!,
                   ),
                 ),
-                child: Image.network(
-                  imageBaseUrl + country.flagImage!,
-                  width: 50,
-                  height: 20,
-                  fit: BoxFit.cover,
-                ),
               ),
-              const SizedBox(width: 15), // Add some spacing
+              const SizedBox(width: 15),
               Expanded(
                 child: Text(
                   country.name!,
-                  style: const TextStyle(
-                    color: Colors.black,
+                  style: TextStyle(
+                    fontSize: 17,
+                    color: primaryColor,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
               ),
-
               Icon(
                 Localizations.localeOf(context) == const Locale(enLocale)
                     ? Icons.keyboard_arrow_right
                     : Icons.keyboard_arrow_left,
-                color: Colors.black,
+                color: primaryColor,
                 size: 30.0,
               ),
             ],
