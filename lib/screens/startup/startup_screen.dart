@@ -101,6 +101,7 @@ class _StartupScreenState extends State<StartupScreen> {
               ),
             ),
             Expanded(
+<<<<<<< HEAD
               child: StreamBuilder<Object>(
                   stream: startupBloc.countriesStreamController.stream,
                   builder: (context, snapshot) {
@@ -121,6 +122,29 @@ class _StartupScreenState extends State<StartupScreen> {
                       },
                     );
                   }),
+=======
+              child: ListView.builder(
+                itemCount: startupBloc.countries.length,
+                itemBuilder: (context, index) {
+                  return GestureDetector(
+                    onTap: () {
+                      // Handle item click
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => LoginScreen(
+                              country: startupBloc.countries[index]),
+                        ),
+                      );
+                    },
+                    child: ListTile(
+                      title: Text(startupBloc.countries[index].name!),
+                      // trailing: Text(startupBloc.countries[index].flag),
+                    ),
+                  );
+                },
+              ),
+>>>>>>> main
             ),
           ],
         ));

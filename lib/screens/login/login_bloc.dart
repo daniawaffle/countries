@@ -1,10 +1,17 @@
+import 'package:countries_app/services/api.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
 class LoginBLoc {
   final formKey = GlobalKey<FormState>();
 
+  final ApiService apiService = ApiService();
+
   TextEditingController numberController = TextEditingController();
 
-  String dropdownvalue = '+962';
-  var prefixNum = ['+962', '+963', '+318', '+11', '+113'];
+  Future login({required String phoneNumber, required int countryId}) async {
+    Response response = await apiService.sendOtpRequest(
+        phoneNumber: phoneNumber, countryId: countryId);
+    return response;
+  }
 }
