@@ -116,6 +116,7 @@ class _StartupScreenState extends State<StartupScreen> {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => LoginScreen(
+                                      countries: startupBloc.countries,
                                       country: startupBloc.countries[index]),
                                 ));
                           },

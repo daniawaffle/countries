@@ -10,7 +10,9 @@ import 'login_bloc.dart';
 
 class LoginScreen extends StatefulWidget {
   final Country country;
-  const LoginScreen({super.key, required this.country});
+  final List<Country> countries;
+  const LoginScreen(
+      {super.key, required this.country, required this.countries});
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -25,6 +27,7 @@ class _LoginScreenState extends State<LoginScreen>
   @override
   void initState() {
     super.initState();
+    loginBLoc.selectedDialCode = widget.country.dialCode;
     _controller = AnimationController(
       vsync: this,
       duration: const Duration(seconds: 5), // Adjust the duration as needed
@@ -75,7 +78,23 @@ class _LoginScreenState extends State<LoginScreen>
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(widget.country.dialCode!),
+                      // Text(widget.country.dialCode!),
+
+                      DropdownButton(
+                        value: loginBLoc.selectedDialCode,
+                        icon: const Icon(Icons.keyboard_arrow_down),
+                        items: widget.countries.map((Country country) {
+                          return DropdownMenuItem<String>(
+                            value: country.dialCode,
+                            child: Text(country.dialCode!),
+                          );
+                        }).toList(),
+                        onChanged: (newValue) {
+                          setState(() {
+                            loginBLoc.selectedDialCode = newValue!;
+                          });
+                        },
+                      ),
                       const SizedBox(width: 16),
                       Expanded(
                         flex: 8,

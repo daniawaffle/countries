@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 class LoginBLoc {
   final formKey = GlobalKey<FormState>();
-
+  String? selectedDialCode;
   final ApiService apiService = ApiService();
 
   TextEditingController numberController = TextEditingController();
