@@ -36,68 +36,71 @@ class _StartupScreenState extends State<StartupScreen> {
           children: [
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 10.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: startupBloc.language == "English"
-                            ? Colors.blue
-                            : Colors.white,
-                      ),
-                      onPressed: () async {
-                        startupBloc.language = "English";
+              child: Directionality(
+                textDirection: TextDirection.ltr,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: startupBloc.language == "English"
+                              ? Colors.blue
+                              : Colors.white,
+                        ),
+                        onPressed: () async {
+                          startupBloc.language = "English";
 
-                        await locator<HiveService>().setValue<String>(
-                            boxName: languageHiveBox,
-                            key: languageHiveKey,
-                            value: startupBloc.language!);
-                        if (mounted) MainApp.of(context)?.rebuild();
-                        setState(() {});
-                        fun();
-                      },
-                      child: Text(
-                        // 'english-text'.i18n(),
-                        AppLocalizations.of(context)!.englishText,
-                        style: TextStyle(
-                            color: startupBloc.language == "English"
-                                ? Colors.white
-                                : Colors.blue),
+                          await locator<HiveService>().setValue<String>(
+                              boxName: languageHiveBox,
+                              key: languageHiveKey,
+                              value: startupBloc.language!);
+                          if (mounted) MainApp.of(context)?.rebuild();
+                          setState(() {});
+                          fun();
+                        },
+                        child: Text(
+                          // 'english-text'.i18n(),
+                          AppLocalizations.of(context)!.englishText,
+                          style: TextStyle(
+                              color: startupBloc.language == "English"
+                                  ? Colors.white
+                                  : Colors.blue),
+                        ),
                       ),
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: startupBloc.language == "Arabic"
-                            ? Colors.blue
-                            : Colors.white,
-                      ),
-                      onPressed: () async {
-                        startupBloc.language = "Arabic";
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: startupBloc.language == "Arabic"
+                              ? Colors.blue
+                              : Colors.white,
+                        ),
+                        onPressed: () async {
+                          startupBloc.language = "Arabic";
 
-                        await locator<HiveService>().setValue<String>(
-                            boxName: languageHiveBox,
-                            key: languageHiveKey,
-                            value: startupBloc.language!);
+                          await locator<HiveService>().setValue<String>(
+                              boxName: languageHiveBox,
+                              key: languageHiveKey,
+                              value: startupBloc.language!);
 
-                        if (mounted) MainApp.of(context)?.rebuild();
-                        setState(() {});
-                        fun();
-                      },
-                      child: Text(
-                        AppLocalizations.of(context)!.arabicText,
-                        style: TextStyle(
-                            color: startupBloc.language == "Arabic"
-                                ? Colors.white
-                                : Colors.blue),
+                          if (mounted) MainApp.of(context)?.rebuild();
+                          setState(() {});
+                          fun();
+                        },
+                        child: Text(
+                          AppLocalizations.of(context)!.arabicText,
+                          style: TextStyle(
+                              color: startupBloc.language == "Arabic"
+                                  ? Colors.white
+                                  : Colors.blue),
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
             Expanded(
