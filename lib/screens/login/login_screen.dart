@@ -1,7 +1,6 @@
 import 'package:countries_app/models/country_model.dart';
 import 'package:countries_app/screens/verfication/verfication_screen.dart';
 
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -127,24 +126,25 @@ class _LoginScreenState extends State<LoginScreen>
                     : ElevatedButton(
                         onPressed: () async {
                           try {
-                            Response response = await loginBLoc.login(
-                                countryId: widget.country.id!,
-                                phoneNumber: widget.country.dialCode! +
-                                    loginBLoc.numberController.text);
+                            var response = await loginBLoc.login(
+                                countryId: loginBLoc.selectedCountry.id!,
+                                phoneNumber:
+                                    loginBLoc.selectedCountry.dialCode! +
+                                        loginBLoc.numberController.text);
 
                             if (context.mounted) {
-                              print(
-                                  'responsefor user id   ${response.data['data']['id']}');
+                              print('OTP  ${response.loginModel!.lastOtp}');
+
                               Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => VerificationScreen(
-                                    loginOTP: response.data['data']['last_otp'],
+                                    loginOTP: response.loginModel!.lastOtp!,
                                     countryId: loginBLoc.selectedCountry.id!,
                                     phoneNumber:
                                         loginBLoc.selectedCountry.dialCode! +
                                             loginBLoc.numberController.text,
-                                    userId: response.data['data']['id'],
+                                    userId: response.loginModel!.id!,
                                   ),
                                 ),
                               );
