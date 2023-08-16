@@ -71,21 +71,6 @@ class _LoginScreenState extends State<LoginScreen>
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    // DropdownButton(
-                    //   value: _selectedDialCode,
-                    //   icon: const Icon(Icons.keyboard_arrow_down),
-                    //   items: _countries.map((Data country) {
-                    //     return DropdownMenuItem<String>(
-                    //       value: country.dialCode,
-                    //       child: Text(country.dialCode!),
-                    //     );
-                    //   }).toList(),
-                    //   onChanged: (newValue) {
-                    //     setState(() {
-                    //       _selectedDialCode = newValue!;
-                    //     });
-                    //   },
-                    // ),
                     Text(widget.country.dialCode!),
                     const SizedBox(width: 16),
                     Expanded(
