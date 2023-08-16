@@ -124,6 +124,8 @@ class _LoginScreenState extends State<LoginScreen>
                                     loginBLoc.numberController.text);
 
                             if (context.mounted) {
+                              print(
+                                  'responsefor user id   ${response.data['data']['id']}');
                               Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
