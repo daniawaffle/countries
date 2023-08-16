@@ -4,6 +4,7 @@ import 'package:countries_app/screens/verfication/verfication_screen.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'login_bloc.dart';
 
@@ -49,6 +50,7 @@ class _LoginScreenState extends State<LoginScreen>
 
   @override
   Widget build(BuildContext context) {
+    print('eliana');
     return Scaffold(
       appBar: AppBar(),
       body: Padding(
@@ -68,34 +70,38 @@ class _LoginScreenState extends State<LoginScreen>
                   ),
                 ),
                 const SizedBox(height: 40),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(widget.country.dialCode!),
-                    const SizedBox(width: 16),
-                    Expanded(
-                      flex: 8,
-                      child: Form(
-                        key: loginBLoc.formKey,
-                        child: TextFormField(
-                          controller: loginBLoc.numberController,
-                          maxLength: widget.country.maxLength,
-                          onChanged: (String value) {
-                            _validateNumber(value);
-                            loginBLoc.numberController.text = value;
-                          },
-                          decoration: const InputDecoration(
-                            labelText: "Enter your number",
-                            border: OutlineInputBorder(),
+                Directionality(
+                  textDirection: TextDirection.ltr,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(widget.country.dialCode!),
+                      const SizedBox(width: 16),
+                      Expanded(
+                        flex: 8,
+                        child: Form(
+                          key: loginBLoc.formKey,
+                          child: TextFormField(
+                            controller: loginBLoc.numberController,
+                            maxLength: widget.country.maxLength,
+                            onChanged: (String value) {
+                              _validateNumber(value);
+                              loginBLoc.numberController.text = value;
+                            },
+                            decoration: InputDecoration(
+                              labelText:
+                                  AppLocalizations.of(context)!.enterNumText,
+                              border: const OutlineInputBorder(),
+                            ),
+                            keyboardType: TextInputType.number,
+                            inputFormatters: <TextInputFormatter>[
+                              FilteringTextInputFormatter.digitsOnly
+                            ],
                           ),
-                          keyboardType: TextInputType.number,
-                          inputFormatters: <TextInputFormatter>[
-                            FilteringTextInputFormatter.digitsOnly
-                          ],
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
                 const SizedBox(height: 24),
                 isDisabled
@@ -115,13 +121,12 @@ class _LoginScreenState extends State<LoginScreen>
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => VerificationScreen(
-                                      loginOTP: response.data['data']
-                                          ['last_otp'],
-                                      countryId: widget.country.id!,
-                                      phoneNumber: widget.country.dialCode! +
-                                          loginBLoc.numberController.text,
-                                      userId: 1 //response.data['data']['id'],
-                                      ),
+                                    loginOTP: response.data['data']['last_otp'],
+                                    countryId: widget.country.id!,
+                                    phoneNumber: widget.country.dialCode! +
+                                        loginBLoc.numberController.text,
+                                    userId: response.data['data']['id'],
+                                  ),
                                 ),
                               );
                             }
@@ -129,7 +134,7 @@ class _LoginScreenState extends State<LoginScreen>
                             print(error);
                           }
                         },
-                        child: const Text('Next'),
+                        child: Text(AppLocalizations.of(context)!.nextText),
                       ),
               ],
             ),

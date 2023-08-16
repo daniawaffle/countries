@@ -11,8 +11,9 @@ enum HttpResultStatus {
 
 class HttpExceptionHandler {
   static HttpResultStatus handleException(dynamic error) {
-    if (error is DioError) {
+    if (error is DioException) {
       final response = error.response;
+      print(response!.statusCode);
 
       if (response != null) {
         switch (response.statusCode) {

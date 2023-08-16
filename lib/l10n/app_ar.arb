@@ -3,5 +3,9 @@
 
     "englishText":"الإنجليزية",
     "arabicText":"العربية",
-    "setupText":"الإعدادات"
+    "setupText":"الإعدادات",
+    "loginText":"تسجيل دخول",
+    "resendOtpText":"اعادة ارسال الرمز",
+    "enterNumText":"ادخل رقم الهاتف",
+    "nextText":"التالي"
 }
