@@ -4,3 +4,7 @@ const String languageHiveKey = "languageKey";
 const String englishKey = "English";
 const String arabicKey = "Arabic";
 const String imageBaseUrl = "https://www.helpera.app/static/countries/";
+const String enLocale = "en";
+const String arLocale = "ar";
+const String getMethod = "GET";
+const String postMethod = "POST";

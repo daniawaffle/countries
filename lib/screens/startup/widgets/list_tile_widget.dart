@@ -48,8 +48,11 @@ class ListTileWidget extends StatelessWidget {
                   ),
                 ),
               ),
-              const Icon(
-                Icons.keyboard_arrow_right,
+
+              Icon(
+                Localizations.localeOf(context) == const Locale(enLocale)
+                    ? Icons.keyboard_arrow_right
+                    : Icons.keyboard_arrow_left,
                 color: Colors.black,
                 size: 30.0,
               ),

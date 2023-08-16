@@ -45,26 +45,25 @@ class _StartupScreenState extends State<StartupScreen> {
                       padding: const EdgeInsets.symmetric(horizontal: 10.0),
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: startupBloc.language == "English"
+                          backgroundColor: startupBloc.language == enLocale
                               ? Colors.blue
                               : Colors.white,
                         ),
                         onPressed: () async {
-                          startupBloc.language = "English";
+                          startupBloc.language = enLocale;
 
                           await locator<HiveService>().setValue<String>(
                               boxName: languageHiveBox,
                               key: languageHiveKey,
                               value: startupBloc.language!);
                           if (mounted) MainApp.of(context)?.rebuild();
-                          setState(() {});
-                          fun();
+                          startupBloc.printLocale();
                         },
                         child: Text(
                           // 'english-text'.i18n(),
                           AppLocalizations.of(context)!.englishText,
                           style: TextStyle(
-                              color: startupBloc.language == "English"
+                              color: startupBloc.language == enLocale
                                   ? Colors.white
                                   : Colors.blue),
                         ),
@@ -74,12 +73,12 @@ class _StartupScreenState extends State<StartupScreen> {
                       padding: const EdgeInsets.symmetric(horizontal: 10.0),
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: startupBloc.language == "Arabic"
+                          backgroundColor: startupBloc.language == arLocale
                               ? Colors.blue
                               : Colors.white,
                         ),
                         onPressed: () async {
-                          startupBloc.language = "Arabic";
+                          startupBloc.language = arLocale;
 
                           await locator<HiveService>().setValue<String>(
                               boxName: languageHiveBox,
@@ -87,13 +86,12 @@ class _StartupScreenState extends State<StartupScreen> {
                               value: startupBloc.language!);
 
                           if (mounted) MainApp.of(context)?.rebuild();
-                          setState(() {});
-                          fun();
+                          startupBloc.printLocale();
                         },
                         child: Text(
                           AppLocalizations.of(context)!.arabicText,
                           style: TextStyle(
-                              color: startupBloc.language == "Arabic"
+                              color: startupBloc.language == arLocale
                                   ? Colors.white
                                   : Colors.blue),
                         ),
@@ -128,9 +126,5 @@ class _StartupScreenState extends State<StartupScreen> {
             ),
           ],
         ));
-  }
-
-  void fun() {
-    setState(() {});
   }
 }
