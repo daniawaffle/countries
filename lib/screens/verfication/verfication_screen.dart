@@ -5,6 +5,8 @@ import 'package:otp_text_field/style.dart';
 import 'package:otp_timer_button/otp_timer_button.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../equiti/equiti_screen.dart';
+
 class VerificationScreen extends StatefulWidget {
   final String phoneNumber;
   final int userId;
@@ -71,6 +73,13 @@ class _VerificationScreenState extends State<VerificationScreen> {
                       countryId: widget.countryId,
                       userId: widget.userId,
                       lastOTP: otpp);
+                  if (context.mounted) {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => EquitiAcadmyScreen(),
+                        ));
+                  }
                 },
                 child: Text(AppLocalizations.of(context)!.loginText),
               ),
