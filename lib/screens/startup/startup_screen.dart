@@ -1,11 +1,12 @@
 import 'package:countries_app/locater.dart';
 import 'package:countries_app/screens/login/login_screen.dart';
 import 'package:countries_app/screens/startup/startup_bloc.dart';
+import 'package:countries_app/screens/startup/widgets/list_tile_widget.dart';
 import 'package:countries_app/services/hive.dart';
 import 'package:flutter/material.dart';
 import '../../constants.dart';
 import '../../main.dart';
-import '../../services/api.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class StartupScreen extends StatefulWidget {
   const StartupScreen({super.key});
@@ -19,8 +20,7 @@ class _StartupScreenState extends State<StartupScreen> {
 
   @override
   void initState() {
-    print(startupBloc.countries);
-
+    startupBloc.getCountries();
     super.initState();
   }
 
@@ -29,7 +29,7 @@ class _StartupScreenState extends State<StartupScreen> {
     startupBloc.getCountries();
     return Scaffold(
         appBar: AppBar(
-          title: const Text('Country API'),
+          title: Text(AppLocalizations.of(context)!.setupText),
           centerTitle: true,
         ),
         body: Column(
@@ -54,15 +54,13 @@ class _StartupScreenState extends State<StartupScreen> {
                             boxName: languageHiveBox,
                             key: languageHiveKey,
                             value: startupBloc.language!);
-                        print(startupBloc.language);
-                        await locator<ApiService>().getCountriesData;
                         if (mounted) MainApp.of(context)?.rebuild();
                         setState(() {});
                         fun();
                       },
                       child: Text(
                         // 'english-text'.i18n(),
-                        "English",
+                        AppLocalizations.of(context)!.englishText,
                         style: TextStyle(
                             color: startupBloc.language == "English"
                                 ? Colors.white
@@ -85,14 +83,13 @@ class _StartupScreenState extends State<StartupScreen> {
                             boxName: languageHiveBox,
                             key: languageHiveKey,
                             value: startupBloc.language!);
-                        print(startupBloc.language);
 
                         if (mounted) MainApp.of(context)?.rebuild();
                         setState(() {});
                         fun();
                       },
                       child: Text(
-                        "Arabic",
+                        AppLocalizations.of(context)!.arabicText,
                         style: TextStyle(
                             color: startupBloc.language == "Arabic"
                                 ? Colors.white
@@ -104,6 +101,28 @@ class _StartupScreenState extends State<StartupScreen> {
               ),
             ),
             Expanded(
+<<<<<<< HEAD
+              child: StreamBuilder<Object>(
+                  stream: startupBloc.countriesStreamController.stream,
+                  builder: (context, snapshot) {
+                    return ListView.builder(
+                      itemCount: startupBloc.countries.length,
+                      itemBuilder: (context, index) {
+                        return ListTileWidget(
+                          pushNextScreen: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => LoginScreen(
+                                      country: startupBloc.countries[index]),
+                                ));
+                          },
+                          country: startupBloc.countries[index],
+                        );
+                      },
+                    );
+                  }),
+=======
               child: ListView.builder(
                 itemCount: startupBloc.countries.length,
                 itemBuilder: (context, index) {
@@ -125,6 +144,7 @@ class _StartupScreenState extends State<StartupScreen> {
                   );
                 },
               ),
+>>>>>>> main
             ),
           ],
         ));

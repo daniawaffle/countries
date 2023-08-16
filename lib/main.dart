@@ -3,7 +3,8 @@ import 'package:countries_app/screens/startup/startup_screen.dart';
 import 'package:countries_app/services/hive.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:localization/localization.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'locater.dart';
 
@@ -42,19 +43,18 @@ class MainAppState extends State<MainApp> {
 
   @override
   Widget build(BuildContext context) {
-    LocalJsonLocalization.delegate.directories = ['lib/i18n/'];
     return MaterialApp(
-        // locale: Locale(locale ?? "en"),
-        // localizationsDelegates: [
-        //   GlobalMaterialLocalizations.delegate,
-        //   GlobalWidgetsLocalizations.delegate,
-        //   GlobalCupertinoLocalizations.delegate,
-        //   LocalJsonLocalization.delegate,
-        // ],
-        // supportedLocales: const [
-        //   Locale('en', ''),
-        //   Locale('ar', ''),
-        // ],
+        locale: Locale(locale ?? "en"),
+        localizationsDelegates: const [
+          AppLocalizations.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: const [
+          Locale('en'),
+          Locale('ar'),
+        ],
         debugShowCheckedModeBanner: false,
         home: const StartupScreen());
   }
