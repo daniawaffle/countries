@@ -1,3 +1,4 @@
+import 'package:countries_app/constants.dart';
 import 'package:countries_app/models/country_model.dart';
 import 'package:countries_app/screens/verfication/verfication_screen.dart';
 
@@ -53,7 +54,9 @@ class _LoginScreenState extends State<LoginScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        backgroundColor: primaryColor,
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Center(
@@ -76,8 +79,6 @@ class _LoginScreenState extends State<LoginScreen>
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      // Text(widget.country.dialCode!),
-
                       DropdownButton(
                         value: loginBLoc.selectedCountry,
                         icon: const Icon(Icons.keyboard_arrow_down),
@@ -106,6 +107,19 @@ class _LoginScreenState extends State<LoginScreen>
                               loginBLoc.numberController.text = value;
                             },
                             decoration: InputDecoration(
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(25.0),
+                                borderSide: BorderSide(
+                                  color: primaryColor,
+                                ),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(25.0),
+                                  borderSide: BorderSide(
+                                    color: primaryColor,
+                                    width: 2.0,
+                                  )),
+                              labelStyle: TextStyle(color: primaryColor),
                               labelText:
                                   AppLocalizations.of(context)!.enterNumText,
                               border: const OutlineInputBorder(),
@@ -124,6 +138,9 @@ class _LoginScreenState extends State<LoginScreen>
                 isDisabled
                     ? Container()
                     : ElevatedButton(
+                        style: ButtonStyle(
+                            backgroundColor:
+                                MaterialStateProperty.all(primaryColor)),
                         onPressed: () async {
                           try {
                             var response = await loginBLoc.login(
