@@ -21,8 +21,6 @@ class _EquitiAcademyScreenState extends State<EquitiAcademyScreen> {
 
   @override
   Widget build(BuildContext context) {
-    bloc.getCategories();
-    print(bloc.categories);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Equiti academy'),
@@ -33,29 +31,39 @@ class _EquitiAcademyScreenState extends State<EquitiAcademyScreen> {
         children: [
           Expanded(
             flex: 4,
-            child: ListView.builder(
-              itemCount: bloc.categories.length,
-              itemBuilder: (context, index) {
-                return Card(
-                  elevation: 4,
-                  margin:
-                      const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
-                  child: ListTile(
-                    leading: CircleAvatar(
-                      radius: 15,
-                      backgroundColor: secendaryColor,
-                      backgroundImage: NetworkImage(
-                        categoryImageBaseUrl + bloc.categories[index].icon!,
-                      ),
-                    ),
-                    title: Text(bloc.categories[index].name!),
-                    onTap: () {
-                      // Handle item tap
+            child: StreamBuilder(
+                stream: bloc.categoriesStreamController.stream,
+                builder: (context, snapshot) {
+                  return ListView.builder(
+                    itemCount: bloc.categories.length,
+                    itemBuilder: (context, index) {
+                      return Card(
+                        elevation: 4,
+                        margin: const EdgeInsets.symmetric(
+                            horizontal: 5, vertical: 10),
+                        child: ListTile(
+                          contentPadding:
+                              const EdgeInsets.symmetric(horizontal: 8),
+                          leading: CircleAvatar(
+                            radius: 15,
+                            backgroundColor: secendaryColor,
+                            backgroundImage: NetworkImage(
+                              categoryImageBaseUrl +
+                                  bloc.categories[index].icon!,
+                            ),
+                          ),
+                          title: Text(
+                            bloc.categories[index].name!,
+                            style: const TextStyle(fontSize: 14),
+                          ),
+                          onTap: () {
+                            // Handle item tap
+                          },
+                        ),
+                      );
                     },
-                  ),
-                );
-              },
-            ),
+                  );
+                }),
           ),
           Expanded(
               flex: 5,
