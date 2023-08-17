@@ -1,11 +1,13 @@
+import 'dart:async';
+
 import 'package:countries_app/screens/verfication/verification_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:otp_text_field/otp_field.dart';
 import 'package:otp_text_field/style.dart';
-import 'package:otp_timer_button/otp_timer_button.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../equiti/equiti_screen.dart';
+import '../../constants.dart';
+import '../equiti/equiti_academy_screen.dart';
 
 class VerificationScreen extends StatefulWidget {
   final String phoneNumber;
@@ -27,6 +29,33 @@ class VerificationScreen extends StatefulWidget {
 
 class _VerificationScreenState extends State<VerificationScreen> {
   VerificationBloc verBloc = VerificationBloc();
+
+  void startTimeout() {
+    var duration = verBloc.interval;
+    Timer.periodic(duration, (timer) {
+      setState(() {
+        verBloc.currentSeconds = timer.tick;
+        if (timer.tick >= verBloc.timerMaxSeconds) {
+          timer.cancel();
+          verBloc.otpButtonVisible.value = true;
+        }
+      });
+    });
+  }
+
+  void sendOtp() {
+    verBloc.requestNewOtp(
+        phoneNumber: widget.phoneNumber, countryId: widget.countryId);
+    verBloc.otpButtonVisible.value = false; // Hide the button
+    verBloc.currentSeconds = 0; // Reset timer
+    startTimeout(); // Start timer
+  }
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
   String otpp = '';
   @override
   Widget build(BuildContext context) {
@@ -67,6 +96,8 @@ class _VerificationScreenState extends State<VerificationScreen> {
                 height: 20,
               ),
               ElevatedButton(
+                style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all(primaryColor)),
                 onPressed: () {
                   verBloc.verify(
                       phoneNumber: widget.phoneNumber,
@@ -77,20 +108,45 @@ class _VerificationScreenState extends State<VerificationScreen> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => EquitiAcadmyScreen(),
+                          builder: (context) => EquitiAcademyScreen(),
                         ));
                   }
                 },
                 child: Text(AppLocalizations.of(context)!.loginText),
               ),
-              OtpTimerButton(
-                controller: verBloc.resendController,
-                onPressed: () => verBloc.requestNewOtp(
-                    phoneNumber: widget.phoneNumber,
-                    countryId: widget.countryId),
-                text: Text(AppLocalizations.of(context)!.resendOtpText),
-                duration: 60,
-              ),
+
+              // ElevatedButton(
+              //   onPressed: () {
+              //     // verBloc.requestNewOtp(
+              //     //     phoneNumber: widget.phoneNumber,
+              //     //     countryId: widget.countryId);
+              //     setState(() {
+              //       startTimeout();
+              //     });
+              //   },
+              //   child: Text(timerText != 0
+              //       ? '${AppLocalizations.of(context)!.resendOtpText}'
+              //       : '${timerText}'),
+              // ),
+
+              ValueListenableBuilder(
+                valueListenable: verBloc.otpButtonVisible,
+                builder: (context, isVisible, child) {
+                  return isVisible
+                      ? ElevatedButton(
+                          style: ButtonStyle(
+                              backgroundColor:
+                                  MaterialStateProperty.all(primaryColor)),
+                          onPressed: sendOtp,
+                          child:
+                              Text(AppLocalizations.of(context)!.resendOtpText),
+                        )
+                      : Text(
+                          verBloc.timerText,
+                          style: TextStyle(fontSize: 15),
+                        );
+                },
+              )
             ],
           ),
         ),
