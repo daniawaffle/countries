@@ -10,7 +10,6 @@ class MentorCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<String> entries = <String>['A', 'B', 'C', 'D', 'E', 'F'];
     return Center(
       child: SafeArea(
         child: Card(
@@ -20,7 +19,6 @@ class MentorCard extends StatelessWidget {
             side: BorderSide(
               color: primaryColor,
             ),
-            // borderRadius: const BorderRadius.all(Radius.circular(12)),
           ),
           margin: const EdgeInsets.all(10),
           child: Column(
@@ -108,41 +106,51 @@ class MentorCard extends StatelessWidget {
                     color: primaryColor,
                   ),
                 ),
-                child: IntrinsicHeight(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: <Widget>[
-                      Row(
-                        children: <Widget>[
-                          Image(
-                            width: 60,
-                            height: 40,
-                            image: NetworkImage(
-                                '$imageBaseUrl${mentor.countryFlag}'),
-                          ),
-                          Text(
-                            '${mentor.categoryName}',
-                            textAlign: TextAlign.center,
-                          ),
-                        ],
-                      ),
-                      VerticalDivider(
-                        color: primaryColor,
-                        thickness: 1,
-                      ),
-                      Flexible(
-                        child: RatingBarIndicator(
-                          rating: mentor.rate!,
-                          itemBuilder: (context, index) => const Icon(
-                            Icons.star,
-                            color: Colors.amber,
-                          ),
-                          itemCount: 5,
-                          itemSize: 30.0,
-                          direction: Axis.horizontal,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: IntrinsicHeight(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Image(
+                              width: 50,
+                              height: 30,
+                              image: NetworkImage(
+                                  '$imageBaseUrl${mentor.countryFlag}'),
+                            ),
+                            Container(
+                              width: MediaQuery.of(context).size.width / 7,
+                              child: Text(
+                                '${mentor.countryName}',
+                                textAlign: TextAlign.center,
+                                overflow: TextOverflow.visible,
+                              ),
+                            ),
+                          ],
                         ),
-                      ),
-                    ],
+                        VerticalDivider(
+                          color: primaryColor,
+                          thickness: 1,
+                        ),
+                        Align(
+                          alignment: Alignment.center,
+                          child: RatingBarIndicator(
+                            rating: mentor.rate!,
+                            itemBuilder: (context, index) => const Icon(
+                              Icons.star,
+                              color: Colors.amber,
+                            ),
+                            itemCount: 5,
+                            itemSize: 18.0,
+                            direction: Axis.horizontal,
+                          ),
+                        ),
+                        Text('${mentor.numberOfReviewr}')
+                      ],
+                    ),
                   ),
                 ),
               ),
