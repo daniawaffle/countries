@@ -4,8 +4,11 @@ import 'package:countries_app/services/exception_handler.dart';
 
 import 'package:dio/dio.dart';
 
+import 'interceptor.dart';
+
 class ApiService {
-  final Dio _dio = Dio(BaseOptions(baseUrl: baseUrl));
+  final Dio _dio = Dio(BaseOptions(baseUrl: baseUrl))
+    ..interceptors.add(HttpInterciptor());
 
   Future<T> apiRequest<T>(
       {required String path,
