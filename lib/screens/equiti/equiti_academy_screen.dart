@@ -18,6 +18,7 @@ class _EquitiAcademyScreenState extends State<EquitiAcademyScreen> {
   }
 
   EquitiAcademyBloc bloc = EquitiAcademyBloc();
+  int _selectedIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -72,6 +73,33 @@ class _EquitiAcademyScreenState extends State<EquitiAcademyScreen> {
               )),
         ],
       ),
+      bottomNavigationBar: BottomNavigationBar(
+        selectedItemColor: primaryColor,
+        selectedIconTheme: IconThemeData(
+          color: primaryColor,
+        ),
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.home,
+            ),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+              icon: Icon(
+                Icons.menu,
+              ),
+              label: ''),
+        ],
+        currentIndex: _selectedIndex,
+        onTap: _onItemTapped,
+      ),
     );
+  }
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
   }
 }
