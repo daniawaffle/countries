@@ -11,12 +11,14 @@ class ApiService {
       {required String path,
       dynamic body,
       required String method,
-      Options? options}) async {
+      Options? options,
+      Map<String, dynamic>? queryParameters}) async {
     try {
       Response response;
 
       if (method == 'GET') {
-        response = await _dio.get(path, options: options);
+        response = await _dio.get(path,
+            options: options, queryParameters: queryParameters);
       } else if (method == 'POST') {
         response = await _dio.post(path, data: body, options: options);
       } else {

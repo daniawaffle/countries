@@ -1,7 +1,9 @@
+import 'package:countries_app/models/mentor_model.dart';
 import 'package:flutter/material.dart';
 
 import '../../constants.dart';
 import 'equiti_bloc.dart';
+import 'mentor_list_widget.dart';
 
 class EquitiAcademyScreen extends StatefulWidget {
   const EquitiAcademyScreen({super.key});
@@ -57,8 +59,8 @@ class _EquitiAcademyScreenState extends State<EquitiAcademyScreen> {
                             bloc.categories[index].name!,
                             style: const TextStyle(fontSize: 14),
                           ),
-                          onTap: () {
-                            // Handle item tap
+                          onTap: () async {
+                            await bloc.getMentors(bloc.categories[index].id!);
                           },
                         ),
                       );
@@ -68,9 +70,17 @@ class _EquitiAcademyScreenState extends State<EquitiAcademyScreen> {
           ),
           Expanded(
               flex: 5,
-              child: Container(
-                color: Colors.red,
-              )),
+              child: StreamBuilder<List<Mentor>>(
+                  stream: bloc.mentorsStreamController.stream,
+                  builder: (context, snapshot) {
+                    if (snapshot.data != null) {
+                      return MentorListWidget(
+                        mentorsList: snapshot.data,
+                      );
+                    } else {
+                      return const CircularProgressIndicator();
+                    }
+                  })),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(

@@ -15,3 +15,4 @@ const String getMethod = "GET";
 const String postMethod = "POST";
 Color primaryColor = Colors.green.shade700;
 Color secendaryColor = Colors.green.shade50;
+const String mentorImage = "https://www.helpera.app/static/mentorsImg/";
