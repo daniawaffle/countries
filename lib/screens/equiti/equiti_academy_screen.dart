@@ -16,6 +16,7 @@ class _EquitiAcademyScreenState extends State<EquitiAcademyScreen> {
   @override
   void initState() {
     bloc.getCategories();
+    bloc.getMentors(1);
     super.initState();
   }
 
@@ -69,7 +70,7 @@ class _EquitiAcademyScreenState extends State<EquitiAcademyScreen> {
                 }),
           ),
           Expanded(
-              flex: 5,
+              flex: 8,
               child: StreamBuilder<List<Mentor>>(
                   stream: bloc.mentorsStreamController.stream,
                   builder: (context, snapshot) {
@@ -78,7 +79,7 @@ class _EquitiAcademyScreenState extends State<EquitiAcademyScreen> {
                         mentorsList: snapshot.data,
                       );
                     } else {
-                      return const CircularProgressIndicator();
+                      return const Center(child: Text("Not data to show"));
                     }
                   })),
         ],
