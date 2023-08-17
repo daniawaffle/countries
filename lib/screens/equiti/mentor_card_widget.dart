@@ -124,8 +124,7 @@ class MentorCard extends StatelessWidget {
                                   '$imageBaseUrl${mentor.countryFlag}'),
                             ),
                             Container(
-                              color: Colors.amber,
-                              width: 80,
+                              width: MediaQuery.of(context).size.width / 7,
                               child: Text(
                                 '${mentor.countryName}',
                                 textAlign: TextAlign.center,
