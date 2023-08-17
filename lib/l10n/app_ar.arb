@@ -8,5 +8,6 @@
     "resendOtpText":"اعادة ارسال الرمز",
     "enterNumText":"ادخل رقم الهاتف",
     "nextText":"التالي",
-    
+    "languageText":"اللغة",
+    "hourRateText":"سعر الساعة"
 }
