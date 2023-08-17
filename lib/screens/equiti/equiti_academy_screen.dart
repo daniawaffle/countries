@@ -90,6 +90,7 @@ class _EquitiAcademyScreenState extends State<EquitiAcademyScreen> {
           ),
           Expanded(
               flex: 6,
+
               child: StreamBuilder<List<Mentor>>(
                   stream: bloc.mentorsStreamController.stream,
                   builder: (context, snapshot) {
