@@ -26,59 +26,60 @@ class _StartupScreenState extends State<StartupScreen> {
   Widget build(BuildContext context) {
     startupBloc.getCountries();
     return Scaffold(
-        backgroundColor: secendaryColor,
-        appBar: AppBar(
-          backgroundColor: primaryColor,
-          title: Text(AppLocalizations.of(context)!.setupText),
-          centerTitle: true,
-        ),
-        body: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10.0),
-              child: Directionality(
-                textDirection: TextDirection.ltr,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    LanguageButton(
-                      label: AppLocalizations.of(context)!.englishText,
-                      startupBloc: startupBloc,
-                      localLanguage: enLocale,
-                    ),
-                    LanguageButton(
-                      label: AppLocalizations.of(context)!.arabicText,
-                      startupBloc: startupBloc,
-                      localLanguage: arLocale,
-                    ),
-                  ],
-                ),
+      backgroundColor: secendaryColor,
+      appBar: AppBar(
+        backgroundColor: primaryColor,
+        title: Text(AppLocalizations.of(context)!.setupText),
+        centerTitle: true,
+      ),
+      body: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 10.0),
+            child: Directionality(
+              textDirection: TextDirection.ltr,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  LanguageButton(
+                    label: AppLocalizations.of(context)!.englishText,
+                    startupBloc: startupBloc,
+                    localLanguage: enLocale,
+                  ),
+                  LanguageButton(
+                    label: AppLocalizations.of(context)!.arabicText,
+                    startupBloc: startupBloc,
+                    localLanguage: arLocale,
+                  ),
+                ],
               ),
             ),
-            Expanded(
-              child: StreamBuilder<Object>(
-                  stream: startupBloc.countriesStreamController.stream,
-                  builder: (context, snapshot) {
-                    return ListView.builder(
-                      itemCount: startupBloc.countries.length,
-                      itemBuilder: (context, index) {
-                        return ListTileWidget(
-                          pushNextScreen: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => LoginScreen(
-                                      countries: startupBloc.countries,
-                                      country: startupBloc.countries[index]),
-                                ));
-                          },
-                          country: startupBloc.countries[index],
-                        );
-                      },
-                    );
-                  }),
-            ),
-          ],
-        ));
+          ),
+          Expanded(
+            child: StreamBuilder<Object>(
+                stream: startupBloc.countriesStreamController.stream,
+                builder: (context, snapshot) {
+                  return ListView.builder(
+                    itemCount: startupBloc.countries.length,
+                    itemBuilder: (context, index) {
+                      return ListTileWidget(
+                        pushNextScreen: () {
+                          Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => LoginScreen(
+                                    countries: startupBloc.countries,
+                                    country: startupBloc.countries[index]),
+                              ));
+                        },
+                        country: startupBloc.countries[index],
+                      );
+                    },
+                  );
+                }),
+          ),
+        ],
+      ),
+    );
   }
 }
