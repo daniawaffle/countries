@@ -10,7 +10,6 @@ class MentorCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<String> entries = <String>['A', 'B', 'C', 'D', 'E', 'F'];
     return Center(
       child: SafeArea(
         child: Card(
@@ -20,7 +19,6 @@ class MentorCard extends StatelessWidget {
             side: BorderSide(
               color: primaryColor,
             ),
-            // borderRadius: const BorderRadius.all(Radius.circular(12)),
           ),
           margin: const EdgeInsets.all(10),
           child: Column(
@@ -150,6 +148,8 @@ class MentorCard extends StatelessWidget {
                             direction: Axis.horizontal,
                           ),
                         ),
+                        Text('${mentor.numberOfReviewr}')
+
                       ],
                     ),
                   ),

@@ -58,7 +58,7 @@ class MainAppState extends State<MainApp> {
           Locale(arLocale),
         ],
         debugShowCheckedModeBanner: false,
-        home: EquitiAcademyScreen());
+        home: StartupScreen());
   }
 
   void rebuild() {

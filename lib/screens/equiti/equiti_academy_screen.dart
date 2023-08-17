@@ -21,7 +21,8 @@ class _EquitiAcademyScreenState extends State<EquitiAcademyScreen> {
   }
 
   EquitiAcademyBloc bloc = EquitiAcademyBloc();
-  int _selectedIndex = 0;
+  int _selectedIndex = 1;
+  int selectedItemIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -34,43 +35,62 @@ class _EquitiAcademyScreenState extends State<EquitiAcademyScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Expanded(
-            flex: 4,
+            flex: 2,
             child: StreamBuilder(
                 stream: bloc.categoriesStreamController.stream,
                 builder: (context, snapshot) {
                   return ListView.builder(
                     itemCount: bloc.categories.length,
                     itemBuilder: (context, index) {
+                      bool isSelected = index == selectedItemIndex;
+
                       return Card(
-                        elevation: 4,
-                        margin: const EdgeInsets.symmetric(
-                            horizontal: 5, vertical: 10),
-                        child: ListTile(
-                          contentPadding:
-                              const EdgeInsets.symmetric(horizontal: 8),
-                          leading: CircleAvatar(
-                            radius: 15,
-                            backgroundColor: secendaryColor,
-                            backgroundImage: NetworkImage(
-                              categoryImageBaseUrl +
-                                  bloc.categories[index].icon!,
+                          color: isSelected ? selectedItemColor : Colors.white,
+                          elevation: 4,
+                          margin: const EdgeInsets.symmetric(
+                              horizontal: 5, vertical: 10),
+                          child: InkWell(
+                            onTap: () async {
+                              setState(() {
+                                selectedItemIndex =
+                                    index; // Update the selected index
+                              });
+                              await bloc.getMentors(bloc.categories[index].id!);
+                            },
+                            child: Padding(
+                              padding: const EdgeInsets.all(5.0),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  CircleAvatar(
+                                    radius: 25,
+                                    backgroundColor: secendaryColor,
+                                    backgroundImage: NetworkImage(
+                                      categoryImageBaseUrl +
+                                          bloc.categories[index].icon!,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 5,
+                                  ),
+                                  Text(
+                                    bloc.categories[index].name!,
+                                    style: const TextStyle(
+                                      fontSize: 14,
+                                    ),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ],
+                              ),
                             ),
-                          ),
-                          title: Text(
-                            bloc.categories[index].name!,
-                            style: const TextStyle(fontSize: 14),
-                          ),
-                          onTap: () async {
-                            await bloc.getMentors(bloc.categories[index].id!);
-                          },
-                        ),
-                      );
+                          ));
                     },
                   );
                 }),
           ),
           Expanded(
-              flex: 8,
+              flex: 6,
+
               child: StreamBuilder<List<Mentor>>(
                   stream: bloc.mentorsStreamController.stream,
                   builder: (context, snapshot) {
@@ -108,9 +128,9 @@ class _EquitiAcademyScreenState extends State<EquitiAcademyScreen> {
     );
   }
 
-  void _onItemTapped(int index) {
+  void _onItemTapped(int i) {
     setState(() {
-      _selectedIndex = index;
+      _selectedIndex = i;
     });
   }
 }
