@@ -115,6 +115,7 @@ class MentorCard extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: <Widget>[
                         Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             Image(
                               width: 50,
@@ -122,9 +123,14 @@ class MentorCard extends StatelessWidget {
                               image: NetworkImage(
                                   '$imageBaseUrl${mentor.countryFlag}'),
                             ),
-                            Text(
-                              '${mentor.countryName}',
-                              textAlign: TextAlign.center,
+                            Container(
+                              color: Colors.amber,
+                              width: 80,
+                              child: Text(
+                                '${mentor.countryName}',
+                                textAlign: TextAlign.center,
+                                overflow: TextOverflow.visible,
+                              ),
                             ),
                           ],
                         ),
