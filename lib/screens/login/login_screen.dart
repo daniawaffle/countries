@@ -170,7 +170,9 @@ class _LoginScreenState extends State<LoginScreen>
                             print(error);
                           }
                         },
-                        child: Text(AppLocalizations.of(context)!.nextText),
+                        child: Text(
+                          AppLocalizations.of(context)!.nextText,
+                        ),
                       ),
               ],
             ),

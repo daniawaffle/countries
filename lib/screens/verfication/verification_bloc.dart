@@ -1,6 +1,6 @@
 import 'package:countries_app/models/verify_model.dart';
+import 'package:flutter/material.dart';
 import 'package:otp_text_field/otp_field.dart';
-import 'package:otp_timer_button/otp_timer_button.dart';
 
 import '../../locater.dart';
 import '../../models/login_model.dart';
@@ -9,8 +9,13 @@ import '../../services/api.dart';
 class VerificationBloc {
   OtpFieldController otpController = OtpFieldController();
 
-  OtpTimerButtonController resendController = OtpTimerButtonController();
   final ApiService apiService = ApiService();
+  final interval = const Duration(seconds: 1);
+  final int timerMaxSeconds = 90;
+  int currentSeconds = 0;
+  String get timerText =>
+      '${((timerMaxSeconds - currentSeconds) ~/ 60).toString().padLeft(2, '0')}: ${((timerMaxSeconds - currentSeconds) % 60).toString().padLeft(2, '0')}';
+  ValueNotifier<bool> otpButtonVisible = ValueNotifier<bool>(true);
 
   Future<LoginApiModel> requestNewOtp({
     required String phoneNumber,
@@ -32,10 +37,10 @@ class VerificationBloc {
       body: body,
     );
 
-    resendController.loading();
-    Future.delayed(const Duration(seconds: 2), () {
-      resendController.startTimer();
-    });
+    // resendController.loading();
+    // Future.delayed(const Duration(seconds: 2), () {
+    //   resendController.startTimer();
+    // });
 
     print(LoginApiModel.fromJson(response).loginModel!.lastOtp);
     return LoginApiModel.fromJson(response);
