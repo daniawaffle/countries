@@ -5,41 +5,11 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import '../../models/mentor_model.dart';
 
 class MentorCard extends StatelessWidget {
-  MentorCard({super.key});
-  Map<String, dynamic> mentorData = {
-    "id": 1,
-    "category_name": "Psychology",
-    "suffixe_name": "Sr.",
-    "first_name": "abed alrahman 1",
-    "last_name": "al haj hussain",
-    "rate": 0.0,
-    "hour_rate": 20.5,
-    "profile_img": "1.png",
-    "languages": ["English", "العربية"],
-    "country_name": "Qatar",
-    "country_flag": "qatar.png",
-    "number_of_reviewr": 0,
-  };
-
-  // final Mentor mentor;
-  // const MentorCard({super.key, required this.mentor});
+  final Mentor mentor;
+  const MentorCard({super.key, required this.mentor});
 
   @override
   Widget build(BuildContext context) {
-    Mentor mentor = Mentor(
-      id: mentorData["id"],
-      categoryName: mentorData["category_name"],
-      suffixeName: mentorData["suffixe_name"],
-      firstName: mentorData["first_name"],
-      lastName: mentorData["last_name"],
-      rate: mentorData["rate"],
-      hourRate: mentorData["hour_rate"],
-      profileImg: mentorData["profile_img"],
-      languages: List<String>.from(mentorData["languages"]),
-      countryName: mentorData["country_name"],
-      countryFlag: mentorData["country_flag"],
-      numberOfReviewr: mentorData["number_of_reviewr"],
-    );
     final List<String> entries = <String>['A', 'B', 'C', 'D', 'E', 'F'];
     return Center(
       child: SafeArea(
@@ -106,8 +76,19 @@ class MentorCard extends StatelessWidget {
                     children: [
                       const Text("Languages : "),
                       Wrap(
-                        children: entries
-                            .map((entry) => const Text("testt "))
+                        children: mentor.languages!
+                            .map((entry) => Card(
+                                color: primaryColor,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(5),
+                                  child: Text(
+                                    entry,
+                                    textAlign: TextAlign.center,
+                                    style: const TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                )))
                             .toList(),
                       )
                     ],

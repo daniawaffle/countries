@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:countries_app/screens/verfication/verification_bloc.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:otp_text_field/otp_field.dart';
 import 'package:otp_text_field/style.dart';
@@ -46,9 +47,9 @@ class _VerificationScreenState extends State<VerificationScreen> {
   void sendOtp() {
     verBloc.requestNewOtp(
         phoneNumber: widget.phoneNumber, countryId: widget.countryId);
-    verBloc.otpButtonVisible.value = false; // Hide the button
-    verBloc.currentSeconds = 0; // Reset timer
-    startTimeout(); // Start timer
+    verBloc.otpButtonVisible.value = false;
+    verBloc.currentSeconds = 0;
+    startTimeout();
   }
 
   @override
@@ -98,37 +99,22 @@ class _VerificationScreenState extends State<VerificationScreen> {
               ElevatedButton(
                 style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all(primaryColor)),
-                onPressed: () {
-                  verBloc.verify(
+                onPressed: () async {
+                  var response = await verBloc.verify(
                       phoneNumber: widget.phoneNumber,
                       countryId: widget.countryId,
                       userId: widget.userId,
                       lastOTP: otpp);
-                  if (context.mounted) {
-                    Navigator.push(
+                  if (context.mounted && response.verifyModel != null) {
+                    Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => EquitiAcademyScreen(),
+                          builder: (context) => const EquitiAcademyScreen(),
                         ));
                   }
                 },
                 child: Text(AppLocalizations.of(context)!.loginText),
               ),
-
-              // ElevatedButton(
-              //   onPressed: () {
-              //     // verBloc.requestNewOtp(
-              //     //     phoneNumber: widget.phoneNumber,
-              //     //     countryId: widget.countryId);
-              //     setState(() {
-              //       startTimeout();
-              //     });
-              //   },
-              //   child: Text(timerText != 0
-              //       ? '${AppLocalizations.of(context)!.resendOtpText}'
-              //       : '${timerText}'),
-              // ),
-
               ValueListenableBuilder(
                 valueListenable: verBloc.otpButtonVisible,
                 builder: (context, isVisible, child) {
@@ -143,7 +129,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
                         )
                       : Text(
                           verBloc.timerText,
-                          style: TextStyle(fontSize: 15),
+                          style: const TextStyle(fontSize: 15),
                         );
                 },
               )

@@ -12,6 +12,8 @@ import '../../services/hive.dart';
 class EquitiAcademyBloc {
   StreamController<List<Category>> categoriesStreamController =
       StreamController<List<Category>>();
+  StreamController<List<Mentor>> mentorsStreamController =
+      StreamController<List<Mentor>>();
 
   String? language = locator<HiveService>()
           .getValue(boxName: languageHiveBox, key: languageHiveKey) ??
@@ -50,6 +52,7 @@ class EquitiAcademyBloc {
     if (mentorsModel.mentors != null) {
       mentors = mentorsModel.mentors!;
     }
+    mentorsStreamController.sink.add(mentors);
     return mentors;
   }
 }
