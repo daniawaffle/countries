@@ -108,41 +108,45 @@ class MentorCard extends StatelessWidget {
                     color: primaryColor,
                   ),
                 ),
-                child: IntrinsicHeight(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: <Widget>[
-                      Row(
-                        children: <Widget>[
-                          Image(
-                            width: 60,
-                            height: 40,
-                            image: NetworkImage(
-                                '$imageBaseUrl${mentor.countryFlag}'),
-                          ),
-                          Text(
-                            '${mentor.categoryName}',
-                            textAlign: TextAlign.center,
-                          ),
-                        ],
-                      ),
-                      VerticalDivider(
-                        color: primaryColor,
-                        thickness: 1,
-                      ),
-                      Flexible(
-                        child: RatingBarIndicator(
-                          rating: mentor.rate!,
-                          itemBuilder: (context, index) => const Icon(
-                            Icons.star,
-                            color: Colors.amber,
-                          ),
-                          itemCount: 5,
-                          itemSize: 30.0,
-                          direction: Axis.horizontal,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: IntrinsicHeight(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
+                        Row(
+                          children: <Widget>[
+                            Image(
+                              width: 50,
+                              height: 30,
+                              image: NetworkImage(
+                                  '$imageBaseUrl${mentor.countryFlag}'),
+                            ),
+                            Text(
+                              '${mentor.countryName}',
+                              textAlign: TextAlign.center,
+                            ),
+                          ],
                         ),
-                      ),
-                    ],
+                        VerticalDivider(
+                          color: primaryColor,
+                          thickness: 1,
+                        ),
+                        Align(
+                          alignment: Alignment.center,
+                          child: RatingBarIndicator(
+                            rating: mentor.rate!,
+                            itemBuilder: (context, index) => const Icon(
+                              Icons.star,
+                              color: Colors.amber,
+                            ),
+                            itemCount: 5,
+                            itemSize: 18.0,
+                            direction: Axis.horizontal,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
