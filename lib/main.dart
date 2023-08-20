@@ -1,6 +1,5 @@
 import 'package:countries_app/constants.dart';
-import 'package:countries_app/screens/equiti/equiti_academy_screen.dart';
-import 'package:countries_app/screens/equiti/mentor_card_widget.dart';
+
 import 'package:countries_app/screens/startup/startup_screen.dart';
 import 'package:countries_app/services/hive.dart';
 import 'package:flutter/material.dart';
