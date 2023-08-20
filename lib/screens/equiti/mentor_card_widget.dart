@@ -1,6 +1,7 @@
 import 'package:countries_app/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../models/mentor_model.dart';
 
@@ -71,9 +72,13 @@ class MentorCard extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(25, 8, 20, 8),
                   child: Wrap(
+                    direction: Axis.horizontal,
                     children: [
-                      const Text("Languages : "),
+                      Text(
+                        "${AppLocalizations.of(context)!.languageText} : ",
+                      ),
                       Wrap(
+                        direction: Axis.horizontal,
                         children: mentor.languages!
                             .map((entry) => Card(
                                 color: primaryColor,
@@ -95,7 +100,8 @@ class MentorCard extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(25, 8, 20, 8),
-                child: Text("Hour Rate : ${mentor.hourRate}"),
+                child: Text(
+                    "${AppLocalizations.of(context)!.hourRateText} : ${mentor.hourRate}"),
               ),
               Card(
                 color: secendaryColor,
@@ -149,7 +155,6 @@ class MentorCard extends StatelessWidget {
                           ),
                         ),
                         Text('${mentor.numberOfReviewr}')
-
                       ],
                     ),
                   ),
