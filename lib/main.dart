@@ -48,7 +48,7 @@ class MainAppState extends State<MainApp> {
   void initState() {
     // LocalJsonLocalization.delegate.directories = ['lib/i18n/'];
     locale = locator<HiveService>().getValue<String>(
-          boxName: languageHiveBox,
+          boxName: hiveBox,
           key: languageHiveKey,
         ) ??
         enLocale;
@@ -75,7 +75,7 @@ class MainAppState extends State<MainApp> {
 
   void rebuild() {
     String appLanguage = locator<HiveService>().getValue<String>(
-          boxName: languageHiveBox,
+          boxName: hiveBox,
           key: languageHiveKey,
         ) ??
         enLocale;
