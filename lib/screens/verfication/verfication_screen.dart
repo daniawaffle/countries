@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:countries_app/screens/verfication/verification_bloc.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:otp_text_field/otp_field.dart';
 import 'package:otp_text_field/style.dart';

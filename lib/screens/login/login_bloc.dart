@@ -11,7 +11,21 @@ class LoginBLoc {
 
   late Country selectedCountry;
 
+  ValueNotifier<String?> errorMessage = ValueNotifier<String?>(null);
+
+  ValueNotifier<bool?> isDisabled = ValueNotifier<bool?>(true);
+
   TextEditingController numberController = TextEditingController();
+
+  validateNumber(String value, int minLen) {
+    if (value.length != minLen) {
+      return 'Please enter $minLen digits number';
+    } else {
+      isDisabled.value = false;
+
+      return null;
+    }
+  }
 
   Future<LoginApiModel> login({
     required String phoneNumber,
