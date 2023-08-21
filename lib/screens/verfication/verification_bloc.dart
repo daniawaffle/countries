@@ -1,3 +1,4 @@
+import 'package:countries_app/constants.dart';
 import 'package:countries_app/models/verify_model.dart';
 import 'package:flutter/material.dart';
 import 'package:otp_text_field/otp_field.dart';
@@ -5,6 +6,7 @@ import 'package:otp_text_field/otp_field.dart';
 import '../../locater.dart';
 import '../../models/login_model.dart';
 import '../../services/api.dart';
+import '../../services/hive.dart';
 
 class VerificationBloc {
   OtpFieldController otpController = OtpFieldController();
@@ -75,7 +77,12 @@ class VerificationBloc {
       method: 'POST',
       body: body,
     );
-    print(VerifyApiModel.fromJson(response).message);
+    print(VerifyApiModel.fromJson(response).verifyModel);
+    locator<HiveService>().setValue(
+        boxName: hiveBox,
+        key: userTokenKey,
+        value: VerifyApiModel.fromJson(response).verifyModel!.token);
+
     return VerifyApiModel.fromJson(response);
   }
 }

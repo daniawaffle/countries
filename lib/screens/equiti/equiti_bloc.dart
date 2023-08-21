@@ -15,9 +15,9 @@ class EquitiAcademyBloc {
   StreamController<List<Mentor>> mentorsStreamController =
       StreamController<List<Mentor>>();
 
-  String? language = locator<HiveService>()
-          .getValue(boxName: languageHiveBox, key: languageHiveKey) ??
-      "en";
+  String? language =
+      locator<HiveService>().getValue(boxName: hiveBox, key: languageHiveKey) ??
+          "en";
   List<Category> categories = [];
   List<Mentor> mentors = [];
 

@@ -10,9 +10,9 @@ class StartupBloc {
   StreamController<List<Country>> countriesStreamController =
       StreamController<List<Country>>();
 
-  String? language = locator<HiveService>()
-          .getValue(boxName: languageHiveBox, key: languageHiveKey) ??
-      "en";
+  String? language =
+      locator<HiveService>().getValue(boxName: hiveBox, key: languageHiveKey) ??
+          "en";
   List<Country> countries = [];
 
   Future<List<Country>> getCountries() async {
@@ -36,6 +36,6 @@ class StartupBloc {
     language = localLanguage;
 
     await locator<HiveService>().setValue<String>(
-        boxName: languageHiveBox, key: languageHiveKey, value: language!);
+        boxName: hiveBox, key: languageHiveKey, value: language!);
   }
 }
