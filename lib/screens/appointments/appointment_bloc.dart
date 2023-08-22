@@ -46,4 +46,17 @@ class AppointmentsBloc {
       return result;
     }
   }
+
+  Future<AppointmentsModel> cancelAppointment() async {
+    final response = await locator<ApiService>().apiRequest(
+      path: "client-appointment/cancel",
+      method: postMethod,
+      options: Options(
+        headers: {'lang': language, "Authorization": "Bearer $userToken"},
+      ),
+    );
+    print(response);
+
+    return AppointmentsModel.fromJson(response);
+  }
 }

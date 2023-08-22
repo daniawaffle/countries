@@ -3,6 +3,9 @@ import 'package:intl/intl.dart';
 
 import '../../../models/apointments_model.dart';
 import '../appointment_bloc.dart';
+
+import 'alert_dialog.dart';
+
 import 'client_card.dart';
 
 class AppointmentDetail extends StatelessWidget {
@@ -58,18 +61,22 @@ class AppointmentDetail extends StatelessWidget {
                               children: <Widget>[
                                 Padding(
                                   padding: const EdgeInsets.all(8.0),
-                                  child: const Row(
+                                  child: Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      SizedBox(
-                                        width: 5,
+                                      const SizedBox(
+                                        width: 0,
                                       ),
-                                      Text(
+                                      const Text(
                                         "Meeting\nwith",
                                         textAlign: TextAlign.center,
                                       ),
-                                      Icon(Icons.close)
+                                      IconButton(
+                                          onPressed: () {
+                                            Navigator.of(context).pop();
+                                          },
+                                          icon: const Icon(Icons.close))
                                     ],
                                   ),
                                 ),
@@ -281,7 +288,7 @@ class AppointmentDetail extends StatelessWidget {
                                         backgroundColor:
                                             MaterialStatePropertyAll<Color>(
                                                 Colors.red)),
-                                    onPressed: () {},
+                                    onPressed: () => showAlertDialog(context),
                                     child: Text("Cancel Attend")),
                               ],
                             ),
