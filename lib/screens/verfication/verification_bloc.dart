@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:countries_app/constants.dart';
 import 'package:countries_app/models/verify_model.dart';
 import 'package:flutter/material.dart';
@@ -9,15 +11,28 @@ import '../../services/api.dart';
 import '../../services/hive.dart';
 
 class VerificationBloc {
+  final otpButtonVisible = ValueNotifier<bool>(true);
+  final currentSeconds = ValueNotifier<int>(0);
+
   OtpFieldController otpController = OtpFieldController();
 
   final ApiService apiService = ApiService();
   final interval = const Duration(seconds: 1);
-  final int timerMaxSeconds = 90;
-  int currentSeconds = 0;
+  final int timerMaxSeconds = 60;
+
   String get timerText =>
-      '${((timerMaxSeconds - currentSeconds) ~/ 60).toString().padLeft(2, '0')}: ${((timerMaxSeconds - currentSeconds) % 60).toString().padLeft(2, '0')}';
-  ValueNotifier<bool> otpButtonVisible = ValueNotifier<bool>(true);
+      '${((timerMaxSeconds - currentSeconds.value) ~/ 60).toString().padLeft(2, '0')}: ${((timerMaxSeconds - currentSeconds.value) % 60).toString().padLeft(2, '0')}';
+
+  void startTimeout() {
+    final duration = interval;
+    Timer.periodic(duration, (timer) {
+      currentSeconds.value = timer.tick;
+      if (timer.tick >= timerMaxSeconds) {
+        timer.cancel();
+        otpButtonVisible.value = true;
+      }
+    });
+  }
 
   Future<LoginApiModel> requestNewOtp({
     required String phoneNumber,

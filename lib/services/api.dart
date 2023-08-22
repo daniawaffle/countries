@@ -32,12 +32,11 @@ class ApiService {
         //return response.data;
         return response.data as T;
       } else {
-        throw Exception(response.statusMessage);
+        throw Exception(response.statusCode);
       }
     } catch (e) {
-      HttpExceptionHandler.handleException(e);
-      print(e);
-      throw Exception(e.toString());
+      var tt = HttpExceptionHandler.handleException(e);
+      throw Exception(HttpExceptionHandler.generateExceptionMessage(tt));
     }
   }
 }

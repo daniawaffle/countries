@@ -1,14 +1,14 @@
 class AppointmentsModel {
-  List<Appointment>? data;
+  List<Appoint>? data;
   String? message;
 
   AppointmentsModel({this.data, this.message});
 
   AppointmentsModel.fromJson(Map<String, dynamic> json) {
     if (json['data'] != null) {
-      data = <Appointment>[];
+      data = <Appoint>[];
       json['data'].forEach((v) {
-        data!.add(Appointment.fromJson(v));
+        data!.add(Appoint.fromJson(v));
       });
     }
     message = json['message'];
@@ -24,10 +24,10 @@ class AppointmentsModel {
   }
 }
 
-class Appointment {
+class Appoint {
   int? id;
-  String? dateFrom;
-  String? dateTo;
+  DateTime? dateFrom;
+  DateTime? dateTo;
   int? clientId;
   int? mentorId;
   int? appointmentType;
@@ -43,7 +43,7 @@ class Appointment {
   int? categoryId;
   String? categoryName;
 
-  Appointment(
+  Appoint(
       {this.id,
       this.dateFrom,
       this.dateTo,
@@ -62,10 +62,11 @@ class Appointment {
       this.categoryId,
       this.categoryName});
 
-  Appointment.fromJson(Map<String, dynamic> json) {
+  Appoint.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    dateFrom = json['date_from'];
-    dateTo = json['date_to'];
+    dateFrom = DateTime.parse(json['date_from']);
+
+    dateTo = DateTime.parse(json['date_to']);
     clientId = json['client_id'];
     mentorId = json['mentor_id'];
     appointmentType = json['appointment_type'];

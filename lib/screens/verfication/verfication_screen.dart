@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:countries_app/screens/appointments/appointments_screen.dart';
 import 'package:countries_app/screens/verfication/verification_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:otp_text_field/otp_field.dart';
@@ -30,25 +31,12 @@ class VerificationScreen extends StatefulWidget {
 class _VerificationScreenState extends State<VerificationScreen> {
   VerificationBloc verBloc = VerificationBloc();
 
-  void startTimeout() {
-    var duration = verBloc.interval;
-    Timer.periodic(duration, (timer) {
-      setState(() {
-        verBloc.currentSeconds = timer.tick;
-        if (timer.tick >= verBloc.timerMaxSeconds) {
-          timer.cancel();
-          verBloc.otpButtonVisible.value = true;
-        }
-      });
-    });
-  }
-
   void sendOtp() {
     verBloc.requestNewOtp(
         phoneNumber: widget.phoneNumber, countryId: widget.countryId);
     verBloc.otpButtonVisible.value = false;
-    verBloc.currentSeconds = 0;
-    startTimeout();
+    verBloc.currentSeconds.value = 0;
+    verBloc.startTimeout();
   }
 
   @override
