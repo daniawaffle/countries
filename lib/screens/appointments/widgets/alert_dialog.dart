@@ -1,6 +1,10 @@
+import 'package:countries_app/screens/appointments/appointment_bloc.dart';
 import 'package:flutter/material.dart';
 
-Future<void> showAlertDialog(BuildContext context) async {
+Future<void> showAlertDialog(
+    {required BuildContext context,
+    required AppointmentsBloc bloc,
+    required int appointmentID}) async {
   return showDialog<void>(
     context: context,
     barrierDismissible: false, // user must tap button!
@@ -25,6 +29,7 @@ Future<void> showAlertDialog(BuildContext context) async {
           TextButton(
             child: const Text('Yes'),
             onPressed: () {
+              bloc.cancelAppointment(appointmentID);
               Navigator.of(context).pop();
             },
           ),

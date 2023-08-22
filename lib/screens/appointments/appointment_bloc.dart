@@ -1,13 +1,11 @@
 import 'dart:async';
-import 'dart:io';
-
 import 'package:dio/dio.dart';
-
 import '../../constants.dart';
 import '../../locater.dart';
 import '../../models/apointments_model.dart';
 import '../../services/api.dart';
 import '../../services/hive.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class AppointmentsBloc {
   StreamController<List<Appoint>> appointmentsStreamController =
@@ -47,16 +45,33 @@ class AppointmentsBloc {
     }
   }
 
-  Future<AppointmentsModel> cancelAppointment() async {
-    final response = await locator<ApiService>().apiRequest(
+  Future<void> cancelAppointment(int id) async {
+    final Response response = await locator<ApiService>().apiRequest(
       path: "client-appointment/cancel",
       method: postMethod,
+      queryParameters: {"id": id},
       options: Options(
         headers: {'lang': language, "Authorization": "Bearer $userToken"},
       ),
     );
     print(response);
+    if (response.statusCode == 200) {
+      Fluttertoast.showToast(msg: "Appointment has been cnaceled");
+    } else {
+      Fluttertoast.showToast(msg: "something went wrong");
+    }
+  }
 
-    return AppointmentsModel.fromJson(response);
+  Future<void> addAppointmentNote(
+      {required int appointmentID, required String note}) async {
+    final response = await locator<ApiService>().apiRequest(
+      path: "client-appointment/comment",
+      method: postMethod,
+      body: {"id": appointmentID, "comment": note},
+      options: Options(
+        headers: {'lang': language, "Authorization": "Bearer $userToken"},
+      ),
+    );
+    print(response);
   }
 }
