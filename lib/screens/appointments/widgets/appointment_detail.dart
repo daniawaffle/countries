@@ -1,13 +1,12 @@
-import 'package:countries_app/screens/appointment/appointment__detail_bloc.dart';
-import 'package:countries_app/screens/appointment/widgets/appointment_bottom_sheet.dart';
-import 'package:countries_app/screens/appointment/widgets/client_card.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import '../../models/apointments_model.dart';
+import '../../../models/apointments_model.dart';
+import '../../appointment_detail/widgets/client_card.dart';
+import '../appointment_bloc.dart';
 
 class AppointmentDetail extends StatelessWidget {
-  final AppointmentDetailBloc bloc = AppointmentDetailBloc();
+  final AppointmentsBloc bloc = AppointmentsBloc();
   AppointmentDetail({super.key});
   final Map<String, dynamic> appointmentJson = {
     "id": 12,
@@ -31,7 +30,7 @@ class AppointmentDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Appointment appointment = Appointment.fromJson(appointmentJson);
+    final Appoint appointment = Appoint.fromJson(appointmentJson);
     return Scaffold(
       body: SafeArea(
         child: Column(
