@@ -23,7 +23,8 @@ class ApiService {
         response = await _dio.get(path,
             options: options, queryParameters: queryParameters);
       } else if (method == 'POST') {
-        response = await _dio.post(path, data: body, options: options);
+        response = await _dio.post(path,
+            data: body, options: options, queryParameters: queryParameters);
       } else {
         throw Exception('Unsupported HTTP method: $method');
       }
