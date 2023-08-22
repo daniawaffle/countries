@@ -26,7 +26,7 @@ class AppointmentBottomSheet extends StatelessWidget {
                   Icon(Icons.close)
                 ],
               ),
-              // ClientCard(),
+              ClientCard(),
             ],
           );
         });
