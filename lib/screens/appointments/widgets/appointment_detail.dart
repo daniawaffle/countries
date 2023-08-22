@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 import '../../../models/apointments_model.dart';
-import '../../appointment_detail/widgets/client_card.dart';
 import '../appointment_bloc.dart';
+import 'client_card.dart';
 
 class AppointmentDetail extends StatelessWidget {
   final AppointmentsBloc bloc = AppointmentsBloc();
