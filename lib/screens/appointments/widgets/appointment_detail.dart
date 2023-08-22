@@ -3,7 +3,9 @@ import 'package:intl/intl.dart';
 
 import '../../../models/apointments_model.dart';
 import '../appointment_bloc.dart';
+
 import 'alert_dialog.dart';
+
 import 'client_card.dart';
 
 class AppointmentDetail extends StatelessWidget {

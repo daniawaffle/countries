@@ -4,6 +4,7 @@ import 'package:syncfusion_flutter_calendar/calendar.dart';
 import '../../models/apointments_model.dart';
 import 'appointment_bloc.dart';
 import 'meeting_data_source.dart';
+import 'widgets/appointment_bottom_sheet.dart';
 
 class AppointmentsScreen extends StatefulWidget {
   const AppointmentsScreen({super.key});
@@ -27,6 +28,18 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
     setState(() {
       dataSource = MeetingDataSource(appointmentsModel);
     });
+  }
+
+  void _handleCalendarTap(CalendarTapDetails details) {
+    if (details.targetElement == CalendarElement.calendarCell) {
+      // Open the bottom sheet when tapping on a date cell
+      showModalBottomSheet<void>(
+        context: context,
+        builder: (BuildContext context) {
+          return AppointmentBottomSheet(); // Your bottom sheet widget
+        },
+      );
+    }
   }
 
   @override
@@ -53,7 +66,7 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
             child: SfCalendar(
               view: CalendarView.month,
               dataSource: dataSource,
-
+              onTap: _handleCalendarTap,
               monthViewSettings: const MonthViewSettings(
                   showAgenda: true,
                   appointmentDisplayCount:

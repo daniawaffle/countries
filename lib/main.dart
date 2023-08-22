@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:countries_app/constants.dart';
-import 'package:countries_app/screens/appointments/widgets/appointment_detail.dart';
+import 'package:countries_app/screens/startup/startup_screen.dart';
 import 'package:countries_app/services/hive.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -67,7 +67,7 @@ class MainAppState extends State<MainApp> {
           Locale(arLocale),
         ],
         debugShowCheckedModeBanner: false,
-        home: AppointmentDetail());
+        home: StartupScreen());
   }
 
   void rebuild() {
