@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 import '../../../models/apointments_model.dart';
+import 'add_note.dart';
 import 'alert_dialog.dart';
 import 'client_card.dart';
 
@@ -202,7 +203,12 @@ Future<void> showAppoitmentDetails(
                             MaterialStatePropertyAll<Size>(Size.fromHeight(50)),
                         backgroundColor:
                             MaterialStatePropertyAll<Color>(Colors.blue)),
-                    onPressed: () {},
+                    onPressed: () {
+                      displayTextInputDialog(
+                          appointmentID: appointment.id!,
+                          bloc: bloc,
+                          context: context);
+                    },
                     child: Text("Add / Edit Notes")),
                 SizedBox(
                   height: 15,
