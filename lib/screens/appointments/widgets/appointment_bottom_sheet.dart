@@ -108,7 +108,7 @@ Future<void> showAppoitmentDetails(
                     children: <Widget>[
                       Text("Session Duration:"),
                       Text(
-                        bloc.formatDuration(
+                        AppointmentsBloc.formatDuration(
                             dateFrom: appointment.dateFrom!,
                             dateTo: appointment.dateTo!),
                         style: const TextStyle(fontWeight: FontWeight.bold),

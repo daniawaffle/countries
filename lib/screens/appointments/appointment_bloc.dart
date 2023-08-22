@@ -32,7 +32,7 @@ class AppointmentsBloc {
     return AppointmentsModel.fromJson(response);
   }
 
-  String formatDuration(
+  static String formatDuration(
       {required DateTime dateFrom, required DateTime dateTo}) {
     Duration duration = dateTo.difference(dateFrom);
     if (duration.inMinutes < 60) {
