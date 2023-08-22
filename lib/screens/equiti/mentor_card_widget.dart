@@ -45,7 +45,7 @@ class MentorCard extends StatelessWidget {
                               : CircleAvatar(
                                   radius: 30,
                                   backgroundImage: NetworkImage(
-                                      '$mentorImage${mentor.profileImg}')),
+                                      '$mentorImageUrl${mentor.profileImg}')),
                     ),
                     Flexible(
                       child: Padding(

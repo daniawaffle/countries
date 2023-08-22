@@ -26,8 +26,8 @@ class AppointmentsModel {
 
 class Appointment {
   int? id;
-  String? dateFrom;
-  String? dateTo;
+  DateTime? dateFrom;
+  DateTime? dateTo;
   int? clientId;
   int? mentorId;
   int? appointmentType;
@@ -64,8 +64,8 @@ class Appointment {
 
   Appointment.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    dateFrom = json['date_from'];
-    dateTo = json['date_to'];
+    dateFrom = DateTime.parse(json['date_from']);
+    dateTo = DateTime.parse(json['date_to']);
     clientId = json['client_id'];
     mentorId = json['mentor_id'];
     appointmentType = json['appointment_type'];
