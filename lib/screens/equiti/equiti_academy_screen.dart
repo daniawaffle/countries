@@ -2,6 +2,7 @@ import 'package:countries_app/models/mentor_model.dart';
 import 'package:flutter/material.dart';
 
 import '../../constants.dart';
+import '../appointments/appointments_screen.dart';
 import 'equiti_bloc.dart';
 import 'mentor_list_widget.dart';
 
@@ -28,9 +29,19 @@ class _EquitiAcademyScreenState extends State<EquitiAcademyScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Equiti academy'),
-        backgroundColor: primaryColor,
-      ),
+          title: const Text('Equiti academy'),
+          backgroundColor: primaryColor,
+          actions: [
+            IconButton(
+                onPressed: () {
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const AppointmentsScreen(),
+                      ));
+                },
+                icon: Icon(Icons.next_plan))
+          ]),
       body: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -90,7 +101,6 @@ class _EquitiAcademyScreenState extends State<EquitiAcademyScreen> {
           ),
           Expanded(
               flex: 6,
-
               child: StreamBuilder<List<Mentor>>(
                   stream: bloc.mentorsStreamController.stream,
                   builder: (context, snapshot) {
