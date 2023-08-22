@@ -3,7 +3,7 @@ import 'package:countries_app/models/apointments_model.dart';
 import 'package:flutter/material.dart';
 
 class ClientCard extends StatelessWidget {
-  Map<String, dynamic> appointmentJson = {
+  final Map<String, dynamic> appointmentJson = {
     "id": 12,
     "date_from": "2023-02-15T15:00:00",
     "date_to": "2023-02-15T15:30:00",
@@ -27,7 +27,7 @@ class ClientCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Appointment appointment = Appointment.fromJson(appointmentJson);
+    final Appoint appointment = Appoint.fromJson(appointmentJson);
     return Center(
       child: SafeArea(
         child: Card(
