@@ -69,7 +69,7 @@ class MainAppState extends State<MainApp> {
           Locale(arLocale),
         ],
         debugShowCheckedModeBanner: false,
-        home: AppointmentsScreen());
+        home: AppointmentDetail());
   }
 
   void rebuild() {
