@@ -18,4 +18,4 @@ const String postMethod = "POST";
 Color primaryColor = Colors.green.shade700;
 Color secendaryColor = Colors.green.shade50;
 Color selectedItemColor = Colors.green.shade300;
-const String mentorImage = "https://www.helpera.app/static/mentorsImg/";
+const String mentorImageUrl = "https://www.helpera.app/static/mentorsImg/";

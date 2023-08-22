@@ -65,7 +65,6 @@ class Appoint {
   Appoint.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     dateFrom = DateTime.parse(json['date_from']);
-
     dateTo = DateTime.parse(json['date_to']);
     clientId = json['client_id'];
     mentorId = json['mentor_id'];
