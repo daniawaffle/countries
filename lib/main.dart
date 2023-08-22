@@ -1,9 +1,6 @@
 import 'dart:async';
 
 import 'package:countries_app/constants.dart';
-import 'package:countries_app/screens/appointment/appointment_detail.dart';
-import 'package:countries_app/screens/appointment/widgets/appointment_bottom_sheet.dart';
-import 'package:countries_app/screens/appointment/widgets/client_card.dart';
 
 import 'package:countries_app/screens/startup/startup_screen.dart';
 import 'package:countries_app/services/hive.dart';
@@ -15,6 +12,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'locater.dart';
 import 'screens/appointments/appointments_screen.dart';
+import 'screens/appointments/widgets/appointment_detail.dart';
 import 'screens/equiti/equiti_academy_screen.dart';
 
 Future<void> main() async {
