@@ -1,7 +1,6 @@
 import 'package:countries_app/constants.dart';
 import 'package:countries_app/models/apointments_model.dart';
 import 'package:flutter/material.dart';
-import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 class ClientCard extends StatelessWidget {
   final Appoint appoint;

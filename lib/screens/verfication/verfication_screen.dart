@@ -1,3 +1,4 @@
+import 'package:countries_app/screens/bottom_nav.dart';
 import 'package:countries_app/screens/verfication/verification_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:otp_text_field/otp_field.dart';
@@ -5,7 +6,6 @@ import 'package:otp_text_field/style.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../constants.dart';
-import '../equiti/equiti_academy_screen.dart';
 
 class VerificationScreen extends StatefulWidget {
   final String phoneNumber;
@@ -93,7 +93,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
                     Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const EquitiAcademyScreen(),
+                          builder: (context) => const BottomSheetNav(),
                         ));
                   }
                 },

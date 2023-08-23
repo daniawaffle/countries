@@ -2,7 +2,7 @@ import 'package:countries_app/models/mentor_model.dart';
 import 'package:flutter/material.dart';
 
 import '../../constants.dart';
-import '../appointments/appointments_screen.dart';
+
 import 'equiti_bloc.dart';
 import 'mentor_list_widget.dart';
 
@@ -22,26 +22,15 @@ class _EquitiAcademyScreenState extends State<EquitiAcademyScreen> {
   }
 
   EquitiAcademyBloc bloc = EquitiAcademyBloc();
-  int _selectedIndex = 1;
   int selectedItemIndex = 0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: const Text('Equiti academy'),
-          backgroundColor: primaryColor,
-          actions: [
-            IconButton(
-                onPressed: () {
-                  Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const AppointmentsScreen(),
-                      ));
-                },
-                icon: Icon(Icons.next_plan))
-          ]),
+        title: const Text('Equiti academy'),
+        backgroundColor: primaryColor,
+      ),
       body: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -114,33 +103,6 @@ class _EquitiAcademyScreenState extends State<EquitiAcademyScreen> {
                   })),
         ],
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        selectedItemColor: primaryColor,
-        selectedIconTheme: IconThemeData(
-          color: primaryColor,
-        ),
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.home,
-            ),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-              icon: Icon(
-                Icons.menu,
-              ),
-              label: ''),
-        ],
-        currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
-      ),
     );
-  }
-
-  void _onItemTapped(int i) {
-    setState(() {
-      _selectedIndex = i;
-    });
   }
 }

@@ -1,3 +1,4 @@
+import 'package:countries_app/constants.dart';
 import 'package:countries_app/screens/appointments/widgets/appointment_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
@@ -47,19 +48,26 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
                   'Appointments',
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
-                IconButton(onPressed: () {}, icon: const Icon(Icons.refresh))
+                IconButton(
+                    onPressed: () {
+                      setState(() {});
+                    },
+                    icon: const Icon(Icons.refresh))
               ],
             ),
           ),
           SizedBox(
             height: MediaQuery.sizeOf(context).height * .55,
             child: SfCalendar(
+              todayHighlightColor: primaryColor,
+              cellBorderColor: secendaryColor,
               view: CalendarView.month,
               dataSource: dataSource,
               onTap: (calendarTapDetails) async {
-                AppointmentsModel allApp = await fetchAppointments();
                 if (calendarTapDetails.targetElement ==
                     CalendarElement.appointment) {
+                  AppointmentsModel allApp = await fetchAppointments();
+
                   final Appointment appointment =
                       calendarTapDetails.appointments!.first;
                   final matchingAppoint = allApp.data!.firstWhere(
@@ -67,7 +75,7 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
                         app.dateFrom == appointment.startTime &&
                         app.dateTo == appointment.endTime,
                   );
-                  if (matchingAppoint != null) {
+                  if (context.mounted) {
                     showAppoitmentDetails(
                       context: context,
                       appoint: matchingAppoint,
@@ -77,10 +85,10 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
                 }
               },
 
-              monthViewSettings: const MonthViewSettings(
+              monthViewSettings: MonthViewSettings(
                   showAgenda: true,
-                  appointmentDisplayCount:
-                      5), // display count length of list on this date
+                  appointmentDisplayCount: dataSource.appointments!
+                      .length), // display count length of list on this date
             ),
           ),
         ],
