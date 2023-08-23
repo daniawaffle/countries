@@ -49,8 +49,8 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
                 IconButton(
-                    onPressed: () {
-                      setState(() {});
+                    onPressed: () async {
+                      await fetchAppointments();
                     },
                     icon: const Icon(Icons.refresh))
               ],
