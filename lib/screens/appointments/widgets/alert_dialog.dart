@@ -1,32 +1,40 @@
+import 'package:countries_app/screens/appointments/appointment_bloc.dart';
 import 'package:flutter/material.dart';
 
-Future<void> showSimpleDialog({required BuildContext context}) async {
-  await showDialog<void>(
-      context: context,
-      builder: (BuildContext context) {
-        return SimpleDialog(
-          // <-- SEE HERE
-          title: const Text('Select Booking Type'),
-          children: <Widget>[
-            SimpleDialogOption(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: const Text('General'),
-            ),
-            SimpleDialogOption(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: const Text('Silver'),
-            ),
-            SimpleDialogOption(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: const Text('Gold'),
-            ),
-          ],
-        );
-      });
+Future<void> showAlertDialog(
+    {required BuildContext context,
+    required AppointmentsBloc bloc,
+    required int appointmentID}) async {
+  return showDialog<void>(
+    context: context,
+    barrierDismissible: false, // user must tap button!
+    builder: (BuildContext context) {
+      return AlertDialog(
+        // <-- SEE HERE
+        title: const Text('Cancel Appointment'),
+        content: SingleChildScrollView(
+          child: ListBody(
+            children: const <Widget>[
+              Text('Are you sure want to cancel the appointment?'),
+            ],
+          ),
+        ),
+        actions: <Widget>[
+          TextButton(
+            child: const Text('No'),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+          TextButton(
+            child: const Text('Yes'),
+            onPressed: () {
+              bloc.cancelAppointment(appointmentID);
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
+      );
+    },
+  );
 }

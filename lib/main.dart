@@ -1,7 +1,8 @@
 import 'dart:async';
 
 import 'package:countries_app/constants.dart';
-
+import 'package:countries_app/screens/appointments/appointments_screen.dart';
+import 'package:countries_app/screens/appointments/widgets/appointment_detail.dart';
 import 'package:countries_app/screens/startup/startup_screen.dart';
 import 'package:countries_app/services/hive.dart';
 import 'package:dio/dio.dart';
@@ -9,7 +10,6 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
 import 'locater.dart';
 
 Future<void> main() async {
@@ -69,7 +69,7 @@ class MainAppState extends State<MainApp> {
           Locale(arLocale),
         ],
         debugShowCheckedModeBanner: false,
-        home: StartupScreen());
+        home: AppointmentDetail());
   }
 
   void rebuild() {
