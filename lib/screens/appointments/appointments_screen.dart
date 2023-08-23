@@ -23,11 +23,13 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
     fetchAppointments();
   }
 
-  Future<void> fetchAppointments() async {
+  fetchAppointments() async {
     final appointmentsModel = await appBloc.getAppointments();
     setState(() {
       dataSource = MeetingDataSource(appointmentsModel);
     });
+
+    return appointmentsModel;
   }
 
   @override
@@ -54,19 +56,27 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
             child: SfCalendar(
               view: CalendarView.month,
               dataSource: dataSource,
-              onTap: (calendarTapDetails) {
+              onTap: (calendarTapDetails) async {
+                AppointmentsModel allApp = await fetchAppointments();
                 if (calendarTapDetails.targetElement ==
                     CalendarElement.appointment) {
                   final Appointment appointment =
                       calendarTapDetails.appointments!.first;
-                  showAppoitmentDetails(
-                    context: context,
-                    appointment: appointment
-                        as Appoint, // Cast it to the appropriate type
-                    bloc: appBloc,
+                  final matchingAppoint = allApp.data!.firstWhere(
+                    (app) =>
+                        app.dateFrom == appointment.startTime &&
+                        app.dateTo == appointment.endTime,
                   );
+                  if (matchingAppoint != null) {
+                    showAppoitmentDetails(
+                      context: context,
+                      appointment: matchingAppoint,
+                      bloc: appBloc,
+                    );
+                  }
                 }
               },
+
               monthViewSettings: const MonthViewSettings(
                   showAgenda: true,
                   appointmentDisplayCount:
