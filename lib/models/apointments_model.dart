@@ -31,8 +31,8 @@ class Appoint {
   int? clientId;
   int? mentorId;
   int? appointmentType;
-  int? priceBeforeDiscount;
-  int? priceAfterDiscount;
+  double? priceBeforeDiscount;
+  double? priceAfterDiscount;
   int? state;
   String? noteFromClient;
   String? noteFromMentor;
@@ -69,8 +69,8 @@ class Appoint {
     clientId = json['client_id'];
     mentorId = json['mentor_id'];
     appointmentType = json['appointment_type'];
-    priceBeforeDiscount = json['price_before_discount'];
-    priceAfterDiscount = json['price_after_discount'];
+    priceBeforeDiscount = json['price_before_discount'].toDouble();
+    priceAfterDiscount = json['price_after_discount'].toDouble();
     state = json['state'];
     noteFromClient = json['note_from_client'];
     noteFromMentor = json['note_from_mentor'];
