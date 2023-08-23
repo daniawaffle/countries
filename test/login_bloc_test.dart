@@ -2,7 +2,7 @@ import 'package:countries_app/screens/login/login_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  group('test phone number length validator', () {
+  group('validateNumber', () {
     test('test phone number length < min len  validator return error message',
         () {
       final loginBloc = LoginBLoc();
