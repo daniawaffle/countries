@@ -1,33 +1,34 @@
 import 'package:countries_app/constants.dart';
 import 'package:countries_app/models/apointments_model.dart';
 import 'package:flutter/material.dart';
+import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 class ClientCard extends StatelessWidget {
-  final Map<String, dynamic> appointmentJson = {
-    "id": 12,
-    "date_from": "2023-02-15T15:00:00",
-    "date_to": "2023-02-15T15:30:00",
-    "client_id": 1,
-    "mentor_id": 6,
-    "appointment_type": 1,
-    "price_before_discount": 12,
-    "price_after_discount": 12,
-    "state": 1,
-    "note_from_client": null,
-    "note_from_mentor": null,
-    "profile_img": "",
-    "suffixe_name": "Mrs.",
-    "first_name": "abed alrahman 6",
-    "last_name": "al haj hussain",
-    "category_id": 2,
-    "categoryName": "طب اطفال"
-  };
+  final Appoint appoint;
+  // final Map<String, dynamic> appointmentJson = {
+  //   "id": 12,
+  //   "date_from": "2023-02-15T15:00:00",
+  //   "date_to": "2023-02-15T15:30:00",
+  //   "client_id": 1,
+  //   "mentor_id": 6,
+  //   "appointment_type": 1,
+  //   "price_before_discount": 12,
+  //   "price_after_discount": 12,
+  //   "state": 1,
+  //   "note_from_client": null,
+  //   "note_from_mentor": null,
+  //   "profile_img": "",
+  //   "suffixe_name": "Mrs.",
+  //   "first_name": "abed alrahman 6",
+  //   "last_name": "al haj hussain",
+  //   "category_id": 2,
+  //   "categoryName": "طب اطفال"
+  // };
 
-  ClientCard({super.key});
+  ClientCard({super.key, required this.appoint});
 
   @override
   Widget build(BuildContext context) {
-    final Appoint appointment = Appoint.fromJson(appointmentJson);
     return Center(
       child: SafeArea(
         child: Card(
@@ -55,8 +56,8 @@ class ClientCard extends StatelessWidget {
                           elevation: 0,
                           color: secendaryColor,
                           margin: const EdgeInsets.symmetric(horizontal: 10),
-                          child: (appointment.profileImg == null ||
-                                  appointment.profileImg == "")
+                          child: (appoint.profileImg == null ||
+                                  appoint.profileImg == "")
                               ? const CircleAvatar(
                                   radius: 50,
                                   backgroundImage:
@@ -64,7 +65,7 @@ class ClientCard extends StatelessWidget {
                               : CircleAvatar(
                                   radius: 50,
                                   backgroundImage: NetworkImage(
-                                      '$mentorImageUrl${appointment.profileImg}')),
+                                      '$mentorImageUrl${appoint.profileImg}')),
                         ),
                         Align(
                           alignment: Alignment
@@ -85,7 +86,7 @@ class ClientCard extends StatelessWidget {
                     child: Column(
                       children: <Widget>[
                         Text(
-                          "${appointment.firstName} ${appointment.lastName}",
+                          "${appoint.firstName} ${appoint.lastName}",
                           style: const TextStyle(fontWeight: FontWeight.bold),
                           overflow: TextOverflow.visible,
                         ),

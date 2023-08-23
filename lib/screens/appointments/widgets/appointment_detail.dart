@@ -1,30 +1,24 @@
 import 'package:countries_app/screens/appointments/widgets/appointment_bottom_sheet.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-
 import '../../../models/apointments_model.dart';
 import '../appointment_bloc.dart';
-
-import 'alert_dialog.dart';
-
-import 'client_card.dart';
 
 class AppointmentDetail extends StatelessWidget {
   final AppointmentsBloc bloc = AppointmentsBloc();
   AppointmentDetail({super.key});
   final Map<String, dynamic> appointmentJson = {
-    "id": 13,
-    "date_from": "2023-08-16T14:00:00",
-    "date_to": "2023-08-16T15:00:00",
+    "id": 15,
+    "date_from": "2023-09-17T17:00:00",
+    "date_to": "2023-09-17T18:00:00",
     "client_id": 1,
     "mentor_id": 2,
     "appointment_type": 1,
-    "price_before_discount": 12,
-    "price_after_discount": 12,
-    "state": 1,
-    "note_from_client": null,
+    "price_before_discount": 7,
+    "price_after_discount": 7,
+    "state": 3,
+    "note_from_client": "this is Client note",
     "note_from_mentor": null,
-    "channel_id": "test13",
+    "channel_id": "test15",
     "profile_img": "",
     "suffixe_name": "Dr.",
     "first_name": "abed alrahman 2",
@@ -44,7 +38,7 @@ class AppointmentDetail extends StatelessWidget {
             ElevatedButton(
                 onPressed: () {
                   showAppoitmentDetails(
-                    appointment: appointment,
+                    appoint: appointment,
                     bloc: bloc,
                     context: context,
                   );

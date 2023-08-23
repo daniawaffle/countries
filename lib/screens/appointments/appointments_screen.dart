@@ -61,7 +61,7 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
                       calendarTapDetails.appointments!.first;
                   showAppoitmentDetails(
                     context: context,
-                    appointment: appointment
+                    appoint: appointment
                         as Appoint, // Cast it to the appropriate type
                     bloc: appBloc,
                   );
