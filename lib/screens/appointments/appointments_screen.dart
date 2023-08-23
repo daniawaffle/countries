@@ -70,7 +70,7 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
                   if (matchingAppoint != null) {
                     showAppoitmentDetails(
                       context: context,
-                      appointment: matchingAppoint,
+                      appoint: matchingAppoint,
                       bloc: appBloc,
                     );
                   }

@@ -1,10 +1,11 @@
+import 'package:countries_app/models/apointments_model.dart';
 import 'package:countries_app/screens/appointments/appointment_bloc.dart';
 import 'package:flutter/material.dart';
 
 Future<void> displayTextInputDialog(
     {required BuildContext context,
     required AppointmentsBloc bloc,
-    required int appointmentID}) async {
+    required Appoint appointment}) async {
   final TextEditingController textFieldController = TextEditingController();
 
   String? valueText;
@@ -35,7 +36,7 @@ Future<void> displayTextInputDialog(
               child: const Text('OK'),
               onPressed: () {
                 bloc.addAppointmentNote(
-                    appointmentID: appointmentID, note: valueText!);
+                    appointmentID: appointment.id!, note: valueText!);
                 Navigator.pop(context);
               },
             ),

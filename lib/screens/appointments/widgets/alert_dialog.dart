@@ -12,9 +12,9 @@ Future<void> showAlertDialog(
       return AlertDialog(
         // <-- SEE HERE
         title: const Text('Cancel Appointment'),
-        content: SingleChildScrollView(
+        content: const SingleChildScrollView(
           child: ListBody(
-            children: const <Widget>[
+            children: <Widget>[
               Text('Are you sure want to cancel the appointment?'),
             ],
           ),
@@ -30,7 +30,9 @@ Future<void> showAlertDialog(
             child: const Text('Yes'),
             onPressed: () {
               bloc.cancelAppointment(appointmentID);
-              Navigator.of(context).pop();
+              // Navigator.of(context).pop();
+              int count = 0;
+              Navigator.of(context).popUntil((_) => count++ >= 2);
             },
           ),
         ],
