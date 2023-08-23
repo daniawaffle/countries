@@ -11,9 +11,6 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'locater.dart';
-import 'screens/appointments/appointments_screen.dart';
-import 'screens/appointments/widgets/appointment_detail.dart';
-import 'screens/equiti/equiti_academy_screen.dart';
 
 Future<void> main() async {
   runZonedGuarded(() async {

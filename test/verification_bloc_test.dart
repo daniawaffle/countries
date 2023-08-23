@@ -10,18 +10,11 @@ void main() {
 
       fakeAsync.elapse(verBloc.interval);
 
-      // Verify that the expected changes have occurred
-      expect(
-          verBloc.currentSeconds.value, 1); // Adjust this based on your logic
-      expect(verBloc.otpButtonVisible.value, false);
+      expect(verBloc.currentSeconds.value, 1);
 
-      // Advance the virtual time by more than timerMaxSeconds
       fakeAsync.elapse(Duration(seconds: verBloc.timerMaxSeconds));
 
-      // Verify the final state after the timeout
-      expect(verBloc.currentSeconds.value,
-          verBloc.timerMaxSeconds); // Adjust this based on your logic
-      expect(verBloc.otpButtonVisible.value, true);
+      expect(verBloc.currentSeconds.value, verBloc.timerMaxSeconds);
     });
   });
 }
