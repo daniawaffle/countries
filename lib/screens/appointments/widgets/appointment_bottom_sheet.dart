@@ -23,6 +23,7 @@ Future<void> showAppoitmentDetails(
               topLeft: Radius.circular(25.0), topRight: Radius.circular(25.0))),
       builder: (BuildContext context) {
         return SingleChildScrollView(
+          scrollDirection: Axis.vertical,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
             child: Column(
@@ -220,7 +221,7 @@ Future<void> showAppoitmentDetails(
                         ? () {
                             displayTextInputDialog(
                                 appointment: appoint,
-                                bloc: bloc,
+                                onOkPressed: bloc.addAppointmentNote,
                                 context: context);
                           }
                         : null,
@@ -239,8 +240,8 @@ Future<void> showAppoitmentDetails(
                         ? () {
                             showAlertDialog(
                               context: context,
-                              appointmentID: appoint.id!,
-                              bloc: bloc,
+                              onCancelPressed: () =>
+                                  bloc.cancelAppointment(appoint.id!),
                             );
                           }
                         : null,
