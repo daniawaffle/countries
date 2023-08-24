@@ -2,37 +2,32 @@ import 'package:countries_app/models/apointments_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-typedef FutureVoidCallbackWithParams = Future<void> Function(
-    {required int appointmentID, required String note});
+import '../appointment_bloc.dart';
 
 Future<void> displayTextInputDialog(
     {required BuildContext context,
-    required FutureVoidCallbackWithParams onOkPressed,
-    required Appoint appointment}) async {
-  final TextEditingController textFieldController = TextEditingController();
-  final formKey = GlobalKey<FormState>();
-  String? valueText;
+    required Appoint appointment,
+    required AppointmentsBloc bloc}) async {
+  bloc.saveInNoteTextController(appointment.noteFromClient);
   return showDialog(
       context: context,
       builder: (context) {
         return Form(
-          key: formKey,
+          key: bloc.addNoteFormKey,
           child: AlertDialog(
             title: Text(AppLocalizations.of(context)!.addNotesText),
             content: TextFormField(
               onChanged: (value) {
-                valueText = value;
+                bloc.note = value;
               },
-              controller: textFieldController,
+              controller: bloc.noteTextFieldController,
               decoration: InputDecoration(
                 hintText: AppLocalizations.of(context)!.addNotesText,
               ),
-              validator: (value) {
-                if (value == null || value.trim().isEmpty) {
-                  return AppLocalizations.of(context)!.alertEmptyNoteText;
-                }
-                return null;
-              },
+              validator: (value) =>
+                  bloc.validateAddNoteField(context: context, note: value)
+                      ? null
+                      : AppLocalizations.of(context)!.alertEmptyNoteText,
             ),
             actions: <Widget>[
               MaterialButton(
@@ -48,9 +43,12 @@ Future<void> displayTextInputDialog(
                 textColor: Colors.white,
                 child: Text(AppLocalizations.of(context)!.okText),
                 onPressed: () {
-                  if (formKey.currentState!.validate()) {
-                    onOkPressed(
-                        appointmentID: appointment.id!, note: valueText!);
+                  if (bloc.addNoteFormKey.currentState!.validate()) {
+                    bloc
+                        .addAppointmentNote(
+                            appointmentID: appointment.id!, note: bloc.note!)
+                        .then(
+                            (value) => appointment.noteFromClient = bloc.note);
                     Navigator.pop(context);
                   }
                 },

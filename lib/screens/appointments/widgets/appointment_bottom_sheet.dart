@@ -67,7 +67,7 @@ Future<void> showAppoitmentDetails(
                         ? () {
                             displayTextInputDialog(
                                 appointment: appoint,
-                                onOkPressed: bloc.addAppointmentNote,
+                                bloc: bloc,
                                 context: context);
                           }
                         : null,
@@ -85,10 +85,9 @@ Future<void> showAppoitmentDetails(
                     onPressed: appoint.state == 1
                         ? () {
                             showAlertDialog(
-                              context: context,
-                              onCancelPressed: () =>
-                                  bloc.cancelAppointment(appoint.id!),
-                            );
+                                context: context,
+                                bloc: bloc,
+                                appoitmentID: appoint.id!);
                           }
                         : null,
                     child:
