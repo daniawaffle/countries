@@ -70,7 +70,7 @@ class MainAppState extends State<MainApp> {
           Locale(AppConstants.arLocale),
         ],
         debugShowCheckedModeBanner: false,
-        home: StartupScreen());
+        home: const BottomSheetNav());
   }
 
   void rebuild() {

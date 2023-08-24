@@ -127,7 +127,7 @@ class MentorCard extends StatelessWidget {
                               image: NetworkImage(
                                   '${AppConstants.imageBaseUrl}${mentor.countryFlag}'),
                             ),
-                            Container(
+                            SizedBox(
                               width: MediaQuery.of(context).size.width / 7,
                               child: Text(
                                 '${mentor.countryName}',

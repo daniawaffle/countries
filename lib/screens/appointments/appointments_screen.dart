@@ -18,6 +18,7 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
   AppointmentsBloc appBloc = AppointmentsBloc();
 
   MeetingDataSource dataSource = MeetingDataSource(AppointmentsModel());
+  AppointmentsModel? allAppointmentsModel;
 
   @override
   void initState() {
@@ -31,6 +32,7 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
 
     setState(() {
       dataSource = MeetingDataSource(appointmentsModel);
+      allAppointmentsModel = appointmentsModel;
     });
 
     return appointmentsModel;
@@ -65,22 +67,17 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
               height: MediaQuery.sizeOf(context).height * .55,
               child: SfCalendar(
                 todayHighlightColor: AppConstants.primaryColor,
-
                 cellBorderColor: AppConstants.secendaryColor,
-
                 view: CalendarView.month,
-
                 dataSource: dataSource,
-
                 onTap: (calendarTapDetails) async {
                   if (calendarTapDetails.targetElement ==
                       CalendarElement.appointment) {
-                    AppointmentsModel allApp = await fetchAppointments();
-
                     final Appointment appointment =
                         calendarTapDetails.appointments!.first;
 
-                    final matchingAppoint = allApp.data!.firstWhere(
+                    final matchingAppoint =
+                        allAppointmentsModel!.data!.firstWhere(
                       (app) =>
                           app.dateFrom == appointment.startTime &&
                           app.dateTo == appointment.endTime,
@@ -95,11 +92,9 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
                     }
                   }
                 },
-
                 monthViewSettings: MonthViewSettings(
                     showAgenda: true,
-                    appointmentDisplayCount: dataSource.appointments!
-                        .length), // display count length of list on this date
+                    appointmentDisplayCount: dataSource.appointments!.length),
               ),
             ),
           ],

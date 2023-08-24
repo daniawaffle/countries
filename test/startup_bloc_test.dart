@@ -37,8 +37,6 @@ Future<void> main() async {
       when(hiveService.getValue<String>(
               key: key, boxName: AppConstants.hiveBox))
           .thenReturn(expectedValue);
-      var x = mockBox.get(key);
-      print(x);
 
       final result = startupBloc.getLan();
 
