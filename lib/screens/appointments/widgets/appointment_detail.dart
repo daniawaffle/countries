@@ -43,7 +43,7 @@ class AppointmentDetail extends StatelessWidget {
                     context: context,
                   );
                 },
-                child: Text("show"))
+                child: const Text("show"))
           ],
         ),
       ),

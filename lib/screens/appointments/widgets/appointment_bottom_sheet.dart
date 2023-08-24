@@ -1,13 +1,10 @@
 import 'package:countries_app/screens/appointments/appointment_bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-
 import '../../../constants.dart';
-import '../../../enum/appoint_type.dart';
 import '../../../models/apointments_model.dart';
-import '../../../enum/appoint_state.dart';
 import 'add_note.dart';
 import 'alert_dialog.dart';
+import 'appointment_info.dart';
 import 'client_card.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -51,161 +48,8 @@ Future<void> showAppoitmentDetails(
                 ClientCard(
                   appoint: appoint,
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Text(AppLocalizations.of(context)!.dateText),
-                      Text(
-                        DateFormat("yyyy-M-d").format(appoint.dateFrom!),
-                        style: const TextStyle(fontWeight: FontWeight.bold),
-                      )
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Text(AppLocalizations.of(context)!.dayText),
-                      Text(
-                        DateFormat.EEEE().format(appoint.dateFrom!),
-                        style: const TextStyle(fontWeight: FontWeight.bold),
-                      )
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Text(AppLocalizations.of(context)!.sessionTypeText),
-                      Text(
-                        AppointmentTypeConverter.getTypeFromNumber(
-                                appoint.appointmentType!)
-                            .name,
-                        style: const TextStyle(fontWeight: FontWeight.bold),
-                      )
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Text(AppLocalizations.of(context)!.sessionTimeText),
-                      Text(
-                        DateFormat.jm().format(appoint.dateFrom!),
-                        style: const TextStyle(fontWeight: FontWeight.bold),
-                      )
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Text(AppLocalizations.of(context)!.sessionDurationText),
-                      Text(
-                        AppointmentsBloc.formatDuration(
-                            dateFrom: appoint.dateFrom!,
-                            dateTo: appoint.dateTo!),
-                        style: const TextStyle(fontWeight: FontWeight.bold),
-                      )
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Text(AppLocalizations.of(context)!.sessionStatus),
-                      Text(
-                        AppointmentStatusConverter.getStatusFromNumber(
-                                appoint.state!)
-                            .name,
-                        style: TextStyle(
-                            color:
-                                AppointmentStatusConverter.getStatusFromNumber(
-                                        appoint.state!)
-                                    .textColor,
-                            fontWeight: FontWeight.bold),
-                      )
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Text(AppLocalizations.of(context)!.priceText),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: <Widget>[
-                          Text(
-                            "${appoint.priceBeforeDiscount} ${AppLocalizations.of(context)!.jdText}"
-                                .toString(),
-                            style: const TextStyle(
-                              color: Colors.grey,
-                              decoration: TextDecoration.lineThrough,
-                            ),
-                          ),
-                          Text(
-                            " ${appoint.priceAfterDiscount} ${AppLocalizations.of(context)!.jdText}"
-                                .toString(),
-                            style: const TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                        ],
-                      )
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Text(AppLocalizations.of(context)!.clientNoteText),
-                      Text(
-                        appoint.noteFromClient ??
-                            AppLocalizations.of(context)!.noNotesToShowText,
-                        style: TextStyle(
-                            color: appoint.noteFromClient == null
-                                ? Colors.grey
-                                : Colors.black,
-                            fontWeight: appoint.noteFromClient == null
-                                ? FontWeight.normal
-                                : FontWeight.bold),
-                      )
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Text(AppLocalizations.of(context)!.mentorNoteText),
-                      Text(
-                        appoint.noteFromMentor ??
-                            AppLocalizations.of(context)!.noNotesToShowText,
-                        style: TextStyle(
-                            color: appoint.noteFromMentor == null
-                                ? Colors.grey
-                                : Colors.black,
-                            fontWeight: appoint.noteFromMentor == null
-                                ? FontWeight.normal
-                                : FontWeight.bold),
-                      )
-                    ],
-                  ),
+                AppointmentInfo(
+                  appoint: appoint,
                 ),
                 const Divider(
                   color: Colors.black,
