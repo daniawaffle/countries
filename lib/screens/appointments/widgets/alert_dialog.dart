@@ -1,3 +1,4 @@
+import 'package:countries_app/screens/appointments/appointments_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -30,7 +31,12 @@ Future<void> showAlertDialog(
             onPressed: () {
               onCancelPressed();
               int count = 0;
-              Navigator.of(context).popUntil((_) => count++ >= 2);
+
+              Navigator.of(context).popUntil((_) => count++ >= 3);
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const AppointmentsScreen()));
             },
           ),
         ],

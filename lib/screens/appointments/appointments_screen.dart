@@ -83,17 +83,23 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
                       appoint: matchingAppoint,
                       bloc: appBloc,
                     );
+                    if (matchingAppoint != null) {
+                      showAppoitmentDetails(
+                        context: context,
+                        appoint: matchingAppoint,
+                        bloc: appBloc,
+                      );
+                    }
                   }
-                }
-              },
+                },
 
               monthViewSettings: MonthViewSettings(
                   showAgenda: true,
                   appointmentDisplayCount: dataSource.appointments!
                       .length), // display count length of list on this date
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     ));
   }
