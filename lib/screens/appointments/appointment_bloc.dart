@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
 import '../../constants.dart';
 import '../../locater.dart';
 import '../../models/apointments_model.dart';
@@ -9,6 +10,10 @@ import '../../services/hive.dart';
 class AppointmentsBloc {
   StreamController<List<Appoint>> appointmentsStreamController =
       StreamController<List<Appoint>>();
+  final TextEditingController noteTextFieldController = TextEditingController();
+  final addNoteFormKey = GlobalKey<FormState>();
+  String? note;
+
   String getLan() {
     return locator<HiveService>().getValue(
             boxName: AppConstants.hiveBox, key: AppConstants.languageHiveKey) ??
@@ -73,5 +78,16 @@ class AppointmentsBloc {
         headers: {'lang': getLan(), "Authorization": "Bearer $userToken"},
       ),
     );
+  }
+
+  bool validateAddNoteField({String? note, required BuildContext context}) {
+    if (note == null || note.trim().isEmpty) {
+      return false;
+    }
+    return true;
+  }
+
+  void saveInNoteTextController(String? note) {
+    noteTextFieldController.text = note ?? "";
   }
 }

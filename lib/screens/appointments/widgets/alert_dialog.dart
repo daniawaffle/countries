@@ -1,10 +1,11 @@
+import 'package:countries_app/screens/appointments/appointment_bloc.dart';
 import 'package:countries_app/screens/appointments/appointments_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-typedef FutureCallback = Future<void> Function();
 Future<void> showAlertDialog(
-    {required VoidCallback onCancelPressed,
+    {required AppointmentsBloc bloc,
+    required int appoitmentID,
     required BuildContext context}) async {
   return showDialog<void>(
     context: context,
@@ -29,7 +30,7 @@ Future<void> showAlertDialog(
           TextButton(
             child: Text(AppLocalizations.of(context)!.yesText),
             onPressed: () {
-              onCancelPressed();
+              bloc.cancelAppointment(appoitmentID);
               int count = 0;
 
               Navigator.of(context).popUntil((_) => count++ >= 3);
