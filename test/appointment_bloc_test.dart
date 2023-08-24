@@ -118,4 +118,57 @@ void main() {
       expect(result, '1 h');
     });
   });
+
+  group('Validate note field and saving into the note controller', () {
+    test('validateAddNoteField should return false for empty note', () {
+      final AppointmentsBloc appointmentsBloc = AppointmentsBloc();
+      final result = appointmentsBloc.validateAddNoteField(note: '');
+
+      expect(result, false);
+    });
+
+    test('validateAddNoteField should return false for null note', () {
+      final AppointmentsBloc appointmentsBloc = AppointmentsBloc();
+      final result = appointmentsBloc.validateAddNoteField(note: null);
+
+      expect(result, false);
+    });
+
+    test('validateAddNoteField should return true for non-empty note', () {
+      final AppointmentsBloc appointmentsBloc = AppointmentsBloc();
+      final result =
+          appointmentsBloc.validateAddNoteField(note: 'This is a note');
+
+      expect(result, true);
+    });
+
+    test('saveInNoteTextController should set noteTextFieldController text',
+        () {
+      final AppointmentsBloc appointmentsBloc = AppointmentsBloc();
+      appointmentsBloc.saveInNoteTextController('Saved note');
+
+      expect(appointmentsBloc.noteTextFieldController.text, 'Saved note');
+    });
+  });
+
+  group("Note value notifier", () {
+    test('updateNoteValuesNotifier should update the ValueNotifier', () {
+      final appointmentsBloc = AppointmentsBloc();
+
+      appointmentsBloc.noteValuesNotifier.value = 'Initial note';
+
+      appointmentsBloc.updateNoteValuesNotifier('Updated note');
+      expect(appointmentsBloc.noteValuesNotifier.value, 'Updated note');
+    });
+    test('updateNoteValuesNotifier should update the ValueNotifier with null',
+        () {
+      final appointmentsBloc = AppointmentsBloc();
+
+      appointmentsBloc.noteValuesNotifier.value = 'Initial note';
+
+      appointmentsBloc.updateNoteValuesNotifier(null);
+
+      expect(appointmentsBloc.noteValuesNotifier.value, '');
+    });
+  });
 }

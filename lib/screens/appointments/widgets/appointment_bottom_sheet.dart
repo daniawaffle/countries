@@ -49,6 +49,7 @@ Future<void> showAppoitmentDetails(
                   appoint: appoint,
                 ),
                 AppointmentInfo(
+                  appointmentsBloc: bloc,
                   appoint: appoint,
                 ),
                 const Divider(
