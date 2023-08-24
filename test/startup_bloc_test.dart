@@ -30,11 +30,12 @@ Future<void> main() async {
 
   group('getLan', () {
     test('getLan should return value from HiveService', () {
-      const key = languageHiveKey;
+      const key = AppConstants.languageHiveKey;
       const expectedValue = 'ar';
       final startupBloc = StartupBloc();
 
-      when(hiveService.getValue<String>(key: key, boxName: hiveBox))
+      when(hiveService.getValue<String>(
+              key: key, boxName: AppConstants.hiveBox))
           .thenReturn(expectedValue);
       var x = mockBox.get(key);
       print(x);
@@ -44,10 +45,11 @@ Future<void> main() async {
       expect(result, expectedValue);
     });
     test('getLan should return default value "en" from HiveService', () {
-      const key = languageHiveKey;
+      const key = AppConstants.languageHiveKey;
       final startupBloc = StartupBloc();
 
-      when(hiveService.getValue<String>(key: key, boxName: hiveBox))
+      when(hiveService.getValue<String>(
+              key: key, boxName: AppConstants.hiveBox))
           .thenReturn(null);
 
       final result = startupBloc.getLan();
@@ -63,12 +65,16 @@ Future<void> main() async {
 
       final startupBloc = StartupBloc();
       when(hiveService.setValue<String>(
-              key: languageHiveKey, boxName: hiveBox, value: value))
+              key: AppConstants.languageHiveKey,
+              boxName: AppConstants.hiveBox,
+              value: value))
           .thenAnswer((_) => Future.value());
       startupBloc.saveLanguageToHive(value);
 
       verify(hiveService.setValue<String>(
-              key: languageHiveKey, boxName: hiveBox, value: value))
+              key: AppConstants.languageHiveKey,
+              boxName: AppConstants.hiveBox,
+              value: value))
           .called(1);
     });
 
@@ -79,7 +85,7 @@ Future<void> main() async {
 
       startupBloc.saveLanguageToHive(value);
 
-      verify(mockBox.put(languageHiveKey, value)).called(1);
+      verify(mockBox.put(AppConstants.languageHiveKey, value)).called(1);
     });
   });
 }

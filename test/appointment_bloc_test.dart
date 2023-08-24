@@ -30,11 +30,12 @@ void main() {
 
   group('getLan', () {
     test('getLan should return value from HiveService', () {
-      const key = languageHiveKey;
+      const key = AppConstants.languageHiveKey;
       const expectedValue = 'ar';
       final appsBloc = AppointmentsBloc();
 
-      when(hiveService.getValue<String>(key: key, boxName: hiveBox))
+      when(hiveService.getValue<String>(
+              key: key, boxName: AppConstants.hiveBox))
           .thenReturn(expectedValue);
       var x = mockBox.get(key);
       print(x);
@@ -44,10 +45,11 @@ void main() {
       expect(result, expectedValue);
     });
     test('getLan should return default value "en" from HiveService', () {
-      const key = languageHiveKey;
+      const key = AppConstants.languageHiveKey;
       final appsBloc = AppointmentsBloc();
 
-      when(hiveService.getValue<String>(key: key, boxName: hiveBox))
+      when(hiveService.getValue<String>(
+              key: key, boxName: AppConstants.hiveBox))
           .thenReturn(null);
 
       final result = appsBloc.getLan();
@@ -58,11 +60,12 @@ void main() {
 
   group('getUserToken', () {
     test('getUserToken should return value from HiveService', () {
-      const key = userTokenKey;
+      const key = AppConstants.userTokenKey;
       const expectedValue = 'hgjhgjgjh';
       final appsBloc = AppointmentsBloc();
 
-      when(hiveService.getValue<String>(key: key, boxName: hiveBox))
+      when(hiveService.getValue<String>(
+              key: key, boxName: AppConstants.hiveBox))
           .thenReturn(expectedValue);
       var x = mockBox.get(key);
       print(x);
@@ -72,10 +75,11 @@ void main() {
       expect(result, expectedValue);
     });
     test('getUserToken should return default value "" from HiveService', () {
-      const key = userTokenKey;
+      const key = AppConstants.userTokenKey;
       final appsBloc = AppointmentsBloc();
 
-      when(hiveService.getValue<String>(key: key, boxName: hiveBox))
+      when(hiveService.getValue<String>(
+              key: key, boxName: AppConstants.hiveBox))
           .thenReturn(null);
 
       final result = appsBloc.getUserToken();

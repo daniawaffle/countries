@@ -31,7 +31,7 @@ class ListTileWidget extends StatelessWidget {
                   radius: 20.0,
                   backgroundColor: Colors.transparent,
                   backgroundImage: NetworkImage(
-                    imageBaseUrl + country.flagImage!,
+                    AppConstants.imageBaseUrl + country.flagImage!,
                   ),
                 ),
               ),
@@ -41,16 +41,17 @@ class ListTileWidget extends StatelessWidget {
                   country.name!,
                   style: TextStyle(
                     fontSize: 17,
-                    color: primaryColor,
+                    color: AppConstants.primaryColor,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
               ),
               Icon(
-                Localizations.localeOf(context) == const Locale(enLocale)
+                Localizations.localeOf(context) ==
+                        const Locale(AppConstants.enLocale)
                     ? Icons.keyboard_arrow_right
                     : Icons.keyboard_arrow_left,
-                color: primaryColor,
+                color: AppConstants.primaryColor,
                 size: 30.0,
               ),
             ],

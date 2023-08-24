@@ -15,7 +15,7 @@ class StartupBloc {
   Future<List<Country>> getCountries() async {
     final responbse = await locator<ApiService>().apiRequest(
       path: "countries",
-      method: getMethod,
+      method: AppConstants.getMethod,
       options: Options(
         headers: {'lang': getLan()},
       ),
@@ -31,12 +31,14 @@ class StartupBloc {
 
   Future<void> saveLanguageToHive(localLanguage) async {
     await locator<HiveService>().setValue<String>(
-        boxName: hiveBox, key: languageHiveKey, value: localLanguage!);
+        boxName: AppConstants.hiveBox,
+        key: AppConstants.languageHiveKey,
+        value: localLanguage!);
   }
 
   String getLan() {
-    return locator<HiveService>()
-            .getValue(boxName: hiveBox, key: languageHiveKey) ??
+    return locator<HiveService>().getValue(
+            boxName: AppConstants.hiveBox, key: AppConstants.languageHiveKey) ??
         "en";
   }
 }

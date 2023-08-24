@@ -30,9 +30,9 @@ class _BottomSheetNavState extends State<BottomSheetNav> {
         },
       ),
       bottomNavigationBar: BottomNavigationBar(
-        selectedItemColor: primaryColor,
+        selectedItemColor: AppConstants.primaryColor,
         selectedIconTheme: IconThemeData(
-          color: primaryColor,
+          color: AppConstants.primaryColor,
         ),
         items: [
           BottomNavigationBarItem(

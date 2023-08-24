@@ -44,7 +44,7 @@ class _LoginScreenState extends State<LoginScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: primaryColor,
+        backgroundColor: AppConstants.primaryColor,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -108,17 +108,18 @@ class _LoginScreenState extends State<LoginScreen>
                                   focusedBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(25.0),
                                     borderSide: BorderSide(
-                                      color: primaryColor,
+                                      color: AppConstants.primaryColor,
                                     ),
                                   ),
                                   enabledBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(25.0),
                                     borderSide: BorderSide(
-                                      color: primaryColor,
+                                      color: AppConstants.primaryColor,
                                       width: 2.0,
                                     ),
                                   ),
-                                  labelStyle: TextStyle(color: primaryColor),
+                                  labelStyle: TextStyle(
+                                      color: AppConstants.primaryColor),
                                   labelText: AppLocalizations.of(context)!
                                       .enterNumText,
                                   border: const OutlineInputBorder(),
@@ -145,8 +146,8 @@ class _LoginScreenState extends State<LoginScreen>
                           ? Container()
                           : ElevatedButton(
                               style: ButtonStyle(
-                                  backgroundColor:
-                                      MaterialStateProperty.all(primaryColor)),
+                                  backgroundColor: MaterialStateProperty.all(
+                                      AppConstants.primaryColor)),
                               onPressed: () async {
                                 try {
                                   var response = await loginBLoc.login(

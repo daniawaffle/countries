@@ -30,7 +30,7 @@ class _EquitiAcademyScreenState extends State<EquitiAcademyScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(AppLocalizations.of(context)!.appBarText),
-        backgroundColor: primaryColor,
+        backgroundColor: AppConstants.primaryColor,
       ),
       body: Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -46,7 +46,9 @@ class _EquitiAcademyScreenState extends State<EquitiAcademyScreen> {
                       bool isSelected = index == selectedItemIndex;
 
                       return Card(
-                          color: isSelected ? selectedItemColor : Colors.white,
+                          color: isSelected
+                              ? AppConstants.selectedItemColor
+                              : Colors.white,
                           elevation: 4,
                           margin: const EdgeInsets.symmetric(
                               horizontal: 5, vertical: 10),
@@ -65,9 +67,10 @@ class _EquitiAcademyScreenState extends State<EquitiAcademyScreen> {
                                 children: [
                                   CircleAvatar(
                                     radius: 25,
-                                    backgroundColor: secendaryColor,
+                                    backgroundColor:
+                                        AppConstants.secendaryColor,
                                     backgroundImage: NetworkImage(
-                                      categoryImageBaseUrl +
+                                      AppConstants.categoryImageBaseUrl +
                                           bloc.categories[index].icon!,
                                     ),
                                   ),

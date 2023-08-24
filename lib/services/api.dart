@@ -7,7 +7,7 @@ import 'package:dio/dio.dart';
 import 'interceptor.dart';
 
 class ApiService {
-  final Dio _dio = Dio(BaseOptions(baseUrl: baseUrl))
+  final Dio _dio = Dio(BaseOptions(baseUrl: AppConstants.baseUrl))
     ..interceptors.add(HttpInterciptor());
 
   Future<T> apiRequest<T>(

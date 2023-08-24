@@ -15,16 +15,16 @@ class EquitiAcademyBloc {
   StreamController<List<Mentor>> mentorsStreamController =
       StreamController<List<Mentor>>();
 
-  String? language =
-      locator<HiveService>().getValue(boxName: hiveBox, key: languageHiveKey) ??
-          "en";
+  String? language = locator<HiveService>().getValue(
+          boxName: AppConstants.hiveBox, key: AppConstants.languageHiveKey) ??
+      "en";
   List<Category> categories = [];
   List<Mentor> mentors = [];
 
   Future<List<Category>> getCategories() async {
     final response = await locator<ApiService>().apiRequest(
       path: "categories",
-      method: getMethod,
+      method: AppConstants.getMethod,
       options: Options(
         headers: {'lang': language},
       ),
@@ -41,7 +41,7 @@ class EquitiAcademyBloc {
   Future<List<Mentor>> getMentors(int categoryID) async {
     final response = await locator<ApiService>().apiRequest(
       path: "mentor-list",
-      method: getMethod,
+      method: AppConstants.getMethod,
       options: Options(
         headers: {'lang': language},
       ),

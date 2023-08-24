@@ -94,8 +94,8 @@ class VerificationBloc {
     );
     print(VerifyApiModel.fromJson(response).verifyModel);
     locator<HiveService>().setValue(
-        boxName: hiveBox,
-        key: userTokenKey,
+        boxName: AppConstants.hiveBox,
+        key: AppConstants.userTokenKey,
         value: VerifyApiModel.fromJson(response).verifyModel!.token);
 
     return VerifyApiModel.fromJson(response);

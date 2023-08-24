@@ -48,17 +48,17 @@ class MainAppState extends State<MainApp> {
   void initState() {
     // LocalJsonLocalization.delegate.directories = ['lib/i18n/'];
     locale = locator<HiveService>().getValue<String>(
-          boxName: hiveBox,
-          key: languageHiveKey,
+          boxName: AppConstants.hiveBox,
+          key: AppConstants.languageHiveKey,
         ) ??
-        enLocale;
+        AppConstants.enLocale;
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        locale: Locale(locale ?? enLocale),
+        locale: Locale(locale ?? AppConstants.enLocale),
         localizationsDelegates: const [
           AppLocalizations.delegate,
           GlobalMaterialLocalizations.delegate,
@@ -66,19 +66,19 @@ class MainAppState extends State<MainApp> {
           GlobalCupertinoLocalizations.delegate,
         ],
         supportedLocales: const [
-          Locale(enLocale),
-          Locale(arLocale),
+          Locale(AppConstants.enLocale),
+          Locale(AppConstants.arLocale),
         ],
         debugShowCheckedModeBanner: false,
-        home: BottomSheetNav());
+        home: StartupScreen());
   }
 
   void rebuild() {
     String appLanguage = locator<HiveService>().getValue<String>(
-          boxName: hiveBox,
-          key: languageHiveKey,
+          boxName: AppConstants.hiveBox,
+          key: AppConstants.languageHiveKey,
         ) ??
-        enLocale;
+        AppConstants.enLocale;
     locale = appLanguage;
 
     setState(() {});
