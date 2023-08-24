@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:countries_app/constants.dart';
 import 'package:countries_app/screens/bottomNavBar/bottom_nav_bloc.dart';
+import 'package:countries_app/screens/equiti/equiti_academy_screen.dart';
 
 import 'package:countries_app/screens/startup/startup_screen.dart';
 import 'package:countries_app/services/hive.dart';
@@ -70,7 +71,9 @@ class MainAppState extends State<MainApp> {
           Locale(AppConstants.arLocale),
         ],
         debugShowCheckedModeBanner: false,
+
         home: const BottomSheetNav());
+
   }
 
   void rebuild() {
