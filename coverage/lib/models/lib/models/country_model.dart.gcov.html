@@ -31,13 +31,13 @@
             <td class="headerValue">lcov.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
+            <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
             <td class="headerCovTableEntry">30</td>
-            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntry">30</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2023-08-24 11:06:25</td>
+            <td class="headerValue">2023-08-24 16:39:49</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">-</td>
@@ -64,24 +64,24 @@
 <span id="L2"><span class="lineNum">       2</span>              :   List&lt;Country&gt;? data;</span>
 <span id="L3"><span class="lineNum">       3</span>              :   String? message;</span>
 <span id="L4"><span class="lineNum">       4</span>              : </span>
-<span id="L5"><span class="lineNum">       5</span> <span class="tlaUNC tlaBgUNC">           0 :   CountriesMdoel({this.data, this.message});</span></span>
+<span id="L5"><span class="lineNum">       5</span> <span class="tlaGNC tlaBgGNC">           1 :   CountriesMdoel({this.data, this.message});</span></span>
 <span id="L6"><span class="lineNum">       6</span>              : </span>
-<span id="L7"><span class="lineNum">       7</span> <span class="tlaUNC">           0 :   CountriesMdoel.fromJson(Map&lt;String, dynamic&gt; json) {</span></span>
-<span id="L8"><span class="lineNum">       8</span> <span class="tlaUNC">           0 :     if (json['data'] != null) {</span></span>
-<span id="L9"><span class="lineNum">       9</span> <span class="tlaUNC">           0 :       data = &lt;Country&gt;[];</span></span>
-<span id="L10"><span class="lineNum">      10</span> <span class="tlaUNC">           0 :       json['data'].forEach((v) {</span></span>
-<span id="L11"><span class="lineNum">      11</span> <span class="tlaUNC">           0 :         data!.add(Country.fromJson(v));</span></span>
+<span id="L7"><span class="lineNum">       7</span> <span class="tlaGNC">           1 :   CountriesMdoel.fromJson(Map&lt;String, dynamic&gt; json) {</span></span>
+<span id="L8"><span class="lineNum">       8</span> <span class="tlaGNC">           1 :     if (json['data'] != null) {</span></span>
+<span id="L9"><span class="lineNum">       9</span> <span class="tlaGNC">           2 :       data = &lt;Country&gt;[];</span></span>
+<span id="L10"><span class="lineNum">      10</span> <span class="tlaGNC">           3 :       json['data'].forEach((v) {</span></span>
+<span id="L11"><span class="lineNum">      11</span> <span class="tlaGNC">           3 :         data!.add(Country.fromJson(v));</span></span>
 <span id="L12"><span class="lineNum">      12</span>              :       });</span>
 <span id="L13"><span class="lineNum">      13</span>              :     }</span>
-<span id="L14"><span class="lineNum">      14</span> <span class="tlaUNC">           0 :     message = json['message'];</span></span>
+<span id="L14"><span class="lineNum">      14</span> <span class="tlaGNC">           2 :     message = json['message'];</span></span>
 <span id="L15"><span class="lineNum">      15</span>              :   }</span>
 <span id="L16"><span class="lineNum">      16</span>              : </span>
-<span id="L17"><span class="lineNum">      17</span> <span class="tlaUNC">           0 :   Map&lt;String, dynamic&gt; toJson() {</span></span>
-<span id="L18"><span class="lineNum">      18</span> <span class="tlaUNC">           0 :     final Map&lt;String, dynamic&gt; data = &lt;String, dynamic&gt;{};</span></span>
-<span id="L19"><span class="lineNum">      19</span> <span class="tlaUNC">           0 :     if (this.data != null) {</span></span>
-<span id="L20"><span class="lineNum">      20</span> <span class="tlaUNC">           0 :       data['data'] = this.data!.map((v) =&gt; v.toJson()).toList();</span></span>
+<span id="L17"><span class="lineNum">      17</span> <span class="tlaGNC">           1 :   Map&lt;String, dynamic&gt; toJson() {</span></span>
+<span id="L18"><span class="lineNum">      18</span> <span class="tlaGNC">           1 :     final Map&lt;String, dynamic&gt; data = &lt;String, dynamic&gt;{};</span></span>
+<span id="L19"><span class="lineNum">      19</span> <span class="tlaGNC">           1 :     if (this.data != null) {</span></span>
+<span id="L20"><span class="lineNum">      20</span> <span class="tlaGNC">           6 :       data['data'] = this.data!.map((v) =&gt; v.toJson()).toList();</span></span>
 <span id="L21"><span class="lineNum">      21</span>              :     }</span>
-<span id="L22"><span class="lineNum">      22</span> <span class="tlaUNC">           0 :     data['message'] = message;</span></span>
+<span id="L22"><span class="lineNum">      22</span> <span class="tlaGNC">           2 :     data['message'] = message;</span></span>
 <span id="L23"><span class="lineNum">      23</span>              :     return data;</span>
 <span id="L24"><span class="lineNum">      24</span>              :   }</span>
 <span id="L25"><span class="lineNum">      25</span>              : }</span>
@@ -95,7 +95,7 @@
 <span id="L33"><span class="lineNum">      33</span>              :   int? minLength;</span>
 <span id="L34"><span class="lineNum">      34</span>              :   int? maxLength;</span>
 <span id="L35"><span class="lineNum">      35</span>              : </span>
-<span id="L36"><span class="lineNum">      36</span> <span class="tlaUNC">           0 :   Country(</span></span>
+<span id="L36"><span class="lineNum">      36</span> <span class="tlaGNC">           1 :   Country(</span></span>
 <span id="L37"><span class="lineNum">      37</span>              :       {this.id,</span>
 <span id="L38"><span class="lineNum">      38</span>              :       this.flagImage,</span>
 <span id="L39"><span class="lineNum">      39</span>              :       this.name,</span>
@@ -104,25 +104,25 @@
 <span id="L42"><span class="lineNum">      42</span>              :       this.minLength,</span>
 <span id="L43"><span class="lineNum">      43</span>              :       this.maxLength});</span>
 <span id="L44"><span class="lineNum">      44</span>              : </span>
-<span id="L45"><span class="lineNum">      45</span> <span class="tlaUNC">           0 :   Country.fromJson(Map&lt;String, dynamic&gt; json) {</span></span>
-<span id="L46"><span class="lineNum">      46</span> <span class="tlaUNC">           0 :     id = json['id'];</span></span>
-<span id="L47"><span class="lineNum">      47</span> <span class="tlaUNC">           0 :     flagImage = json['flag_image'];</span></span>
-<span id="L48"><span class="lineNum">      48</span> <span class="tlaUNC">           0 :     name = json['name'];</span></span>
-<span id="L49"><span class="lineNum">      49</span> <span class="tlaUNC">           0 :     currency = json['currency'];</span></span>
-<span id="L50"><span class="lineNum">      50</span> <span class="tlaUNC">           0 :     dialCode = json['dialCode'];</span></span>
-<span id="L51"><span class="lineNum">      51</span> <span class="tlaUNC">           0 :     minLength = json['minLength'];</span></span>
-<span id="L52"><span class="lineNum">      52</span> <span class="tlaUNC">           0 :     maxLength = json['maxLength'];</span></span>
+<span id="L45"><span class="lineNum">      45</span> <span class="tlaGNC">           1 :   Country.fromJson(Map&lt;String, dynamic&gt; json) {</span></span>
+<span id="L46"><span class="lineNum">      46</span> <span class="tlaGNC">           2 :     id = json['id'];</span></span>
+<span id="L47"><span class="lineNum">      47</span> <span class="tlaGNC">           2 :     flagImage = json['flag_image'];</span></span>
+<span id="L48"><span class="lineNum">      48</span> <span class="tlaGNC">           2 :     name = json['name'];</span></span>
+<span id="L49"><span class="lineNum">      49</span> <span class="tlaGNC">           2 :     currency = json['currency'];</span></span>
+<span id="L50"><span class="lineNum">      50</span> <span class="tlaGNC">           2 :     dialCode = json['dialCode'];</span></span>
+<span id="L51"><span class="lineNum">      51</span> <span class="tlaGNC">           2 :     minLength = json['minLength'];</span></span>
+<span id="L52"><span class="lineNum">      52</span> <span class="tlaGNC">           2 :     maxLength = json['maxLength'];</span></span>
 <span id="L53"><span class="lineNum">      53</span>              :   }</span>
 <span id="L54"><span class="lineNum">      54</span>              : </span>
-<span id="L55"><span class="lineNum">      55</span> <span class="tlaUNC">           0 :   Map&lt;String, dynamic&gt; toJson() {</span></span>
-<span id="L56"><span class="lineNum">      56</span> <span class="tlaUNC">           0 :     final Map&lt;String, dynamic&gt; data = &lt;String, dynamic&gt;{};</span></span>
-<span id="L57"><span class="lineNum">      57</span> <span class="tlaUNC">           0 :     data['id'] = id;</span></span>
-<span id="L58"><span class="lineNum">      58</span> <span class="tlaUNC">           0 :     data['flag_image'] = flagImage;</span></span>
-<span id="L59"><span class="lineNum">      59</span> <span class="tlaUNC">           0 :     data['name'] = name;</span></span>
-<span id="L60"><span class="lineNum">      60</span> <span class="tlaUNC">           0 :     data['currency'] = currency;</span></span>
-<span id="L61"><span class="lineNum">      61</span> <span class="tlaUNC">           0 :     data['dialCode'] = dialCode;</span></span>
-<span id="L62"><span class="lineNum">      62</span> <span class="tlaUNC">           0 :     data['minLength'] = minLength;</span></span>
-<span id="L63"><span class="lineNum">      63</span> <span class="tlaUNC">           0 :     data['maxLength'] = maxLength;</span></span>
+<span id="L55"><span class="lineNum">      55</span> <span class="tlaGNC">           1 :   Map&lt;String, dynamic&gt; toJson() {</span></span>
+<span id="L56"><span class="lineNum">      56</span> <span class="tlaGNC">           1 :     final Map&lt;String, dynamic&gt; data = &lt;String, dynamic&gt;{};</span></span>
+<span id="L57"><span class="lineNum">      57</span> <span class="tlaGNC">           2 :     data['id'] = id;</span></span>
+<span id="L58"><span class="lineNum">      58</span> <span class="tlaGNC">           2 :     data['flag_image'] = flagImage;</span></span>
+<span id="L59"><span class="lineNum">      59</span> <span class="tlaGNC">           2 :     data['name'] = name;</span></span>
+<span id="L60"><span class="lineNum">      60</span> <span class="tlaGNC">           2 :     data['currency'] = currency;</span></span>
+<span id="L61"><span class="lineNum">      61</span> <span class="tlaGNC">           2 :     data['dialCode'] = dialCode;</span></span>
+<span id="L62"><span class="lineNum">      62</span> <span class="tlaGNC">           2 :     data['minLength'] = minLength;</span></span>
+<span id="L63"><span class="lineNum">      63</span> <span class="tlaGNC">           2 :     data['maxLength'] = maxLength;</span></span>
 <span id="L64"><span class="lineNum">      64</span>              :     return data;</span>
 <span id="L65"><span class="lineNum">      65</span>              :   }</span>
 <span id="L66"><span class="lineNum">      66</span>              : }</span>

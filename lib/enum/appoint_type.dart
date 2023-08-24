@@ -8,17 +8,6 @@ enum AppointmentType {
 }
 
 class AppointmentTypeConverter {
-  static int getStatusNumber(AppointmentType type) {
-    switch (type) {
-      case AppointmentType.schudule:
-        return 1;
-      case AppointmentType.instant:
-        return 2;
-      default:
-        throw Exception("Invalid Type: $type");
-    }
-  }
-
   static AppointmentType getTypeFromNumber(int number) {
     switch (number) {
       case 1:
