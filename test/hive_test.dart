@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:countries_app/constants.dart';
 import 'package:countries_app/services/hive.dart';
 import 'package:flutter/services.dart';
@@ -65,7 +63,7 @@ void main() {
 void mockMethodChannel() {
   const MethodChannel channel =
       MethodChannel('plugins.flutter.io/path_provider');
-  channel.setMockMethodCallHandler((MethodCall methodCall) async {
+  channel.setMethodCallHandler((MethodCall methodCall) async {
     return ".";
   });
 }

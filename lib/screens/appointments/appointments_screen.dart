@@ -1,3 +1,4 @@
+import 'package:countries_app/constants.dart';
 import 'package:countries_app/screens/appointments/widgets/appointment_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
@@ -5,6 +6,7 @@ import 'package:syncfusion_flutter_calendar/calendar.dart';
 import '../../models/apointments_model.dart';
 import 'appointment_bloc.dart';
 import 'meeting_data_source.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AppointmentsScreen extends StatefulWidget {
   const AppointmentsScreen({super.key});
@@ -36,37 +38,50 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: SafeArea(
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Text(
-                    'Appointments',
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                  ),
-                  IconButton(onPressed: () {}, icon: const Icon(Icons.refresh))
-                ],
-              ),
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  AppLocalizations.of(context)!.appointText,
+                  style: const TextStyle(
+                      fontSize: 20, fontWeight: FontWeight.bold),
+                ),
+                IconButton(
+                    onPressed: () async {
+                      await fetchAppointments();
+                    },
+                    icon: const Icon(Icons.refresh))
+              ],
             ),
-            SizedBox(
-              height: MediaQuery.sizeOf(context).height * .55,
-              child: SfCalendar(
-                view: CalendarView.month,
-                dataSource: dataSource,
-                onTap: (calendarTapDetails) async {
+          ),
+          SizedBox(
+            height: MediaQuery.sizeOf(context).height * .55,
+            child: SfCalendar(
+              todayHighlightColor: primaryColor,
+              cellBorderColor: secendaryColor,
+              view: CalendarView.month,
+              dataSource: dataSource,
+              onTap: (calendarTapDetails) async {
+                if (calendarTapDetails.targetElement ==
+                    CalendarElement.appointment) {
                   AppointmentsModel allApp = await fetchAppointments();
-                  if (calendarTapDetails.targetElement ==
-                      CalendarElement.appointment) {
-                    final Appointment appointment =
-                        calendarTapDetails.appointments!.first;
-                    final matchingAppoint = allApp.data!.firstWhere(
-                      (app) =>
-                          app.dateFrom == appointment.startTime &&
-                          app.dateTo == appointment.endTime,
+
+                  final Appointment appointment =
+                      calendarTapDetails.appointments!.first;
+                  final matchingAppoint = allApp.data!.firstWhere(
+                    (app) =>
+                        app.dateFrom == appointment.startTime &&
+                        app.dateTo == appointment.endTime,
+                  );
+                  if (context.mounted) {
+                    showAppoitmentDetails(
+                      context: context,
+                      appoint: matchingAppoint,
+                      bloc: appBloc,
                     );
                     if (matchingAppoint != null) {
                       showAppoitmentDetails(
@@ -78,11 +93,10 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
                   }
                 },
 
-                monthViewSettings: const MonthViewSettings(
-                    showAgenda: true,
-                    appointmentDisplayCount:
-                        5), // display count length of list on this date
-              ),
+              monthViewSettings: MonthViewSettings(
+                  showAgenda: true,
+                  appointmentDisplayCount: dataSource.appointments!
+                      .length), // display count length of list on this date
             ),
           ],
         ),

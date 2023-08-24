@@ -1,3 +1,4 @@
+import 'package:countries_app/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 import '../../models/apointments_model.dart';
@@ -22,7 +23,7 @@ class MeetingDataSource extends CalendarDataSource {
       startTime: appoint.dateFrom!,
       endTime: appoint.dateTo!,
       subject: 'Meeting with ${appoint.firstName} ${appoint.lastName}',
-      color: Colors.blue, // Replace with the appropriate color
+      color: primaryColor, // Replace with the appropriate color
       isAllDay: false, // Modify this as needed
     );
   }

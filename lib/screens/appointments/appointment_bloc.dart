@@ -9,21 +9,27 @@ import '../../services/hive.dart';
 class AppointmentsBloc {
   StreamController<List<Appoint>> appointmentsStreamController =
       StreamController<List<Appoint>>();
+  String getLan() {
+    return locator<HiveService>()
+            .getValue(boxName: hiveBox, key: languageHiveKey) ??
+        "en";
+  }
 
-  String? language =
-      locator<HiveService>().getValue(boxName: hiveBox, key: languageHiveKey) ??
-          "en";
-  String? userToken =
-      locator<HiveService>().getValue(boxName: hiveBox, key: userTokenKey) ??
-          "";
+  String getUserToken() {
+    return locator<HiveService>()
+            .getValue(boxName: hiveBox, key: userTokenKey) ??
+        "";
+  }
+
   List<Appoint> appointments = [];
 
   Future<AppointmentsModel> getAppointments() async {
+    String? userToken = getUserToken();
     final response = await locator<ApiService>().apiRequest(
       path: "client-appointment/",
       method: getMethod,
       options: Options(
-        headers: {'lang': language, "Authorization": "Bearer $userToken"},
+        headers: {'lang': getLan(), "Authorization": "Bearer $userToken"},
       ),
     );
     print(response);
@@ -45,24 +51,26 @@ class AppointmentsBloc {
   }
 
   Future<void> cancelAppointment(int id) async {
+    String? userToken = getUserToken();
     await locator<ApiService>().apiRequest(
       path: "client-appointment/cancel",
       method: postMethod,
       queryParameters: {"id": id},
       options: Options(
-        headers: {'lang': language, "Authorization": "Bearer $userToken"},
+        headers: {'lang': getLan(), "Authorization": "Bearer $userToken"},
       ),
     );
   }
 
   Future<void> addAppointmentNote(
       {required int appointmentID, required String note}) async {
+    String? userToken = getUserToken();
     await locator<ApiService>().apiRequest(
       path: "client-appointment/comment",
       method: postMethod,
       body: {"id": appointmentID, "comment": note},
       options: Options(
-        headers: {'lang': language, "Authorization": "Bearer $userToken"},
+        headers: {'lang': getLan(), "Authorization": "Bearer $userToken"},
       ),
     );
   }

@@ -10,6 +10,11 @@
     "nextText":"التالي",
     "languageText":"اللغة",
     "hourRateText":"سعر الساعة",
+    "homeText":"الرئيسية",
+    "appBarText":"أكاديمية اكويتي",
+    "appointText":"المواعيد",
+    "meetingWithText":"موعد مع",
+    "noDataText":"لا يوجد بيانات للعرض"
     "meetingText":"اجتماع",
     "withText":"مع",
     "dateText":"التاريخ",

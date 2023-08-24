@@ -2,9 +2,10 @@ import 'package:countries_app/models/mentor_model.dart';
 import 'package:flutter/material.dart';
 
 import '../../constants.dart';
-import '../appointments/appointments_screen.dart';
+
 import 'equiti_bloc.dart';
 import 'mentor_list_widget.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class EquitiAcademyScreen extends StatefulWidget {
   const EquitiAcademyScreen({super.key});
@@ -22,26 +23,15 @@ class _EquitiAcademyScreenState extends State<EquitiAcademyScreen> {
   }
 
   EquitiAcademyBloc bloc = EquitiAcademyBloc();
-  int _selectedIndex = 1;
   int selectedItemIndex = 0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: const Text('Equiti academy'),
-          backgroundColor: primaryColor,
-          actions: [
-            IconButton(
-                onPressed: () {
-                  Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const AppointmentsScreen(),
-                      ));
-                },
-                icon: Icon(Icons.next_plan))
-          ]),
+        title: Text(AppLocalizations.of(context)!.appBarText),
+        backgroundColor: primaryColor,
+      ),
       body: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -81,7 +71,7 @@ class _EquitiAcademyScreenState extends State<EquitiAcademyScreen> {
                                           bloc.categories[index].icon!,
                                     ),
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 5,
                                   ),
                                   Text(
@@ -109,38 +99,13 @@ class _EquitiAcademyScreenState extends State<EquitiAcademyScreen> {
                         mentorsList: snapshot.data,
                       );
                     } else {
-                      return const Center(child: Text("Not data to show"));
+                      return Center(
+                          child:
+                              Text(AppLocalizations.of(context)!.noDataText));
                     }
                   })),
         ],
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        selectedItemColor: primaryColor,
-        selectedIconTheme: IconThemeData(
-          color: primaryColor,
-        ),
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.home,
-            ),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-              icon: Icon(
-                Icons.menu,
-              ),
-              label: ''),
-        ],
-        currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
-      ),
     );
-  }
-
-  void _onItemTapped(int i) {
-    setState(() {
-      _selectedIndex = i;
-    });
   }
 }
