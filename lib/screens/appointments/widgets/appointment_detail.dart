@@ -15,7 +15,7 @@ class AppointmentDetail extends StatelessWidget {
     "appointment_type": 1,
     "price_before_discount": 7,
     "price_after_discount": 7,
-    "state": 3,
+    "state": 1,
     "note_from_client": "this is Client note",
     "note_from_mentor": null,
     "channel_id": "test15",
@@ -43,7 +43,7 @@ class AppointmentDetail extends StatelessWidget {
                     context: context,
                   );
                 },
-                child: Text("show"))
+                child: const Text("show"))
           ],
         ),
       ),
