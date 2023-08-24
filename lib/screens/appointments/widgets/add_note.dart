@@ -1,6 +1,7 @@
 import 'package:countries_app/models/apointments_model.dart';
 import 'package:countries_app/screens/appointments/appointment_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 Future<void> displayTextInputDialog(
     {required BuildContext context,
@@ -13,19 +14,20 @@ Future<void> displayTextInputDialog(
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: const Text('TextField in Dialog'),
+          title: Text(AppLocalizations.of(context)!.addNotesText),
           content: TextField(
             onChanged: (value) {
               valueText = value;
             },
             controller: textFieldController,
-            decoration: const InputDecoration(hintText: "Text Field in Dialog"),
+            decoration: InputDecoration(
+                hintText: AppLocalizations.of(context)!.addNotesText),
           ),
           actions: <Widget>[
             MaterialButton(
               color: Colors.red,
               textColor: Colors.white,
-              child: const Text('CANCEL'),
+              child: Text(AppLocalizations.of(context)!.cancelText),
               onPressed: () {
                 Navigator.pop(context);
               },
@@ -33,7 +35,7 @@ Future<void> displayTextInputDialog(
             MaterialButton(
               color: Colors.green,
               textColor: Colors.white,
-              child: const Text('OK'),
+              child: Text(AppLocalizations.of(context)!.okText),
               onPressed: () {
                 bloc.addAppointmentNote(
                     appointmentID: appointment.id!, note: valueText!);
