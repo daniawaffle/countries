@@ -15,25 +15,6 @@ enum AppointmentStatus {
 }
 
 class AppointmentStatusConverter {
-  static int getStatusNumber(AppointmentStatus status) {
-    switch (status) {
-      case AppointmentStatus.active:
-        return 1;
-      case AppointmentStatus.mentorCancel:
-        return 2;
-      case AppointmentStatus.clientCancel:
-        return 3;
-      case AppointmentStatus.clientMiss:
-        return 4;
-      case AppointmentStatus.mentorMiss:
-        return 5;
-      case AppointmentStatus.completed:
-        return 6;
-      default:
-        throw Exception("Invalid status: $status");
-    }
-  }
-
   static AppointmentStatus getStatusFromNumber(int number) {
     switch (number) {
       case 1:

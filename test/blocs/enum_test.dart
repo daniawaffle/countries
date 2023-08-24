@@ -4,32 +4,6 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group("AppointmentStatus enum", () {
-    test('getStatusNumber should return correct status number', () {
-      expect(
-          AppointmentStatusConverter.getStatusNumber(AppointmentStatus.active),
-          1);
-      expect(
-          AppointmentStatusConverter.getStatusNumber(
-              AppointmentStatus.mentorCancel),
-          2);
-      expect(
-          AppointmentStatusConverter.getStatusNumber(
-              AppointmentStatus.clientCancel),
-          3);
-      expect(
-          AppointmentStatusConverter.getStatusNumber(
-              AppointmentStatus.clientMiss),
-          4);
-      expect(
-          AppointmentStatusConverter.getStatusNumber(
-              AppointmentStatus.mentorMiss),
-          5);
-      expect(
-          AppointmentStatusConverter.getStatusNumber(
-              AppointmentStatus.completed),
-          6);
-    });
-
     test('getStatusFromNumber should return correct status', () {
       expect(AppointmentStatusConverter.getStatusFromNumber(1),
           AppointmentStatus.active);
@@ -53,13 +27,6 @@ void main() {
   });
 
   group("AppointmentType enum", () {
-    test('getStatusNumber should return correct type number', () {
-      expect(AppointmentTypeConverter.getStatusNumber(AppointmentType.schudule),
-          1);
-      expect(
-          AppointmentTypeConverter.getStatusNumber(AppointmentType.instant), 2);
-    });
-
     test('getTypeFromNumber should return correct type', () {
       expect(AppointmentTypeConverter.getTypeFromNumber(1),
           AppointmentType.schudule);
