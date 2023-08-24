@@ -26,9 +26,9 @@ class _StartupScreenState extends State<StartupScreen> {
   Widget build(BuildContext context) {
     startupBloc.getCountries();
     return Scaffold(
-      backgroundColor: secendaryColor,
+      backgroundColor: AppConstants.secendaryColor,
       appBar: AppBar(
-        backgroundColor: primaryColor,
+        backgroundColor: AppConstants.primaryColor,
         title: Text(AppLocalizations.of(context)!.setupText),
         centerTitle: true,
       ),
@@ -44,12 +44,12 @@ class _StartupScreenState extends State<StartupScreen> {
                   LanguageButton(
                     label: AppLocalizations.of(context)!.englishText,
                     startupBloc: startupBloc,
-                    localLanguage: enLocale,
+                    localLanguage: AppConstants.enLocale,
                   ),
                   LanguageButton(
                     label: AppLocalizations.of(context)!.arabicText,
                     startupBloc: startupBloc,
-                    localLanguage: arLocale,
+                    localLanguage: AppConstants.arLocale,
                   ),
                 ],
               ),

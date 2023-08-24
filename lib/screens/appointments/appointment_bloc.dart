@@ -10,14 +10,14 @@ class AppointmentsBloc {
   StreamController<List<Appoint>> appointmentsStreamController =
       StreamController<List<Appoint>>();
   String getLan() {
-    return locator<HiveService>()
-            .getValue(boxName: hiveBox, key: languageHiveKey) ??
+    return locator<HiveService>().getValue(
+            boxName: AppConstants.hiveBox, key: AppConstants.languageHiveKey) ??
         "en";
   }
 
   String getUserToken() {
-    return locator<HiveService>()
-            .getValue(boxName: hiveBox, key: userTokenKey) ??
+    return locator<HiveService>().getValue(
+            boxName: AppConstants.hiveBox, key: AppConstants.userTokenKey) ??
         "";
   }
 
@@ -27,7 +27,7 @@ class AppointmentsBloc {
     String? userToken = getUserToken();
     final response = await locator<ApiService>().apiRequest(
       path: "client-appointment/",
-      method: getMethod,
+      method: AppConstants.getMethod,
       options: Options(
         headers: {'lang': getLan(), "Authorization": "Bearer $userToken"},
       ),
@@ -54,7 +54,7 @@ class AppointmentsBloc {
     String? userToken = getUserToken();
     await locator<ApiService>().apiRequest(
       path: "client-appointment/cancel",
-      method: postMethod,
+      method: AppConstants.postMethod,
       queryParameters: {"id": id},
       options: Options(
         headers: {'lang': getLan(), "Authorization": "Bearer $userToken"},
@@ -67,7 +67,7 @@ class AppointmentsBloc {
     String? userToken = getUserToken();
     await locator<ApiService>().apiRequest(
       path: "client-appointment/comment",
-      method: postMethod,
+      method: AppConstants.postMethod,
       body: {"id": appointmentID, "comment": note},
       options: Options(
         headers: {'lang': getLan(), "Authorization": "Bearer $userToken"},

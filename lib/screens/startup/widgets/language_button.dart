@@ -25,7 +25,7 @@ class _LanguageButtonState extends State<LanguageButton> {
       style: ElevatedButton.styleFrom(
           minimumSize: const Size(120, 45),
           backgroundColor: widget.startupBloc.getLan() == widget.localLanguage
-              ? primaryColor
+              ? AppConstants.primaryColor
               : Colors.white,
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.zero,
@@ -40,8 +40,8 @@ class _LanguageButtonState extends State<LanguageButton> {
             fontSize: 17,
             fontWeight: FontWeight.bold,
             color: widget.startupBloc.getLan() == widget.localLanguage
-                ? secendaryColor
-                : primaryColor),
+                ? AppConstants.secendaryColor
+                : AppConstants.primaryColor),
       ),
     );
   }

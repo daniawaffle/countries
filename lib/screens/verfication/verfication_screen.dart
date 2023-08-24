@@ -82,7 +82,8 @@ class _VerificationScreenState extends State<VerificationScreen> {
               ),
               ElevatedButton(
                 style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(primaryColor)),
+                    backgroundColor:
+                        MaterialStateProperty.all(AppConstants.primaryColor)),
                 onPressed: () async {
                   var response = await verBloc.verify(
                       phoneNumber: widget.phoneNumber,
@@ -105,8 +106,8 @@ class _VerificationScreenState extends State<VerificationScreen> {
                   return isVisible
                       ? ElevatedButton(
                           style: ButtonStyle(
-                              backgroundColor:
-                                  MaterialStateProperty.all(primaryColor)),
+                              backgroundColor: MaterialStateProperty.all(
+                                  AppConstants.primaryColor)),
                           onPressed: sendOtp,
                           child:
                               Text(AppLocalizations.of(context)!.resendOtpText),

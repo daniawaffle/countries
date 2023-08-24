@@ -14,11 +14,11 @@ class MentorCard extends StatelessWidget {
     return Center(
       child: SafeArea(
         child: Card(
-          color: secendaryColor,
+          color: AppConstants.secendaryColor,
           elevation: 1,
           shape: RoundedRectangleBorder(
             side: BorderSide(
-              color: primaryColor,
+              color: AppConstants.primaryColor,
             ),
           ),
           margin: const EdgeInsets.all(10),
@@ -34,18 +34,18 @@ class MentorCard extends StatelessWidget {
                   children: <Widget>[
                     Card(
                       elevation: 0,
-                      color: secendaryColor,
+                      color: AppConstants.secendaryColor,
                       margin: const EdgeInsets.symmetric(horizontal: 10),
-                      child:
-                          (mentor.profileImg == null || mentor.profileImg == "")
-                              ? const CircleAvatar(
-                                  radius: 30,
-                                  backgroundImage:
-                                      AssetImage("assets/picture-profile.jpeg"))
-                              : CircleAvatar(
-                                  radius: 30,
-                                  backgroundImage: NetworkImage(
-                                      '$mentorImageUrl${mentor.profileImg}')),
+                      child: (mentor.profileImg == null ||
+                              mentor.profileImg == "")
+                          ? const CircleAvatar(
+                              radius: 30,
+                              backgroundImage:
+                                  AssetImage("assets/picture-profile.jpeg"))
+                          : CircleAvatar(
+                              radius: 30,
+                              backgroundImage: NetworkImage(
+                                  '${AppConstants.mentorImageUrl}${mentor.profileImg}')),
                     ),
                     Flexible(
                       child: Padding(
@@ -81,7 +81,7 @@ class MentorCard extends StatelessWidget {
                         direction: Axis.horizontal,
                         children: mentor.languages!
                             .map((entry) => Card(
-                                color: primaryColor,
+                                color: AppConstants.primaryColor,
                                 child: Padding(
                                   padding: const EdgeInsets.all(5),
                                   child: Text(
@@ -104,12 +104,12 @@ class MentorCard extends StatelessWidget {
                     "${AppLocalizations.of(context)!.hourRateText} : ${mentor.hourRate}"),
               ),
               Card(
-                color: secendaryColor,
+                color: AppConstants.secendaryColor,
                 margin: EdgeInsets.zero,
                 elevation: 0,
                 shape: RoundedRectangleBorder(
                   side: BorderSide(
-                    color: primaryColor,
+                    color: AppConstants.primaryColor,
                   ),
                 ),
                 child: Padding(
@@ -125,7 +125,7 @@ class MentorCard extends StatelessWidget {
                               width: 50,
                               height: 30,
                               image: NetworkImage(
-                                  '$imageBaseUrl${mentor.countryFlag}'),
+                                  '${AppConstants.imageBaseUrl}${mentor.countryFlag}'),
                             ),
                             Container(
                               width: MediaQuery.of(context).size.width / 7,
@@ -138,7 +138,7 @@ class MentorCard extends StatelessWidget {
                           ],
                         ),
                         VerticalDivider(
-                          color: primaryColor,
+                          color: AppConstants.primaryColor,
                           thickness: 1,
                         ),
                         Align(

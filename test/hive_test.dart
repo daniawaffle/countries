@@ -30,8 +30,8 @@ void main() {
     expect(hiveService.languageBox.isOpen, true);
   });
   test('setValue should put value in the box', () async {
-    const boxName = hiveBox;
-    const key = languageHiveKey;
+    const boxName = AppConstants.hiveBox;
+    const key = AppConstants.languageHiveKey;
     const value = 'testValue';
 
     await hiveService.setValue(boxName: boxName, key: key, value: value);
@@ -40,8 +40,8 @@ void main() {
   });
 
   test('getValue should return value from the box', () {
-    const boxName = hiveBox;
-    const key = languageHiveKey;
+    const boxName = AppConstants.hiveBox;
+    const key = AppConstants.languageHiveKey;
     const expectedValue = 'testValue';
     when(mockBox.get(key)).thenReturn(expectedValue);
 

@@ -60,7 +60,9 @@ Future<void> showAppoitmentDetails(
                         minimumSize: const MaterialStatePropertyAll<Size>(
                             Size.fromHeight(50)),
                         backgroundColor: MaterialStatePropertyAll<Color>(
-                            appoint.state == 1 ? primaryColor : Colors.grey)),
+                            appoint.state == 1
+                                ? AppConstants.primaryColor
+                                : Colors.grey)),
                     onPressed: appoint.state == 1
                         ? () {
                             displayTextInputDialog(

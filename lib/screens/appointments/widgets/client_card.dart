@@ -11,11 +11,11 @@ class ClientCard extends StatelessWidget {
     return Center(
       child: SafeArea(
         child: Card(
-          color: secendaryColor,
+          color: AppConstants.secendaryColor,
           elevation: 1,
           shape: RoundedRectangleBorder(
             side: BorderSide(
-              color: primaryColor,
+              color: AppConstants.primaryColor,
             ),
           ),
           // margin: const EdgeInsets.all(10),
@@ -36,7 +36,7 @@ class ClientCard extends StatelessWidget {
                       children: [
                         Card(
                           elevation: 0,
-                          color: secendaryColor,
+                          color: AppConstants.secendaryColor,
                           child: (appoint.profileImg == null ||
                                   appoint.profileImg == "")
                               ? const CircleAvatar(
@@ -46,7 +46,7 @@ class ClientCard extends StatelessWidget {
                               : CircleAvatar(
                                   radius: 50,
                                   backgroundImage: NetworkImage(
-                                      '$mentorImageUrl${appoint.profileImg}')),
+                                      '${AppConstants.mentorImageUrl}${appoint.profileImg}')),
                         ),
                         Align(
                           alignment: Alignment

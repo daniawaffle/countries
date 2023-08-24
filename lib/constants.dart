@@ -1,21 +1,26 @@
 import 'package:flutter/material.dart';
 
-const String baseUrl = "https://www.helpera.app/";
-const String hiveBox = "languageBox";
-const String languageHiveKey = "languageKey";
-const String englishKey = "English";
-const String arabicKey = "Arabic";
-const String imageBaseUrl = "https://www.helpera.app/static/countries/";
-const String categoryImageBaseUrl =
-    "https://www.helpera.app/static/categories/";
+class AppConstants {
+  AppConstants._();
+  static const String baseUrl = "https://www.helpera.app/";
+  static const String hiveBox = "languageBox";
+  static const String languageHiveKey = "languageKey";
+  static const String englishKey = "English";
+  static const String arabicKey = "Arabic";
+  static const String imageBaseUrl =
+      "https://www.helpera.app/static/countries/";
+  static const String categoryImageBaseUrl =
+      "https://www.helpera.app/static/categories/";
 
-const String userTokenKey = 'tokenKey';
+  static const String userTokenKey = 'tokenKey';
 
-const String enLocale = "en";
-const String arLocale = "ar";
-const String getMethod = "GET";
-const String postMethod = "POST";
-Color primaryColor = Colors.green.shade700;
-Color secendaryColor = Colors.green.shade50;
-Color selectedItemColor = Colors.green.shade300;
-const String mentorImageUrl = "https://www.helpera.app/static/mentorsImg/";
+  static const String enLocale = "en";
+  static const String arLocale = "ar";
+  static const String getMethod = "GET";
+  static const String postMethod = "POST";
+  static Color primaryColor = Colors.green.shade700;
+  static Color secendaryColor = Colors.green.shade50;
+  static Color selectedItemColor = Colors.green.shade300;
+  static const String mentorImageUrl =
+      "https://www.helpera.app/static/mentorsImg/";
+}

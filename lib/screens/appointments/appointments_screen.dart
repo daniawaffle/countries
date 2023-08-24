@@ -64,9 +64,9 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
             SizedBox(
               height: MediaQuery.sizeOf(context).height * .55,
               child: SfCalendar(
-                todayHighlightColor: primaryColor,
+                todayHighlightColor: AppConstants.primaryColor,
 
-                cellBorderColor: secendaryColor,
+                cellBorderColor: AppConstants.secendaryColor,
 
                 view: CalendarView.month,
 

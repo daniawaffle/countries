@@ -7,13 +7,13 @@ class HiveService {
   late Box languageBox;
 
   Future<void> openBoxes() async {
-    languageBox = await Hive.openBox(hiveBox);
+    languageBox = await Hive.openBox(AppConstants.hiveBox);
   }
 
   Future<void> setValue<T>(
       {required String boxName, required String key, required T value}) async {
     switch (boxName) {
-      case hiveBox:
+      case AppConstants.hiveBox:
         await languageBox.put(key, value);
         break;
     }
@@ -21,7 +21,7 @@ class HiveService {
 
   T? getValue<T>({required String boxName, required String key}) {
     switch (boxName) {
-      case hiveBox:
+      case AppConstants.hiveBox:
         return languageBox.get(key);
 
       default:
