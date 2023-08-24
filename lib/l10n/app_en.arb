@@ -9,5 +9,10 @@
     "enterNumText":"Enter your number",
     "nextText":"Next",
     "languageText":"Language",
-    "hourRateText":"Hour Rate"
+    "hourRateText":"Hour Rate",
+    "homeText":"Home",
+    "appBarText":"Equiti Academy",
+    "appointText":"Appointments",
+    "meetingWithText":"Meeting with",
+    "noDataText":"Not data to show"
 }

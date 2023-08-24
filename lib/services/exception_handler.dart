@@ -44,6 +44,12 @@ class HttpExceptionHandler {
         break;
       case HttpResultStatus.tooManyRequests:
         errorMessage = "Too many requests. Try again later.";
+
+        break;
+
+      case HttpResultStatus.serverError:
+        errorMessage = "Server error. Try again later.";
+
         break;
 
       default:

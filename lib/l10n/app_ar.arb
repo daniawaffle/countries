@@ -9,5 +9,10 @@
     "enterNumText":"ادخل رقم الهاتف",
     "nextText":"التالي",
     "languageText":"اللغة",
-    "hourRateText":"سعر الساعة"
+    "hourRateText":"سعر الساعة",
+    "homeText":"الرئيسية",
+    "appBarText":"أكاديمية اكويتي",
+    "appointText":"المواعيد",
+    "meetingWithText":"موعد مع",
+    "noDataText":"لا يوجد بيانات للعرض"
 }

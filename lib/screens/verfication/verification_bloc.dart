@@ -12,13 +12,13 @@ import '../../services/hive.dart';
 
 class VerificationBloc {
   final otpButtonVisible = ValueNotifier<bool>(true);
-  final currentSeconds = ValueNotifier<int>(0);
+  final currentSeconds = ValueNotifier<int>(60);
 
   OtpFieldController otpController = OtpFieldController();
 
   final ApiService apiService = ApiService();
   final interval = const Duration(seconds: 1);
-  final int timerMaxSeconds = 60;
+  final int timerMaxSeconds = 120;
 
   String get timerText =>
       '${((timerMaxSeconds - currentSeconds.value) ~/ 60).toString().padLeft(2, '0')}: ${((timerMaxSeconds - currentSeconds.value) % 60).toString().padLeft(2, '0')}';

@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:countries_app/constants.dart';
+import 'package:countries_app/screens/bottomNavBar/bottom_nav_bloc.dart';
 
 import 'package:countries_app/screens/startup/startup_screen.dart';
 import 'package:countries_app/services/hive.dart';
@@ -10,6 +11,7 @@ import 'package:hive_flutter/adapters.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'locater.dart';
+import 'screens/bottomNavBar/bottom_nav_screen.dart';
 
 Future<void> main() async {
   runZonedGuarded(() async {
@@ -68,7 +70,7 @@ class MainAppState extends State<MainApp> {
           Locale(arLocale),
         ],
         debugShowCheckedModeBanner: false,
-        home: const StartupScreen());
+        home: BottomSheetNav());
   }
 
   void rebuild() {

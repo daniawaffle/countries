@@ -1,4 +1,4 @@
-import 'package:countries_app/screens/bottom_nav.dart';
+import 'package:countries_app/screens/bottomNavBar/bottom_nav_screen.dart';
 import 'package:countries_app/screens/verfication/verification_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:otp_text_field/otp_field.dart';

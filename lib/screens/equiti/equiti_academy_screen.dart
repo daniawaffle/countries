@@ -5,6 +5,7 @@ import '../../constants.dart';
 
 import 'equiti_bloc.dart';
 import 'mentor_list_widget.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class EquitiAcademyScreen extends StatefulWidget {
   const EquitiAcademyScreen({super.key});
@@ -28,7 +29,7 @@ class _EquitiAcademyScreenState extends State<EquitiAcademyScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Equiti academy'),
+        title: Text(AppLocalizations.of(context)!.appBarText),
         backgroundColor: primaryColor,
       ),
       body: Row(
@@ -70,7 +71,7 @@ class _EquitiAcademyScreenState extends State<EquitiAcademyScreen> {
                                           bloc.categories[index].icon!,
                                     ),
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 5,
                                   ),
                                   Text(
@@ -98,7 +99,9 @@ class _EquitiAcademyScreenState extends State<EquitiAcademyScreen> {
                         mentorsList: snapshot.data,
                       );
                     } else {
-                      return const Center(child: Text("Not data to show"));
+                      return Center(
+                          child:
+                              Text(AppLocalizations.of(context)!.noDataText));
                     }
                   })),
         ],

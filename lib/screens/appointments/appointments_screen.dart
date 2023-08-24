@@ -6,6 +6,7 @@ import 'package:syncfusion_flutter_calendar/calendar.dart';
 import '../../models/apointments_model.dart';
 import 'appointment_bloc.dart';
 import 'meeting_data_source.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AppointmentsScreen extends StatefulWidget {
   const AppointmentsScreen({super.key});
@@ -44,9 +45,10 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text(
-                  'Appointments',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                Text(
+                  AppLocalizations.of(context)!.appointText,
+                  style: const TextStyle(
+                      fontSize: 20, fontWeight: FontWeight.bold),
                 ),
                 IconButton(
                     onPressed: () async {
