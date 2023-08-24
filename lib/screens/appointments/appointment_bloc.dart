@@ -13,6 +13,7 @@ class AppointmentsBloc {
   final TextEditingController noteTextFieldController = TextEditingController();
   final addNoteFormKey = GlobalKey<FormState>();
   String? note;
+  ValueNotifier<String> noteValuesNotifier = ValueNotifier<String>("");
 
   String getLan() {
     return locator<HiveService>().getValue(
@@ -80,7 +81,7 @@ class AppointmentsBloc {
     );
   }
 
-  bool validateAddNoteField({String? note, required BuildContext context}) {
+  bool validateAddNoteField({String? note}) {
     if (note == null || note.trim().isEmpty) {
       return false;
     }
@@ -89,5 +90,9 @@ class AppointmentsBloc {
 
   void saveInNoteTextController(String? note) {
     noteTextFieldController.text = note ?? "";
+  }
+
+  void updateNoteValuesNotifier(String? note) {
+    noteValuesNotifier.value = note ?? "";
   }
 }

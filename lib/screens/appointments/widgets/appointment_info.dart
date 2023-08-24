@@ -9,10 +9,9 @@ import '../appointment_bloc.dart';
 
 class AppointmentInfo extends StatefulWidget {
   final Appoint appoint;
-  const AppointmentInfo({
-    super.key,
-    required this.appoint,
-  });
+  final AppointmentsBloc appointmentsBloc;
+  const AppointmentInfo(
+      {super.key, required this.appoint, required this.appointmentsBloc});
 
   @override
   State<AppointmentInfo> createState() => AppointmentInfoState();
@@ -138,26 +137,30 @@ class AppointmentInfoState extends State<AppointmentInfo> {
             ],
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Text(AppLocalizations.of(context)!.clientNoteText),
-              Text(
-                widget.appoint.noteFromClient ??
-                    AppLocalizations.of(context)!.noNotesToShowText,
-                style: TextStyle(
-                    color: widget.appoint.noteFromClient == null
-                        ? Colors.grey
-                        : Colors.black,
-                    fontWeight: widget.appoint.noteFromClient == null
-                        ? FontWeight.normal
-                        : FontWeight.bold),
-              )
-            ],
-          ),
-        ),
+        ValueListenableBuilder<String>(
+            valueListenable: widget.appointmentsBloc.noteValuesNotifier,
+            builder: (context, value, child) {
+              return Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Text(AppLocalizations.of(context)!.clientNoteText),
+                    Text(
+                      widget.appoint.noteFromClient ??
+                          AppLocalizations.of(context)!.noNotesToShowText,
+                      style: TextStyle(
+                          color: widget.appoint.noteFromClient == null
+                              ? Colors.grey
+                              : Colors.black,
+                          fontWeight: widget.appoint.noteFromClient == null
+                              ? FontWeight.normal
+                              : FontWeight.bold),
+                    )
+                  ],
+                ),
+              );
+            }),
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 8),
           child: Row(

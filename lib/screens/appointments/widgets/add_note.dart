@@ -24,10 +24,9 @@ Future<void> displayTextInputDialog(
               decoration: InputDecoration(
                 hintText: AppLocalizations.of(context)!.addNotesText,
               ),
-              validator: (value) =>
-                  bloc.validateAddNoteField(context: context, note: value)
-                      ? null
-                      : AppLocalizations.of(context)!.alertEmptyNoteText,
+              validator: (value) => bloc.validateAddNoteField(note: value)
+                  ? null
+                  : AppLocalizations.of(context)!.alertEmptyNoteText,
             ),
             actions: <Widget>[
               MaterialButton(
@@ -47,8 +46,10 @@ Future<void> displayTextInputDialog(
                     bloc
                         .addAppointmentNote(
                             appointmentID: appointment.id!, note: bloc.note!)
-                        .then(
-                            (value) => appointment.noteFromClient = bloc.note);
+                        .then((value) {
+                      appointment.noteFromClient = bloc.note;
+                      bloc.updateNoteValuesNotifier(bloc.note!);
+                    });
                     Navigator.pop(context);
                   }
                 },
