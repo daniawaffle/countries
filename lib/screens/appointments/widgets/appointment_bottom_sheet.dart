@@ -221,7 +221,7 @@ Future<void> showAppoitmentDetails(
                         ? () {
                             displayTextInputDialog(
                                 appointment: appoint,
-                                bloc: bloc,
+                                onOkPressed: bloc.addAppointmentNote,
                                 context: context);
                           }
                         : null,

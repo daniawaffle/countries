@@ -31,5 +31,6 @@
     "noText":"لا",
     "addNotesText":"إضافة ملاحظات",
     "cancelText":"إلغاء",
-    "okText":"إضافة"
+    "okText":"إضافة",
+    "alertEmptyNoteText":"لا يمكن أن تكون القيمة فارغة"
 }
