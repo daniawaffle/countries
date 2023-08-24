@@ -13,7 +13,7 @@ Future<void> showAppoitmentDetails(
     required Appoint appoint,
     required AppointmentsBloc bloc}) {
   return showModalBottomSheet<void>(
-      isScrollControlled: true,
+      isScrollControlled: false,
       context: context,
       shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
