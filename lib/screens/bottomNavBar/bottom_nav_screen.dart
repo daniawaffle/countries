@@ -22,37 +22,36 @@ class _BottomSheetNavState extends State<BottomSheetNav> {
   ];
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: ValueListenableBuilder<int>(
+    return ValueListenableBuilder<int>(
         valueListenable: navBloc.selectedIndex,
         builder: (context, index, _) {
-          return _pages[index];
-        },
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        selectedItemColor: AppConstants.primaryColor,
-        selectedIconTheme: IconThemeData(
-          color: AppConstants.primaryColor,
-        ),
-        items: [
-          BottomNavigationBarItem(
-            icon: const Icon(
-              Icons.home,
-            ),
-            label: AppLocalizations.of(context)!.homeText,
-          ),
-          const BottomNavigationBarItem(
-              icon: Icon(
-                Icons.menu,
+          return Scaffold(
+            body: _pages[index],
+            bottomNavigationBar: BottomNavigationBar(
+              selectedItemColor: AppConstants.primaryColor,
+              selectedIconTheme: IconThemeData(
+                color: AppConstants.primaryColor,
               ),
-              label: ''),
-        ],
-        currentIndex: navBloc.selectedIndex.value,
-        onTap: (index) {
-          navBloc.selectedIndex.value = index;
-          navBloc.onItemTapped(index);
-        },
-      ),
-    );
+              items: [
+                BottomNavigationBarItem(
+                  icon: const Icon(
+                    Icons.home,
+                  ),
+                  label: AppLocalizations.of(context)!.homeText,
+                ),
+                const BottomNavigationBarItem(
+                    icon: Icon(
+                      Icons.menu,
+                    ),
+                    label: ''),
+              ],
+              currentIndex: navBloc.selectedIndex.value,
+              onTap: (index) {
+                navBloc.selectedIndex.value = index;
+                navBloc.onItemTapped(index);
+              },
+            ),
+          );
+        });
   }
 }

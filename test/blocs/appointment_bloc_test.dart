@@ -7,8 +7,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:mockito/mockito.dart';
 
-import 'hive_test.dart';
-import 'hive_test.mocks.dart';
+import '../hive_test.dart';
+
+import '../hive_test.mocks.dart';
 
 late HiveService hiveService;
 late MockBox mockBox;

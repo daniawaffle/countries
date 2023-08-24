@@ -7,7 +7,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:mockito/mockito.dart';
 
-import 'hive_test.mocks.dart';
+import '../hive_test.mocks.dart';
 
 late HiveService hiveService;
 late MockBox mockBox;
@@ -37,6 +37,8 @@ Future<void> main() async {
       when(hiveService.getValue<String>(
               key: key, boxName: AppConstants.hiveBox))
           .thenReturn(expectedValue);
+      var x = mockBox.get(key);
+      print(x);
 
       final result = startupBloc.getLan();
 
@@ -91,7 +93,7 @@ Future<void> main() async {
 void mockMethodChannel() {
   const MethodChannel channel =
       MethodChannel('plugins.flutter.io/path_provider');
-  channel.setMethodCallHandler((MethodCall methodCall) async {
+  channel.setMockMethodCallHandler((MethodCall methodCall) async {
     return ".";
   });
 }

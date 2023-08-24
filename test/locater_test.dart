@@ -1,7 +1,7 @@
 import 'package:countries_app/locater.dart';
 import 'package:countries_app/services/api.dart';
 import 'package:countries_app/services/hive.dart';
-import 'package:test/test.dart';
+import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   late HiveService hiveService;
