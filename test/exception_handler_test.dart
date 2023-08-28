@@ -15,7 +15,6 @@ void main() {
         response: Response(statusCode: 403, requestOptions: RequestOptions()), requestOptions: RequestOptions());
     expect(HttpExceptionHandler.handleException(dioException403), HttpResultStatus.unauthorized);
 
-    // Test DioException with a response of status code 404
     final dioException404 = DioException(
         response: Response(statusCode: 404, requestOptions: RequestOptions()), requestOptions: RequestOptions());
     expect(HttpExceptionHandler.handleException(dioException404), HttpResultStatus.notFound);

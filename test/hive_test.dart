@@ -9,7 +9,7 @@ import 'package:mockito/mockito.dart';
 
 import 'hive_test.mocks.dart';
 
-@GenerateMocks([Box])
+@GenerateMocks([Box, HiveService])
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
@@ -63,7 +63,7 @@ void main() {
 void mockMethodChannel() {
   const MethodChannel channel =
       MethodChannel('plugins.flutter.io/path_provider');
-  channel.setMethodCallHandler((MethodCall methodCall) async {
+  channel.setMockMethodCallHandler((MethodCall methodCall) async {
     return ".";
   });
 }
