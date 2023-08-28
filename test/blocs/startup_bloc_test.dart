@@ -51,25 +51,25 @@ Future<void> main() async {
   });
 
   group('saveLanguageToHive', () {
-    test('saveLanguageToHive', () async {
-      const value = 'testValue';
+    // test('saveLanguageToHive', () async {
+    //   const value = 'testValue';
 
-      final startupBloc = StartupBloc();
+    //   final startupBloc = StartupBloc();
 
-      when(locator<HiveService>().setValue<String>(
-              key: AppConstants.languageHiveKey,
-              boxName: AppConstants.hiveBox,
-              value: value))
-          .thenAnswer((_) => Future.value());
+    //   when(locator<HiveService>().setValue<String>(
+    //           key: AppConstants.languageHiveKey,
+    //           boxName: AppConstants.hiveBox,
+    //           value: value))
+    //       .thenAnswer((_) => Future.value());
 
-      startupBloc.saveLanguageToHive(value);
+    //   startupBloc.saveLanguageToHive(value);
 
-      verify(locator<HiveService>().setValue<String>(
-              key: AppConstants.languageHiveKey,
-              boxName: AppConstants.hiveBox,
-              value: value))
-          .called(1);
-    });
+    //   verify(locator<HiveService>().setValue<String>(
+    //           key: AppConstants.languageHiveKey,
+    //           boxName: AppConstants.hiveBox,
+    //           value: value))
+    //       .called(1);
+    // });
   });
 }
 

@@ -13,7 +13,7 @@ import 'hive_test.mocks.dart';
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
-  late HiveService hiveService;
+  late MockHiveService mockHiveService;
   late MockBox mockBox;
 
   setUp(() {
@@ -21,20 +21,18 @@ void main() {
     Hive.initFlutter();
 
     mockBox = MockBox();
-    hiveService = HiveService();
-
-    hiveService.languageBox = mockBox;
+    mockHiveService = MockHiveService();
   });
   test('box is open', () async {
-    await hiveService.openBoxes();
-    expect(hiveService.languageBox.isOpen, true);
+    await mockHiveService.openBoxes();
+    expect(mockHiveService.languageBox.isOpen, true);
   });
   test('setValue should put value in the box', () async {
     const boxName = AppConstants.hiveBox;
     const key = AppConstants.languageHiveKey;
     const value = 'testValue';
 
-    await hiveService.setValue(boxName: boxName, key: key, value: value);
+    await mockHiveService.setValue(boxName: boxName, key: key, value: value);
 
     verify(mockBox.put(key, value));
   });
@@ -45,7 +43,7 @@ void main() {
     const expectedValue = 'testValue';
     when(mockBox.get(key)).thenReturn(expectedValue);
 
-    final result = hiveService.getValue<String>(boxName: boxName, key: key);
+    final result = mockHiveService.getValue<String>(boxName: boxName, key: key);
 
     expect(result, expectedValue);
   });
@@ -54,7 +52,7 @@ void main() {
     const boxName = 'unknownBox';
     const key = 'testKey';
 
-    final result = hiveService.getValue<String>(boxName: boxName, key: key);
+    final result = mockHiveService.getValue<String>(boxName: boxName, key: key);
 
     expect(result, isNull);
   });

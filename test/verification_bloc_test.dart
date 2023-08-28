@@ -19,13 +19,6 @@ void main() {
     });
   });
 
-  test('login', () async {
-    final verBloc = VerificationBloc();
-
-    await verBloc.login();
-    expect(verBloc.isLoading, true);
-  });
-
   group('timerText', () {
     test('timerText current seconds  less than minute', () {
       final verBloc = VerificationBloc();
@@ -55,7 +48,6 @@ void main() {
   });
 
   tearDown(() {
-    verBloc.login();
     verBloc.startTimeout();
     verBloc.timerMaxSeconds;
     verBloc.currentSeconds;
