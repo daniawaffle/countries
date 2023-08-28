@@ -5,7 +5,8 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i3;
 
-import 'package:hive/hive.dart' as _i2;
+import 'package:countries_app/services/hive.dart' as _i4;
+import 'package:hive_flutter/hive_flutter.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -18,6 +19,16 @@ import 'package:mockito/mockito.dart' as _i1;
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
+
+class _FakeBox_0<E> extends _i1.SmartFake implements _i2.Box<E> {
+  _FakeBox_0(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
 
 /// A class which mocks [Box].
 ///
@@ -246,4 +257,71 @@ class MockBox<E> extends _i1.Mock implements _i2.Box<E> {
         returnValue: _i3.Future<void>.value(),
         returnValueForMissingStub: _i3.Future<void>.value(),
       ) as _i3.Future<void>);
+}
+
+/// A class which mocks [HiveService].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockHiveService extends _i1.Mock implements _i4.HiveService {
+  MockHiveService() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i2.Box<dynamic> get languageBox => (super.noSuchMethod(
+        Invocation.getter(#languageBox),
+        returnValue: _FakeBox_0<dynamic>(
+          this,
+          Invocation.getter(#languageBox),
+        ),
+      ) as _i2.Box<dynamic>);
+  @override
+  set languageBox(_i2.Box<dynamic>? _languageBox) => super.noSuchMethod(
+        Invocation.setter(
+          #languageBox,
+          _languageBox,
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  _i3.Future<void> openBoxes() => (super.noSuchMethod(
+        Invocation.method(
+          #openBoxes,
+          [],
+        ),
+        returnValue: _i3.Future<void>.value(),
+        returnValueForMissingStub: _i3.Future<void>.value(),
+      ) as _i3.Future<void>);
+  @override
+  _i3.Future<void> setValue<T>({
+    required String? boxName,
+    required String? key,
+    required T? value,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #setValue,
+          [],
+          {
+            #boxName: boxName,
+            #key: key,
+            #value: value,
+          },
+        ),
+        returnValue: _i3.Future<void>.value(),
+        returnValueForMissingStub: _i3.Future<void>.value(),
+      ) as _i3.Future<void>);
+  @override
+  T? getValue<T>({
+    required String? boxName,
+    required String? key,
+  }) =>
+      (super.noSuchMethod(Invocation.method(
+        #getValue,
+        [],
+        {
+          #boxName: boxName,
+          #key: key,
+        },
+      )) as T?);
 }
