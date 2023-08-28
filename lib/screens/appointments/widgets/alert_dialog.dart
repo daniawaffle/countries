@@ -1,10 +1,9 @@
-import 'package:countries_app/screens/appointments/appointment_bloc.dart';
 import 'package:countries_app/screens/appointments/appointments_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 Future<void> showAlertDialog(
-    {required AppointmentsBloc bloc,
+    {required Function(int id) cancelAppointment,
     required int appoitmentID,
     required BuildContext context}) async {
   return showDialog<void>(
@@ -30,7 +29,7 @@ Future<void> showAlertDialog(
           TextButton(
             child: Text(AppLocalizations.of(context)!.yesText),
             onPressed: () {
-              bloc.cancelAppointment(appoitmentID);
+              cancelAppointment(appoitmentID);
               int count = 0;
 
               Navigator.of(context).popUntil((_) => count++ >= 3);

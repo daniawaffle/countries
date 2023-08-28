@@ -37,5 +37,7 @@
     "addNotesText":"إضافة ملاحظات",
     "cancelText":"إلغاء",
     "okText":"إضافة",
-    "alertEmptyNoteText":"لا يمكن أن تكون القيمة فارغة"
+    "alertEmptyNoteText":"لا يمكن أن تكون القيمة فارغة",
+    "genderText":"الجنس: يفضل عدم التصريح",
+    "dobText":"يوم الميلاد"
 }

@@ -41,7 +41,7 @@ class MentorCard extends StatelessWidget {
                           ? const CircleAvatar(
                               radius: 30,
                               backgroundImage:
-                                  AssetImage("assets/picture-profile.jpeg"))
+                                  AssetImage(AppConstants.defaultUserImage))
                           : CircleAvatar(
                               radius: 30,
                               backgroundImage: NetworkImage(

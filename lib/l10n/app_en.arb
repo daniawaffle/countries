@@ -37,5 +37,7 @@
     "addNotesText":"Add Notes",
     "cancelText":"Cancel",
     "okText":"Ok",
-    "alertEmptyNoteText":"Value cannot be empty"
+    "alertEmptyNoteText":"Value cannot be empty",
+    "genderText":"Gender: Prefer Not To Say",
+    "dobText":"Day of birth"
 }
