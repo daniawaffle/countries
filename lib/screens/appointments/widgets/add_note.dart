@@ -5,10 +5,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../appointment_bloc.dart';
 
 Future<void> displayTextInputDialog(
-    {required BuildContext context,
-    required Appoint appointment,
-    required AppointmentsBloc bloc}) async {
-  bloc.saveInNoteTextController(appointment.noteFromClient);
+    {required BuildContext context, required Appoint appointment, required AppointmentsBloc bloc}) async {
+  bloc.noteTextFieldController.text = appointment.noteFromClient ?? "";
   return showDialog(
       context: context,
       builder: (context) {
@@ -18,15 +16,14 @@ Future<void> displayTextInputDialog(
             title: Text(AppLocalizations.of(context)!.addNotesText),
             content: TextFormField(
               onChanged: (value) {
-                bloc.note = value;
+                bloc.noteTextFieldController.text = value;
               },
               controller: bloc.noteTextFieldController,
               decoration: InputDecoration(
                 hintText: AppLocalizations.of(context)!.addNotesText,
               ),
-              validator: (value) => bloc.validateAddNoteField(note: value)
-                  ? null
-                  : AppLocalizations.of(context)!.alertEmptyNoteText,
+              validator: (value) =>
+                  bloc.validateAddNoteField(note: value) ? null : AppLocalizations.of(context)!.alertEmptyNoteText,
             ),
             actions: <Widget>[
               MaterialButton(
@@ -44,11 +41,9 @@ Future<void> displayTextInputDialog(
                 onPressed: () {
                   if (bloc.addNoteFormKey.currentState!.validate()) {
                     bloc
-                        .addAppointmentNote(
-                            appointmentID: appointment.id!, note: bloc.note!)
+                        .addAppointmentNote(appointmentID: appointment.id!, note: bloc.noteTextFieldController.text)
                         .then((value) {
-                      appointment.noteFromClient = bloc.note;
-                      bloc.updateNoteValuesNotifier(bloc.note!);
+                      appointment.noteFromClient = bloc.noteTextFieldController.text;
                     });
                     Navigator.pop(context);
                   }

@@ -1,16 +1,12 @@
 import 'package:countries_app/constants.dart';
-
-import 'package:countries_app/services/exception_handler.dart';
+import 'package:countries_app/utils/exception_handler.dart';
 
 import 'package:dio/dio.dart';
 
-import 'interceptor.dart';
-
 class ApiService {
-  final Dio _dio = Dio(BaseOptions(baseUrl: AppConstants.baseUrl))
-    ..interceptors.add(HttpInterciptor());
+  final Dio _dio = Dio(BaseOptions(baseUrl: AppConstants.baseUrl));
 
-  Future<T> apiRequest<T>(
+  Future<dynamic> apiRequest(
       {required String path,
       dynamic body,
       required String method,
@@ -19,19 +15,16 @@ class ApiService {
     try {
       Response response;
 
-      if (method == 'GET') {
-        response = await _dio.get(path,
-            options: options, queryParameters: queryParameters);
-      } else if (method == 'POST') {
-        response = await _dio.post(path,
-            data: body, options: options, queryParameters: queryParameters);
+      if (method == AppConstants.getMethod) {
+        response = await _dio.get(path, options: options, queryParameters: queryParameters);
+      } else if (method == AppConstants.postMethod) {
+        response = await _dio.post(path, data: body, options: options, queryParameters: queryParameters);
       } else {
         throw Exception('Unsupported HTTP method: $method');
       }
 
       if (response.statusCode == 200) {
-        //return response.data;
-        return response.data as T;
+        return response.data;
       } else {
         throw Exception(response.statusCode);
       }

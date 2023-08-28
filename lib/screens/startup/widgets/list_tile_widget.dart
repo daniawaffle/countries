@@ -4,20 +4,16 @@ import 'package:flutter/material.dart';
 
 class ListTileWidget extends StatelessWidget {
   final Country country;
-  final Function pushNextScreen;
-  const ListTileWidget(
-      {super.key, required this.country, required this.pushNextScreen});
+  final Function onPress;
+  const ListTileWidget({super.key, required this.country, required this.onPress});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        pushNextScreen();
-      },
+      onTap: () => onPress(),
       child: Card(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(80),
-          //set border radius more than 50% of height and width to make circle
         ),
         elevation: 0,
         margin: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 5.0),
@@ -47,8 +43,7 @@ class ListTileWidget extends StatelessWidget {
                 ),
               ),
               Icon(
-                Localizations.localeOf(context) ==
-                        const Locale(AppConstants.enLocale)
+                Localizations.localeOf(context) == const Locale(AppConstants.enLocale)
                     ? Icons.keyboard_arrow_right
                     : Icons.keyboard_arrow_left,
                 color: AppConstants.primaryColor,

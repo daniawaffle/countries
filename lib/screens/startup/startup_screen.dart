@@ -1,3 +1,4 @@
+import 'package:countries_app/models/country_model.dart';
 import 'package:countries_app/screens/login/login_screen.dart';
 import 'package:countries_app/screens/startup/startup_bloc.dart';
 import 'package:countries_app/screens/startup/widgets/list_tile_widget.dart';
@@ -14,17 +15,16 @@ class StartupScreen extends StatefulWidget {
 }
 
 class _StartupScreenState extends State<StartupScreen> {
-  StartupBloc startupBloc = StartupBloc();
+  StartupBloc bloc = StartupBloc();
 
   @override
   void initState() {
-    startupBloc.getCountries();
+    bloc.getCountries();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    startupBloc.getCountries();
     return Scaffold(
       backgroundColor: AppConstants.secendaryColor,
       appBar: AppBar(
@@ -42,37 +42,42 @@ class _StartupScreenState extends State<StartupScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   LanguageButton(
+                    currentLanguage: bloc.getLan(),
                     label: AppLocalizations.of(context)!.englishText,
-                    startupBloc: startupBloc,
                     localLanguage: AppConstants.enLocale,
+                    saveLanguage: () {
+                      bloc.saveLanguageToHive(context, AppConstants.enLocale);
+                    },
                   ),
                   LanguageButton(
+                    currentLanguage: bloc.getLan(),
                     label: AppLocalizations.of(context)!.arabicText,
-                    startupBloc: startupBloc,
                     localLanguage: AppConstants.arLocale,
+                    saveLanguage: () {
+                      bloc.saveLanguageToHive(context, AppConstants.arLocale);
+                    },
                   ),
                 ],
               ),
             ),
           ),
           Expanded(
-            child: StreamBuilder<Object>(
-                stream: startupBloc.countriesStreamController.stream,
+            child: StreamBuilder<List<Country>>(
+                stream: bloc.countriesStreamController.stream,
                 builder: (context, snapshot) {
                   return ListView.builder(
-                    itemCount: startupBloc.countries.length,
+                    itemCount: snapshot.data!.length,
                     itemBuilder: (context, index) {
                       return ListTileWidget(
-                        pushNextScreen: () {
+                        country: snapshot.data![index],
+                        onPress: () {
                           Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
                                 builder: (context) => LoginScreen(
-                                    countries: startupBloc.countries,
-                                    country: startupBloc.countries[index]),
+                                    listOfCountries: snapshot.data!, selectedCountry: snapshot.data![index]),
                               ));
                         },
-                        country: startupBloc.countries[index],
                       );
                     },
                   );

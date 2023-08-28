@@ -8,10 +8,10 @@ enum AppointmentStatus {
   mentorMiss(5, "Mentor Miss", Colors.red),
   completed(6, "Completed", Colors.green);
 
-  const AppointmentStatus(this.status, this.name, this.textColor);
   final int status;
   final String name;
   final Color textColor;
+  const AppointmentStatus(this.status, this.name, this.textColor);
 }
 
 class AppointmentStatusConverter {

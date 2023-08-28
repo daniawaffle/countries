@@ -2,9 +2,8 @@ import 'package:countries_app/constants.dart';
 import 'package:countries_app/screens/appointments/widgets/appointment_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
-import '../../models/apointments_model.dart';
 import 'appointment_bloc.dart';
-import 'meeting_data_source.dart';
+import '../../utils/meeting_data_source.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AppointmentsScreen extends StatefulWidget {
@@ -15,10 +14,7 @@ class AppointmentsScreen extends StatefulWidget {
 }
 
 class _AppointmentsScreenState extends State<AppointmentsScreen> {
-  AppointmentsBloc appBloc = AppointmentsBloc();
-
-  MeetingDataSource dataSource = MeetingDataSource(AppointmentsModel());
-  AppointmentsModel? allAppointmentsModel;
+  AppointmentsBloc bloc = AppointmentsBloc();
 
   @override
   void initState() {
@@ -28,11 +24,11 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
   }
 
   fetchAppointments() async {
-    final appointmentsModel = await appBloc.getAppointments();
+    final appointmentsModel = await bloc.getAppointments();
 
     setState(() {
-      dataSource = MeetingDataSource(appointmentsModel);
-      allAppointmentsModel = appointmentsModel;
+      bloc.dataSource = MeetingDataSource(appointmentsModel);
+      bloc.allAppointmentsModel = appointmentsModel;
     });
 
     return appointmentsModel;
@@ -52,8 +48,7 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
                 children: [
                   Text(
                     AppLocalizations.of(context)!.appointText,
-                    style: const TextStyle(
-                        fontSize: 20, fontWeight: FontWeight.bold),
+                    style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                   IconButton(
                       onPressed: () async {
@@ -69,32 +64,26 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
                 todayHighlightColor: AppConstants.primaryColor,
                 cellBorderColor: AppConstants.secendaryColor,
                 view: CalendarView.month,
-                dataSource: dataSource,
+                dataSource: bloc.dataSource,
                 onTap: (calendarTapDetails) async {
-                  if (calendarTapDetails.targetElement ==
-                      CalendarElement.appointment) {
-                    final Appointment appointment =
-                        calendarTapDetails.appointments!.first;
+                  if (calendarTapDetails.targetElement == CalendarElement.appointment) {
+                    final Appointment appointment = calendarTapDetails.appointments!.first;
 
-                    final matchingAppoint =
-                        allAppointmentsModel!.data!.firstWhere(
-                      (app) =>
-                          app.dateFrom == appointment.startTime &&
-                          app.dateTo == appointment.endTime,
+                    final matchingAppoint = bloc.allAppointmentsModel!.data!.firstWhere(
+                      (app) => app.dateFrom == appointment.startTime && app.dateTo == appointment.endTime,
                     );
 
                     if (context.mounted) {
                       showAppoitmentDetails(
                         context: context,
                         appoint: matchingAppoint,
-                        bloc: appBloc,
+                        bloc: bloc,
                       );
                     }
                   }
                 },
-                monthViewSettings: MonthViewSettings(
-                    showAgenda: true,
-                    appointmentDisplayCount: dataSource.appointments!.length),
+                monthViewSettings:
+                    MonthViewSettings(showAgenda: true, appointmentDisplayCount: bloc.dataSource.appointments!.length),
               ),
             ),
           ],

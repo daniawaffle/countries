@@ -1,4 +1,4 @@
-import 'package:countries_app/screens/bottomNavBar/bottom_nav_bloc.dart';
+import 'package:countries_app/screens/main_container/main_container_bloc.dart';
 import 'package:test/test.dart';
 
 void main() {

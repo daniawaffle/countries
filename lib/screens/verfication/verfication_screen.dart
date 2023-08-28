@@ -1,4 +1,4 @@
-import 'package:countries_app/screens/bottomNavBar/bottom_nav_screen.dart';
+import 'package:countries_app/screens/main_container/main_container.dart';
 import 'package:countries_app/screens/verfication/verification_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:otp_text_field/otp_field.dart';
@@ -26,22 +26,16 @@ class VerificationScreen extends StatefulWidget {
 }
 
 class _VerificationScreenState extends State<VerificationScreen> {
-  VerificationBloc verBloc = VerificationBloc();
+  VerificationBloc bloc = VerificationBloc();
 
   void sendOtp() {
-    verBloc.requestNewOtp(
-        phoneNumber: widget.phoneNumber, countryId: widget.countryId);
-    verBloc.otpButtonVisible.value = false;
-    verBloc.currentSeconds.value = 0;
-    verBloc.startTimeout();
+    bloc.requestNewOtp(phoneNumber: widget.phoneNumber, countryId: widget.countryId);
+    bloc.otpButtonVisible.value = false;
+    bloc.currentSeconds.value = 0;
+    bloc.startTimeout();
   }
 
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  String otpp = '';
+  // String otpp = '';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,13 +50,11 @@ class _VerificationScreenState extends State<VerificationScreen> {
                 height: 50,
                 width: 50,
               ),
-              const SizedBox(
-                height: 20,
-              ),
+              const SizedBox(height: 20),
               Directionality(
                 textDirection: TextDirection.ltr,
                 child: OTPTextField(
-                    controller: verBloc.otpController,
+                    controller: bloc.otpController,
                     length: 6,
                     width: MediaQuery.of(context).size.width,
                     textFieldAlignment: MainAxisAlignment.center,
@@ -72,48 +64,41 @@ class _VerificationScreenState extends State<VerificationScreen> {
                     style: const TextStyle(fontSize: 17),
                     onChanged: (pin) {},
                     onCompleted: (pin) {
-                      print("Completed: $pin");
-
-                      otpp = pin;
+                      bloc.enteredOTP = pin;
                     }),
               ),
               const SizedBox(
                 height: 20,
               ),
               ElevatedButton(
-                style: ButtonStyle(
-                    backgroundColor:
-                        MaterialStateProperty.all(AppConstants.primaryColor)),
+                style: ButtonStyle(backgroundColor: MaterialStateProperty.all(AppConstants.primaryColor)),
                 onPressed: () async {
-                  var response = await verBloc.verify(
+                  var response = await bloc.verify(
                       phoneNumber: widget.phoneNumber,
                       countryId: widget.countryId,
                       userId: widget.userId,
-                      lastOTP: otpp);
+                      lastOTP: bloc.enteredOTP);
                   if (context.mounted && response.verifyModel != null) {
                     Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const BottomSheetNav(),
+                          builder: (context) => const MainContainer(),
                         ));
                   }
                 },
                 child: Text(AppLocalizations.of(context)!.loginText),
               ),
               ValueListenableBuilder(
-                valueListenable: verBloc.otpButtonVisible,
+                valueListenable: bloc.otpButtonVisible,
                 builder: (context, isVisible, child) {
                   return isVisible
                       ? ElevatedButton(
-                          style: ButtonStyle(
-                              backgroundColor: MaterialStateProperty.all(
-                                  AppConstants.primaryColor)),
+                          style: ButtonStyle(backgroundColor: MaterialStateProperty.all(AppConstants.primaryColor)),
                           onPressed: sendOtp,
-                          child:
-                              Text(AppLocalizations.of(context)!.resendOtpText),
+                          child: Text(AppLocalizations.of(context)!.resendOtpText),
                         )
                       : Text(
-                          verBloc.timerText,
+                          bloc.timerText,
                           style: const TextStyle(fontSize: 15),
                         );
                 },

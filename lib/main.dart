@@ -1,18 +1,10 @@
 import 'dart:async';
-
-import 'package:countries_app/constants.dart';
-import 'package:countries_app/screens/bottomNavBar/bottom_nav_bloc.dart';
-import 'package:countries_app/screens/equiti/equiti_academy_screen.dart';
-
-import 'package:countries_app/screens/startup/startup_screen.dart';
+import 'package:countries_app/app.dart';
 import 'package:countries_app/services/hive.dart';
-import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'locater.dart';
-import 'screens/bottomNavBar/bottom_nav_screen.dart';
 
 Future<void> main() async {
   runZonedGuarded(() async {
@@ -23,67 +15,9 @@ Future<void> main() async {
     await locator<HiveService>().openBoxes();
     return runApp(const MainApp());
   }, (error, stack) {
-    if (error is DioException) {
-      print(error);
-      print(stack);
-    } else {
+    if (kDebugMode) {
       print(error);
       print(stack);
     }
   });
-}
-
-class MainApp extends StatefulWidget {
-  const MainApp({super.key});
-
-  @override
-  State<MainApp> createState() => MainAppState();
-  static MainAppState? of(BuildContext context) {
-    return context.findAncestorStateOfType<MainAppState>();
-  }
-}
-
-class MainAppState extends State<MainApp> {
-  String? locale;
-  @override
-  void initState() {
-    // LocalJsonLocalization.delegate.directories = ['lib/i18n/'];
-    locale = locator<HiveService>().getValue<String>(
-          boxName: AppConstants.hiveBox,
-          key: AppConstants.languageHiveKey,
-        ) ??
-        AppConstants.enLocale;
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-        locale: Locale(locale ?? AppConstants.enLocale),
-        localizationsDelegates: const [
-          AppLocalizations.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        supportedLocales: const [
-          Locale(AppConstants.enLocale),
-          Locale(AppConstants.arLocale),
-        ],
-        debugShowCheckedModeBanner: false,
-
-        home: const BottomSheetNav());
-
-  }
-
-  void rebuild() {
-    String appLanguage = locator<HiveService>().getValue<String>(
-          boxName: AppConstants.hiveBox,
-          key: AppConstants.languageHiveKey,
-        ) ??
-        AppConstants.enLocale;
-    locale = appLanguage;
-
-    setState(() {});
-  }
 }

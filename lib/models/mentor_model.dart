@@ -1,5 +1,3 @@
-// ignore_for_file: unnecessary_new
-
 class MentorsModel {
   List<Mentor>? mentors;
   String? message;
@@ -10,7 +8,7 @@ class MentorsModel {
     if (json['data'] != null) {
       mentors = <Mentor>[];
       json['data'].forEach((v) {
-        mentors!.add(new Mentor.fromJson(v));
+        mentors!.add(Mentor.fromJson(v));
       });
     }
     message = json['message'];

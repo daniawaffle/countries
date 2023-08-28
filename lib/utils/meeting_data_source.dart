@@ -1,7 +1,7 @@
 import 'package:countries_app/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
-import '../../models/apointments_model.dart';
+import '../models/apointments_model.dart';
 
 class MeetingDataSource extends CalendarDataSource {
   MeetingDataSource(AppointmentsModel appointmentsModel) {

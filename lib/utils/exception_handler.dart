@@ -13,9 +13,8 @@ class HttpExceptionHandler {
   static HttpResultStatus handleException(dynamic error) {
     if (error is DioException) {
       final response = error.response;
-      print(response!.statusCode);
 
-      switch (response.statusCode) {
+      switch (response!.statusCode) {
         case 401:
         case 402:
         case 403:
@@ -44,14 +43,10 @@ class HttpExceptionHandler {
         break;
       case HttpResultStatus.tooManyRequests:
         errorMessage = "Too many requests. Try again later.";
-
         break;
-
       case HttpResultStatus.serverError:
         errorMessage = "Server error. Try again later.";
-
         break;
-
       default:
         errorMessage = "An undefined error happened.";
     }
