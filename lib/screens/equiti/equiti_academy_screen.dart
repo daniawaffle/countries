@@ -15,15 +15,13 @@ class EquitiAcademyScreen extends StatefulWidget {
 }
 
 class _EquitiAcademyScreenState extends State<EquitiAcademyScreen> {
+  EquitiAcademyBloc bloc = EquitiAcademyBloc();
   @override
   void initState() {
     bloc.getCategories();
     bloc.getMentors(1);
     super.initState();
   }
-
-  EquitiAcademyBloc bloc = EquitiAcademyBloc();
-  int selectedItemIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +41,7 @@ class _EquitiAcademyScreenState extends State<EquitiAcademyScreen> {
                   return ListView.builder(
                     itemCount: bloc.categories.length,
                     itemBuilder: (context, index) {
-                      bool isSelected = index == selectedItemIndex;
+                      bool isSelected = index == bloc.selectedItemIndex;
 
                       return Card(
                           color: isSelected
@@ -55,7 +53,7 @@ class _EquitiAcademyScreenState extends State<EquitiAcademyScreen> {
                           child: InkWell(
                             onTap: () async {
                               setState(() {
-                                selectedItemIndex =
+                                bloc.selectedItemIndex =
                                     index; // Update the selected index
                               });
                               await bloc.getMentors(bloc.categories[index].id!);

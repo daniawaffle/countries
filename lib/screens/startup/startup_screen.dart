@@ -66,7 +66,8 @@ class _StartupScreenState extends State<StartupScreen> {
                 stream: bloc.countriesStreamController.stream,
                 builder: (context, snapshot) {
                   return ListView.builder(
-                    itemCount: snapshot.data!.length,
+                    itemCount:
+                        (snapshot.data == null ? 0 : snapshot.data!.length),
                     itemBuilder: (context, index) {
                       return ListTileWidget(
                         country: snapshot.data![index],
@@ -75,7 +76,8 @@ class _StartupScreenState extends State<StartupScreen> {
                               context,
                               MaterialPageRoute(
                                 builder: (context) => LoginScreen(
-                                    listOfCountries: snapshot.data!, selectedCountry: snapshot.data![index]),
+                                    listOfCountries: snapshot.data!,
+                                    selectedCountry: snapshot.data![index]),
                               ));
                         },
                       );

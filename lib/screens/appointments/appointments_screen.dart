@@ -3,7 +3,6 @@ import 'package:countries_app/screens/appointments/widgets/appointment_bottom_sh
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 import 'appointment_bloc.dart';
-import '../../utils/meeting_data_source.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AppointmentsScreen extends StatefulWidget {
@@ -20,18 +19,7 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
   void initState() {
     super.initState();
 
-    fetchAppointments();
-  }
-
-  fetchAppointments() async {
-    final appointmentsModel = await bloc.getAppointments();
-
-    setState(() {
-      bloc.dataSource = MeetingDataSource(appointmentsModel);
-      bloc.allAppointmentsModel = appointmentsModel;
-    });
-
-    return appointmentsModel;
+    bloc.fetchAppointments();
   }
 
   @override
@@ -48,11 +36,13 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
                 children: [
                   Text(
                     AppLocalizations.of(context)!.appointText,
-                    style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    style: const TextStyle(
+                        fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                   IconButton(
                       onPressed: () async {
-                        await fetchAppointments();
+                        await bloc.fetchAppointments();
+                        setState(() {});
                       },
                       icon: const Icon(Icons.refresh))
                 ],
@@ -66,11 +56,16 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
                 view: CalendarView.month,
                 dataSource: bloc.dataSource,
                 onTap: (calendarTapDetails) async {
-                  if (calendarTapDetails.targetElement == CalendarElement.appointment) {
-                    final Appointment appointment = calendarTapDetails.appointments!.first;
+                  if (calendarTapDetails.targetElement ==
+                      CalendarElement.appointment) {
+                    final Appointment appointment =
+                        calendarTapDetails.appointments!.first;
 
-                    final matchingAppoint = bloc.allAppointmentsModel!.data!.firstWhere(
-                      (app) => app.dateFrom == appointment.startTime && app.dateTo == appointment.endTime,
+                    final matchingAppoint =
+                        bloc.allAppointmentsModel!.data!.firstWhere(
+                      (app) =>
+                          app.dateFrom == appointment.startTime &&
+                          app.dateTo == appointment.endTime,
                     );
 
                     if (context.mounted) {
@@ -82,8 +77,10 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
                     }
                   }
                 },
-                monthViewSettings:
-                    MonthViewSettings(showAgenda: true, appointmentDisplayCount: bloc.dataSource.appointments!.length),
+                monthViewSettings: MonthViewSettings(
+                    showAgenda: true,
+                    appointmentDisplayCount:
+                        bloc.dataSource.appointments!.length),
               ),
             ),
           ],
