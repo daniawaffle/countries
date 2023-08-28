@@ -16,6 +16,8 @@ class VerificationBloc {
 
   OtpFieldController otpController = OtpFieldController();
 
+  String enteredOTP = "";
+
   final ApiService apiService = ApiService();
   final interval = const Duration(seconds: 1);
   final int timerMaxSeconds = 120;
@@ -47,33 +49,17 @@ class VerificationBloc {
       'app_version': '1.0',
     };
 
-    final response =
-        await locator<ApiService>().apiRequest<Map<String, dynamic>>(
-      path: "client-auth-debug",
-      method: 'POST',
+    final response = await locator<ApiService>().apiRequest(
+      path: AppConstants.authMethod,
+      method: AppConstants.postMethod,
       body: body,
     );
 
-    // resendController.loading();
-    // Future.delayed(const Duration(seconds: 2), () {
-    //   resendController.startTimer();
-    // });
-
-    print(LoginApiModel.fromJson(response).loginModel!.lastOtp);
     return LoginApiModel.fromJson(response);
   }
 
-  bool isLoading = false;
-
-  Future<void> login() async {
-    isLoading = true;
-  }
-
   Future<VerifyApiModel> verify(
-      {required String phoneNumber,
-      required int countryId,
-      required int userId,
-      required String lastOTP}) async {
+      {required String phoneNumber, required int countryId, required int userId, required String lastOTP}) async {
     Map<String, dynamic> body = {
       "mobile_number": phoneNumber,
       "user_id": userId,
@@ -86,13 +72,11 @@ class VerificationBloc {
       "api_key": "00101"
     };
 
-    final response =
-        await locator<ApiService>().apiRequest<Map<String, dynamic>>(
-      path: "client-auth-verify",
-      method: 'POST',
+    final response = await locator<ApiService>().apiRequest(
+      path: AppConstants.authVerifyMethod,
+      method: AppConstants.postMethod,
       body: body,
     );
-    print(VerifyApiModel.fromJson(response).verifyModel);
     locator<HiveService>().setValue(
         boxName: AppConstants.hiveBox,
         key: AppConstants.userTokenKey,

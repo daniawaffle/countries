@@ -1,47 +1,36 @@
 import 'package:flutter/material.dart';
 import '../../../constants.dart';
-import '../../../main.dart';
-import '../startup_bloc.dart';
 
-class LanguageButton extends StatefulWidget {
-  const LanguageButton({
-    super.key,
-    required this.startupBloc,
-    required this.localLanguage,
-    required this.label,
-  });
-
-  final StartupBloc startupBloc;
+class LanguageButton extends StatelessWidget {
   final String localLanguage;
   final String label;
-  @override
-  State<LanguageButton> createState() => _LanguageButtonState();
-}
+  final String currentLanguage;
+  final Function() saveLanguage;
 
-class _LanguageButtonState extends State<LanguageButton> {
+  const LanguageButton({
+    super.key,
+    required this.localLanguage,
+    required this.label,
+    required this.currentLanguage,
+    required this.saveLanguage,
+  });
+
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
           minimumSize: const Size(120, 45),
-          backgroundColor: widget.startupBloc.getLan() == widget.localLanguage
-              ? AppConstants.primaryColor
-              : Colors.white,
+          backgroundColor: currentLanguage == localLanguage ? AppConstants.primaryColor : Colors.white,
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.zero,
           )),
-      onPressed: () async {
-        widget.startupBloc.saveLanguageToHive(widget.localLanguage);
-        if (mounted) MainApp.of(context)?.rebuild();
-      },
+      onPressed: () => saveLanguage(),
       child: Text(
-        widget.label,
+        label,
         style: TextStyle(
             fontSize: 17,
             fontWeight: FontWeight.bold,
-            color: widget.startupBloc.getLan() == widget.localLanguage
-                ? AppConstants.secendaryColor
-                : AppConstants.primaryColor),
+            color: currentLanguage == localLanguage ? AppConstants.secendaryColor : AppConstants.primaryColor),
       ),
     );
   }

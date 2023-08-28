@@ -1,6 +1,7 @@
 import 'package:countries_app/constants.dart';
 import 'package:countries_app/models/country_model.dart';
 import 'package:countries_app/screens/verfication/verfication_screen.dart';
+import 'package:flutter/foundation.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -9,28 +10,26 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'login_bloc.dart';
 
 class LoginScreen extends StatefulWidget {
-  final Country country;
-  final List<Country> countries;
-  const LoginScreen(
-      {super.key, required this.country, required this.countries});
+  final Country selectedCountry;
+  final List<Country> listOfCountries;
+  const LoginScreen({super.key, required this.selectedCountry, required this.listOfCountries});
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen>
-    with SingleTickerProviderStateMixin {
-  LoginBLoc loginBLoc = LoginBLoc();
+class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStateMixin {
+  LoginBLoc bloc = LoginBLoc();
 
   late AnimationController _controller;
 
   @override
   void initState() {
     super.initState();
-    loginBLoc.selectedCountry = widget.country;
+    bloc.selectedCountry = widget.selectedCountry;
     _controller = AnimationController(
       vsync: this,
-      duration: const Duration(seconds: 5), // Adjust the duration as needed
+      duration: const Duration(seconds: 5),
     )..repeat();
   }
 
@@ -69,9 +68,9 @@ class _LoginScreenState extends State<LoginScreen>
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       DropdownButton(
-                        value: loginBLoc.selectedCountry,
+                        value: bloc.selectedCountry,
                         icon: const Icon(Icons.keyboard_arrow_down),
-                        items: widget.countries.map((Country country) {
+                        items: widget.listOfCountries.map((Country country) {
                           return DropdownMenuItem<Country>(
                             value: country,
                             child: Text(country.dialCode!),
@@ -79,30 +78,27 @@ class _LoginScreenState extends State<LoginScreen>
                         }).toList(),
                         onChanged: (newValue) {
                           setState(() {
-                            loginBLoc.selectedCountry = newValue!;
+                            bloc.selectedCountry = newValue!;
                           });
                         },
                       ),
                       const SizedBox(width: 16),
                       ValueListenableBuilder<String?>(
-                        valueListenable: loginBLoc.errorMessage,
+                        valueListenable: bloc.errorMessage,
                         builder: (context, errorMessageValue, child) {
                           return Expanded(
                             flex: 8,
                             child: Form(
-                              key: loginBLoc.formKey,
+                              key: bloc.formKey,
                               child: TextFormField(
-                                controller: loginBLoc.numberController,
-                                maxLength: loginBLoc.selectedCountry.maxLength,
+                                controller: bloc.numberController,
+                                maxLength: bloc.selectedCountry!.maxLength,
                                 onChanged: (String value) {
-                                  final validationResult =
-                                      loginBLoc.validateNumber(
+                                  bloc.validateNumber(
                                     value,
-                                    loginBLoc.selectedCountry.minLength!,
+                                    bloc.selectedCountry!.minLength!,
                                   );
-                                  loginBLoc.numberController.text = value;
-                                  loginBLoc.errorMessage.value =
-                                      validationResult; // Update error message
+                                  bloc.numberController.text = value;
                                 },
                                 decoration: InputDecoration(
                                   focusedBorder: OutlineInputBorder(
@@ -118,18 +114,13 @@ class _LoginScreenState extends State<LoginScreen>
                                       width: 2.0,
                                     ),
                                   ),
-                                  labelStyle: TextStyle(
-                                      color: AppConstants.primaryColor),
-                                  labelText: AppLocalizations.of(context)!
-                                      .enterNumText,
+                                  labelStyle: TextStyle(color: AppConstants.primaryColor),
+                                  labelText: AppLocalizations.of(context)!.enterNumText,
                                   border: const OutlineInputBorder(),
-                                  errorText:
-                                      errorMessageValue, // Display error message
+                                  errorText: errorMessageValue,
                                 ),
                                 keyboardType: TextInputType.number,
-                                inputFormatters: <TextInputFormatter>[
-                                  FilteringTextInputFormatter.digitsOnly
-                                ],
+                                inputFormatters: <TextInputFormatter>[FilteringTextInputFormatter.digitsOnly],
                               ),
                             ),
                           );
@@ -139,46 +130,40 @@ class _LoginScreenState extends State<LoginScreen>
                   ),
                 ),
                 const SizedBox(height: 24),
-                ValueListenableBuilder(
-                    valueListenable: loginBLoc.isDisabled,
-                    builder: (context, errorMessageValue, child) {
-                      return loginBLoc.isDisabled.value!
+                ValueListenableBuilder<bool?>(
+                    valueListenable: bloc.showButtonNotifer,
+                    builder: (context, snapshot, child) {
+                      return snapshot!
                           ? Container()
                           : ElevatedButton(
-                              style: ButtonStyle(
-                                  backgroundColor: MaterialStateProperty.all(
-                                      AppConstants.primaryColor)),
+                              style: ButtonStyle(backgroundColor: MaterialStateProperty.all(AppConstants.primaryColor)),
                               onPressed: () async {
                                 try {
-                                  var response = await loginBLoc.login(
-                                      countryId: loginBLoc.selectedCountry.id!,
-                                      phoneNumber:
-                                          loginBLoc.selectedCountry.dialCode! +
-                                              loginBLoc.numberController.text);
+                                  var response = await bloc.login(
+                                      countryId: bloc.selectedCountry!.id!,
+                                      phoneNumber: bloc.selectedCountry!.dialCode! + bloc.numberController.text);
 
                                   if (context.mounted) {
-                                    print(
-                                        'OTP  ${response.loginModel!.lastOtp}');
+                                    if (kDebugMode) {
+                                      print('OTP  ${response.loginModel!.lastOtp}');
+                                    }
 
                                     Navigator.pushReplacement(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) =>
-                                            VerificationScreen(
-                                          loginOTP:
-                                              response.loginModel!.lastOtp!,
-                                          countryId:
-                                              loginBLoc.selectedCountry.id!,
-                                          phoneNumber: loginBLoc
-                                                  .selectedCountry.dialCode! +
-                                              loginBLoc.numberController.text,
+                                        builder: (context) => VerificationScreen(
+                                          loginOTP: response.loginModel!.lastOtp!,
+                                          countryId: bloc.selectedCountry!.id!,
+                                          phoneNumber: bloc.selectedCountry!.dialCode! + bloc.numberController.text,
                                           userId: response.loginModel!.id!,
                                         ),
                                       ),
                                     );
                                   }
                                 } catch (error) {
-                                  print(error);
+                                  if (kDebugMode) {
+                                    print(error);
+                                  }
                                 }
                               },
                               child: Text(

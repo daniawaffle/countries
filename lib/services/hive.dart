@@ -3,15 +3,13 @@ import 'package:hive_flutter/hive_flutter.dart';
 import '../constants.dart';
 
 class HiveService {
-  //  Already open box
   late Box languageBox;
 
   Future<void> openBoxes() async {
     languageBox = await Hive.openBox(AppConstants.hiveBox);
   }
 
-  Future<void> setValue<T>(
-      {required String boxName, required String key, required T value}) async {
+  Future<void> setValue<T>({required String boxName, required String key, required T value}) async {
     switch (boxName) {
       case AppConstants.hiveBox:
         await languageBox.put(key, value);
