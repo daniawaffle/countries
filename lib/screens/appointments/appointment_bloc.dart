@@ -9,7 +9,8 @@ import '../../services/api.dart';
 import '../../services/hive.dart';
 
 class AppointmentsBloc {
-  StreamController<List<Appoint>> appointmentsStreamController = StreamController<List<Appoint>>();
+  StreamController<List<Appoint>> appointmentsStreamController =
+      StreamController<List<Appoint>>();
   final TextEditingController noteTextFieldController = TextEditingController();
   final addNoteFormKey = GlobalKey<FormState>();
   ValueNotifier<String> noteValuesNotifier = ValueNotifier<String>(""); // ?
@@ -18,11 +19,15 @@ class AppointmentsBloc {
   AppointmentsModel? allAppointmentsModel;
 
   String getLan() {
-    return locator<HiveService>().getValue(boxName: AppConstants.hiveBox, key: AppConstants.languageHiveKey) ?? "en";
+    return locator<HiveService>().getValue(
+            boxName: AppConstants.hiveBox, key: AppConstants.languageHiveKey) ??
+        "en";
   }
 
   String _getUserToken() {
-    return locator<HiveService>().getValue(boxName: AppConstants.hiveBox, key: AppConstants.userTokenKey) ?? "";
+    return locator<HiveService>().getValue(
+            boxName: AppConstants.hiveBox, key: AppConstants.userTokenKey) ??
+        "";
   }
 
   Future<AppointmentsModel> getAppointments() async {
@@ -38,7 +43,8 @@ class AppointmentsBloc {
     return AppointmentsModel.fromJson(response);
   }
 
-  static String formatDuration({required DateTime dateFrom, required DateTime dateTo}) {
+  static String formatDuration(
+      {required DateTime dateFrom, required DateTime dateTo}) {
     Duration duration = dateTo.difference(dateFrom);
     if (duration.inMinutes < 60) {
       return '${duration.inMinutes} min';
@@ -62,7 +68,8 @@ class AppointmentsBloc {
     );
   }
 
-  Future<void> addAppointmentNote({required int appointmentID, required String note}) async {
+  Future<void> addAppointmentNote(
+      {required int appointmentID, required String note}) async {
     String? userToken = _getUserToken();
     await locator<ApiService>().apiRequest(
       path: AppConstants.commentMethod,
@@ -88,4 +95,13 @@ class AppointmentsBloc {
   // void updateNoteValuesNotifier(String? note) {
   //   noteValuesNotifier.value = note ?? "";
   // }
+
+  Future fetchAppointments() async {
+    final appointmentsModel = await getAppointments();
+
+    dataSource = MeetingDataSource(appointmentsModel);
+    allAppointmentsModel = appointmentsModel;
+
+    return appointmentsModel;
+  }
 }

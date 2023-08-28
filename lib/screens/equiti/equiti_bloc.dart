@@ -20,6 +20,7 @@ class EquitiAcademyBloc {
       "en";
   List<Category> categories = [];
   List<Mentor> mentors = [];
+  int selectedItemIndex = 0;
 
   Future<List<Category>> getCategories() async {
     final response = await locator<ApiService>().apiRequest(
