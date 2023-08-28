@@ -6,9 +6,12 @@ class AppConstants {
   static const String hiveBox = "languageBox";
   static const String languageHiveKey = "languageKey";
 
-  static const String imageBaseUrl = "https://www.helpera.app/static/countries/";
-  static const String categoryImageBaseUrl = "https://www.helpera.app/static/categories/";
-  static const String mentorImageUrl = "https://www.helpera.app/static/mentorsImg/";
+  static const String imageBaseUrl =
+      "https://www.helpera.app/static/countries/";
+  static const String categoryImageBaseUrl =
+      "https://www.helpera.app/static/categories/";
+  static const String mentorImageUrl =
+      "https://www.helpera.app/static/mentorsImg/";
 
   static const String userTokenKey = 'tokenKey';
 
@@ -19,6 +22,7 @@ class AppConstants {
   static const String cancelAppointmentMethod = "client-appointment/cancel";
 
   static const String commentMethod = "client-appointment/comment";
+  static const String defaultUserImage = "assets/picture-profile.jpeg";
 
   static const String enLocale = "en";
   static const String arLocale = "ar";

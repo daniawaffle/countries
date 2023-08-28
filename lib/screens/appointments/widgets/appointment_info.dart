@@ -9,9 +9,13 @@ import '../appointment_bloc.dart';
 
 class AppointmentInfo extends StatefulWidget {
   final Appoint appoint;
+  final ValueNotifier<String> noteValuesNotifier;
   final AppointmentsBloc appointmentsBloc;
   const AppointmentInfo(
-      {super.key, required this.appoint, required this.appointmentsBloc});
+      {super.key,
+      required this.appoint,
+      required this.appointmentsBloc,
+      required this.noteValuesNotifier});
 
   @override
   State<AppointmentInfo> createState() => AppointmentInfoState();
@@ -138,7 +142,7 @@ class AppointmentInfoState extends State<AppointmentInfo> {
           ),
         ),
         ValueListenableBuilder<String>(
-            valueListenable: widget.appointmentsBloc.noteValuesNotifier,
+            valueListenable: widget.noteValuesNotifier,
             builder: (context, value, child) {
               return Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8),

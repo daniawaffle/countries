@@ -49,6 +49,7 @@ Future<void> showAppoitmentDetails(
                   appoint: appoint,
                 ),
                 AppointmentInfo(
+                  noteValuesNotifier: bloc.noteValuesNotifier,
                   appointmentsBloc: bloc,
                   appoint: appoint,
                 ),
@@ -67,8 +68,11 @@ Future<void> showAppoitmentDetails(
                     onPressed: appoint.state == 1
                         ? () {
                             displayTextInputDialog(
+                                formKey: bloc.addNoteFormKey,
+                                noteController: bloc.noteTextFieldController,
                                 appointment: appoint,
-                                bloc: bloc,
+                                noteValidation: bloc.validateAddNoteField,
+                                addNote: bloc.addAppointmentNote,
                                 context: context);
                           }
                         : null,
@@ -87,7 +91,7 @@ Future<void> showAppoitmentDetails(
                         ? () {
                             showAlertDialog(
                                 context: context,
-                                bloc: bloc,
+                                cancelAppointment: bloc.cancelAppointment,
                                 appoitmentID: appoint.id!);
                           }
                         : null,

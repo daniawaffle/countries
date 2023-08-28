@@ -1,6 +1,7 @@
 import 'package:countries_app/constants.dart';
 import 'package:countries_app/models/apointments_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ClientCard extends StatelessWidget {
   final Appoint appoint;
@@ -42,7 +43,7 @@ class ClientCard extends StatelessWidget {
                               ? const CircleAvatar(
                                   radius: 50,
                                   backgroundImage:
-                                      AssetImage("assets/picture-profile.jpeg"))
+                                      AssetImage(AppConstants.defaultUserImage))
                               : CircleAvatar(
                                   radius: 50,
                                   backgroundImage: NetworkImage(
@@ -75,8 +76,9 @@ class ClientCard extends StatelessWidget {
                         const SizedBox(
                           height: 3,
                         ),
-                        const Text("Gender: Prefer Not To Say"),
-                        const Text("Day of birth: 5/5/2005")
+                        Text(AppLocalizations.of(context)!.genderText),
+                        Text(
+                            "${AppLocalizations.of(context)!.dobText}: 5/5/2005")
                       ],
                     ),
                   )
