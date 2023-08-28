@@ -23,8 +23,8 @@ class MeetingDataSource extends CalendarDataSource {
       startTime: appoint.dateFrom!,
       endTime: appoint.dateTo!,
       subject: 'Meeting with ${appoint.firstName} ${appoint.lastName}',
-      color: AppConstants.primaryColor, // Replace with the appropriate color
-      isAllDay: false, // Modify this as needed
+      color: AppConstants.primaryColor,
+      isAllDay: false,
     );
   }
 

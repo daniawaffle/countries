@@ -31,13 +31,13 @@
             <td class="headerValue">lcov.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
-            <td class="headerCovTableEntry">3</td>
+            <td class="headerCovTableEntryMed">75.0&nbsp;%</td>
+            <td class="headerCovTableEntry">4</td>
             <td class="headerCovTableEntry">3</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2023-08-24 11:06:25</td>
+            <td class="headerValue">2023-08-24 15:37:13</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">-</td>
@@ -62,25 +62,30 @@
 <pre class="source">
 <span id="L1"><span class="lineNum">       1</span>              : import 'package:flutter/material.dart';</span>
 <span id="L2"><span class="lineNum">       2</span>              : </span>
-<span id="L3"><span class="lineNum">       3</span>              : const String baseUrl = &quot;https://www.helpera.app/&quot;;</span>
-<span id="L4"><span class="lineNum">       4</span>              : const String hiveBox = &quot;languageBox&quot;;</span>
-<span id="L5"><span class="lineNum">       5</span>              : const String languageHiveKey = &quot;languageKey&quot;;</span>
-<span id="L6"><span class="lineNum">       6</span>              : const String englishKey = &quot;English&quot;;</span>
-<span id="L7"><span class="lineNum">       7</span>              : const String arabicKey = &quot;Arabic&quot;;</span>
-<span id="L8"><span class="lineNum">       8</span>              : const String imageBaseUrl = &quot;https://www.helpera.app/static/countries/&quot;;</span>
-<span id="L9"><span class="lineNum">       9</span>              : const String categoryImageBaseUrl =</span>
-<span id="L10"><span class="lineNum">      10</span>              :     &quot;https://www.helpera.app/static/categories/&quot;;</span>
-<span id="L11"><span class="lineNum">      11</span>              : </span>
-<span id="L12"><span class="lineNum">      12</span>              : const String userTokenKey = 'tokenKey';</span>
-<span id="L13"><span class="lineNum">      13</span>              : </span>
-<span id="L14"><span class="lineNum">      14</span>              : const String enLocale = &quot;en&quot;;</span>
-<span id="L15"><span class="lineNum">      15</span>              : const String arLocale = &quot;ar&quot;;</span>
-<span id="L16"><span class="lineNum">      16</span>              : const String getMethod = &quot;GET&quot;;</span>
-<span id="L17"><span class="lineNum">      17</span>              : const String postMethod = &quot;POST&quot;;</span>
-<span id="L18"><span class="lineNum">      18</span> <span class="tlaGNC tlaBgGNC">           3 : Color primaryColor = Colors.green.shade700;</span></span>
-<span id="L19"><span class="lineNum">      19</span> <span class="tlaGNC">           3 : Color secendaryColor = Colors.green.shade50;</span></span>
-<span id="L20"><span class="lineNum">      20</span> <span class="tlaGNC">           3 : Color selectedItemColor = Colors.green.shade300;</span></span>
-<span id="L21"><span class="lineNum">      21</span>              : const String mentorImageUrl = &quot;https://www.helpera.app/static/mentorsImg/&quot;;</span>
+<span id="L3"><span class="lineNum">       3</span>              : class AppConstants {</span>
+<span id="L4"><span class="lineNum">       4</span> <span class="tlaUNC tlaBgUNC">           0 :   AppConstants._();</span></span>
+<span id="L5"><span class="lineNum">       5</span>              :   static const String baseUrl = &quot;https://www.helpera.app/&quot;;</span>
+<span id="L6"><span class="lineNum">       6</span>              :   static const String hiveBox = &quot;languageBox&quot;;</span>
+<span id="L7"><span class="lineNum">       7</span>              :   static const String languageHiveKey = &quot;languageKey&quot;;</span>
+<span id="L8"><span class="lineNum">       8</span>              :   static const String englishKey = &quot;English&quot;;</span>
+<span id="L9"><span class="lineNum">       9</span>              :   static const String arabicKey = &quot;Arabic&quot;;</span>
+<span id="L10"><span class="lineNum">      10</span>              :   static const String imageBaseUrl =</span>
+<span id="L11"><span class="lineNum">      11</span>              :       &quot;https://www.helpera.app/static/countries/&quot;;</span>
+<span id="L12"><span class="lineNum">      12</span>              :   static const String categoryImageBaseUrl =</span>
+<span id="L13"><span class="lineNum">      13</span>              :       &quot;https://www.helpera.app/static/categories/&quot;;</span>
+<span id="L14"><span class="lineNum">      14</span>              : </span>
+<span id="L15"><span class="lineNum">      15</span>              :   static const String userTokenKey = 'tokenKey';</span>
+<span id="L16"><span class="lineNum">      16</span>              : </span>
+<span id="L17"><span class="lineNum">      17</span>              :   static const String enLocale = &quot;en&quot;;</span>
+<span id="L18"><span class="lineNum">      18</span>              :   static const String arLocale = &quot;ar&quot;;</span>
+<span id="L19"><span class="lineNum">      19</span>              :   static const String getMethod = &quot;GET&quot;;</span>
+<span id="L20"><span class="lineNum">      20</span>              :   static const String postMethod = &quot;POST&quot;;</span>
+<span id="L21"><span class="lineNum">      21</span> <span class="tlaGNC tlaBgGNC">           3 :   static Color primaryColor = Colors.green.shade700;</span></span>
+<span id="L22"><span class="lineNum">      22</span> <span class="tlaGNC">           3 :   static Color secendaryColor = Colors.green.shade50;</span></span>
+<span id="L23"><span class="lineNum">      23</span> <span class="tlaGNC">           3 :   static Color selectedItemColor = Colors.green.shade300;</span></span>
+<span id="L24"><span class="lineNum">      24</span>              :   static const String mentorImageUrl =</span>
+<span id="L25"><span class="lineNum">      25</span>              :       &quot;https://www.helpera.app/static/mentorsImg/&quot;;</span>
+<span id="L26"><span class="lineNum">      26</span>              : }</span>
         </pre>
               </td>
             </tr>

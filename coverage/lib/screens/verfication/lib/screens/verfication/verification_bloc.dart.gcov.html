@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2023-08-24 11:06:25</td>
+            <td class="headerValue">2023-08-24 15:37:13</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">-</td>
@@ -82,16 +82,16 @@
 <span id="L20"><span class="lineNum">      20</span>              :   final interval = const Duration(seconds: 1);</span>
 <span id="L21"><span class="lineNum">      21</span>              :   final int timerMaxSeconds = 120;</span>
 <span id="L22"><span class="lineNum">      22</span>              : </span>
-<span id="L23"><span class="lineNum">      23</span> <span class="tlaGNC tlaBgGNC">           1 :   String get timerText =&gt;</span></span>
-<span id="L24"><span class="lineNum">      24</span> <span class="tlaGNC">          15 :       '${((timerMaxSeconds - currentSeconds.value) ~/ 60).toString().padLeft(2, '0')}: ${((timerMaxSeconds - currentSeconds.value) % 60).toString().padLeft(2, '0')}';</span></span>
+<span id="L23"><span class="lineNum">      23</span> <span class="tlaGNC tlaBgGNC">           2 :   String get timerText =&gt;</span></span>
+<span id="L24"><span class="lineNum">      24</span> <span class="tlaGNC">          30 :       '${((timerMaxSeconds - currentSeconds.value) ~/ 60).toString().padLeft(2, '0')}: ${((timerMaxSeconds - currentSeconds.value) % 60).toString().padLeft(2, '0')}';</span></span>
 <span id="L25"><span class="lineNum">      25</span>              : </span>
-<span id="L26"><span class="lineNum">      26</span> <span class="tlaGNC">           1 :   void startTimeout() {</span></span>
-<span id="L27"><span class="lineNum">      27</span> <span class="tlaGNC">           1 :     final duration = interval;</span></span>
-<span id="L28"><span class="lineNum">      28</span> <span class="tlaGNC">           2 :     Timer.periodic(duration, (timer) {</span></span>
-<span id="L29"><span class="lineNum">      29</span> <span class="tlaGNC">           3 :       currentSeconds.value = timer.tick;</span></span>
-<span id="L30"><span class="lineNum">      30</span> <span class="tlaGNC">           3 :       if (timer.tick &gt;= timerMaxSeconds) {</span></span>
-<span id="L31"><span class="lineNum">      31</span> <span class="tlaGNC">           1 :         timer.cancel();</span></span>
-<span id="L32"><span class="lineNum">      32</span> <span class="tlaGNC">           2 :         otpButtonVisible.value = true;</span></span>
+<span id="L26"><span class="lineNum">      26</span> <span class="tlaGNC">           2 :   void startTimeout() {</span></span>
+<span id="L27"><span class="lineNum">      27</span> <span class="tlaGNC">           2 :     final duration = interval;</span></span>
+<span id="L28"><span class="lineNum">      28</span> <span class="tlaGNC">           4 :     Timer.periodic(duration, (timer) {</span></span>
+<span id="L29"><span class="lineNum">      29</span> <span class="tlaGNC">           6 :       currentSeconds.value = timer.tick;</span></span>
+<span id="L30"><span class="lineNum">      30</span> <span class="tlaGNC">           6 :       if (timer.tick &gt;= timerMaxSeconds) {</span></span>
+<span id="L31"><span class="lineNum">      31</span> <span class="tlaGNC">           2 :         timer.cancel();</span></span>
+<span id="L32"><span class="lineNum">      32</span> <span class="tlaGNC">           4 :         otpButtonVisible.value = true;</span></span>
 <span id="L33"><span class="lineNum">      33</span>              :       }</span>
 <span id="L34"><span class="lineNum">      34</span>              :     });</span>
 <span id="L35"><span class="lineNum">      35</span>              :   }</span>
@@ -127,8 +127,8 @@
 <span id="L65"><span class="lineNum">      65</span>              : </span>
 <span id="L66"><span class="lineNum">      66</span>              :   bool isLoading = false;</span>
 <span id="L67"><span class="lineNum">      67</span>              : </span>
-<span id="L68"><span class="lineNum">      68</span> <span class="tlaGNC tlaBgGNC">           1 :   Future&lt;void&gt; login() async {</span></span>
-<span id="L69"><span class="lineNum">      69</span> <span class="tlaGNC">           1 :     isLoading = true;</span></span>
+<span id="L68"><span class="lineNum">      68</span> <span class="tlaGNC tlaBgGNC">           2 :   Future&lt;void&gt; login() async {</span></span>
+<span id="L69"><span class="lineNum">      69</span> <span class="tlaGNC">           2 :     isLoading = true;</span></span>
 <span id="L70"><span class="lineNum">      70</span>              :   }</span>
 <span id="L71"><span class="lineNum">      71</span>              : </span>
 <span id="L72"><span class="lineNum">      72</span> <span class="tlaUNC tlaBgUNC">           0 :   Future&lt;VerifyApiModel&gt; verify(</span></span>
@@ -156,8 +156,8 @@
 <span id="L94"><span class="lineNum">      94</span>              :     );</span>
 <span id="L95"><span class="lineNum">      95</span> <span class="tlaUNC">           0 :     print(VerifyApiModel.fromJson(response).verifyModel);</span></span>
 <span id="L96"><span class="lineNum">      96</span> <span class="tlaUNC">           0 :     locator&lt;HiveService&gt;().setValue(</span></span>
-<span id="L97"><span class="lineNum">      97</span>              :         boxName: hiveBox,</span>
-<span id="L98"><span class="lineNum">      98</span>              :         key: userTokenKey,</span>
+<span id="L97"><span class="lineNum">      97</span>              :         boxName: AppConstants.hiveBox,</span>
+<span id="L98"><span class="lineNum">      98</span>              :         key: AppConstants.userTokenKey,</span>
 <span id="L99"><span class="lineNum">      99</span> <span class="tlaUNC">           0 :         value: VerifyApiModel.fromJson(response).verifyModel!.token);</span></span>
 <span id="L100"><span class="lineNum">     100</span>              : </span>
 <span id="L101"><span class="lineNum">     101</span> <span class="tlaUNC">           0 :     return VerifyApiModel.fromJson(response);</span></span>

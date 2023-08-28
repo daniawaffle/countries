@@ -47,7 +47,6 @@ class _BottomSheetNavState extends State<BottomSheetNav> {
               ],
               currentIndex: navBloc.selectedIndex.value,
               onTap: (index) {
-                navBloc.selectedIndex.value = index;
                 navBloc.onItemTapped(index);
               },
             ),

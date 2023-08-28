@@ -6,7 +6,9 @@ enum AppointmentStatus {
   clientCancel(3, "Client Cancel", Colors.red),
   clientMiss(4, "Client Miss", Colors.red),
   mentorMiss(5, "Mentor Miss", Colors.red),
-  completed(6, "Completed", Colors.green);
+  completed(6, "Completed", Colors.green),
+
+  unknown(7, "unknown", Colors.green);
 
   const AppointmentStatus(this.status, this.name, this.textColor);
   final int status;
@@ -15,25 +17,6 @@ enum AppointmentStatus {
 }
 
 class AppointmentStatusConverter {
-  static int getStatusNumber(AppointmentStatus status) {
-    switch (status) {
-      case AppointmentStatus.active:
-        return 1;
-      case AppointmentStatus.mentorCancel:
-        return 2;
-      case AppointmentStatus.clientCancel:
-        return 3;
-      case AppointmentStatus.clientMiss:
-        return 4;
-      case AppointmentStatus.mentorMiss:
-        return 5;
-      case AppointmentStatus.completed:
-        return 6;
-      default:
-        throw Exception("Invalid status: $status");
-    }
-  }
-
   static AppointmentStatus getStatusFromNumber(int number) {
     switch (number) {
       case 1:
