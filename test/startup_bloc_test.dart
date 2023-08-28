@@ -2,9 +2,9 @@ import 'package:countries_app/constants.dart';
 import 'package:countries_app/locater.dart';
 import 'package:countries_app/screens/startup/startup_bloc.dart';
 import 'package:countries_app/services/hive.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:mockito/mockito.dart';
 
 import 'hive_test.mocks.dart';
@@ -17,8 +17,6 @@ Future<void> main() async {
 
   setUpAll(() async {
     mockMethodChannel();
-    Hive.initFlutter();
-
     mockBox = MockBox();
     hiveService = HiveService();
     if (!locator.isRegistered<HiveService>()) {
@@ -67,7 +65,9 @@ Future<void> main() async {
               boxName: AppConstants.hiveBox,
               value: value))
           .thenAnswer((_) => Future.value());
-      startupBloc.saveLanguageToHive(value);
+      BuildContext? context;
+
+      startupBloc.saveLanguageToHive(context, value);
 
       verify(hiveService.setValue<String>(
               key: AppConstants.languageHiveKey,
@@ -80,8 +80,8 @@ Future<void> main() async {
       const value = 'ttt';
 
       final startupBloc = StartupBloc();
-
-      startupBloc.saveLanguageToHive(value);
+      BuildContext? context;
+      startupBloc.saveLanguageToHive(context, value);
 
       verify(mockBox.put(AppConstants.languageHiveKey, value)).called(1);
     });
@@ -91,7 +91,8 @@ Future<void> main() async {
 void mockMethodChannel() {
   const MethodChannel channel =
       MethodChannel('plugins.flutter.io/path_provider');
-  channel.setMockMethodCallHandler((MethodCall methodCall) async {
-    return ".";
+  TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
+      .setMockMethodCallHandler(channel, (method) {
+    return null;
   });
 }

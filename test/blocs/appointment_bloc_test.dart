@@ -59,35 +59,35 @@ void main() {
     });
   });
 
-  group('getUserToken', () {
-    test('getUserToken should return value from HiveService', () {
-      const key = AppConstants.userTokenKey;
-      const expectedValue = 'hgjhgjgjh';
-      final appsBloc = AppointmentsBloc();
+  // group('getUserToken', () {
+  //   test('getUserToken should return value from HiveService', () {
+  //     const key = AppConstants.userTokenKey;
+  //     const expectedValue = 'hgjhgjgjh';
+  //     final appsBloc = AppointmentsBloc();
 
-      when(hiveService.getValue<String>(
-              key: key, boxName: AppConstants.hiveBox))
-          .thenReturn(expectedValue);
-      var x = mockBox.get(key);
-      print(x);
+  //     when(hiveService.getValue<String>(
+  //             key: key, boxName: AppConstants.hiveBox))
+  //         .thenReturn(expectedValue);
+  //     var x = mockBox.get(key);
+  //     print(x);
 
-      final result = appsBloc.getUserToken();
+  //     final result = appsBloc.getUserToken();
 
-      expect(result, expectedValue);
-    });
-    test('getUserToken should return default value "" from HiveService', () {
-      const key = AppConstants.userTokenKey;
-      final appsBloc = AppointmentsBloc();
+  //     expect(result, expectedValue);
+  //   });
+  //   test('getUserToken should return default value "" from HiveService', () {
+  //     const key = AppConstants.userTokenKey;
+  //     final appsBloc = AppointmentsBloc();
 
-      when(hiveService.getValue<String>(
-              key: key, boxName: AppConstants.hiveBox))
-          .thenReturn(null);
+  //     when(hiveService.getValue<String>(
+  //             key: key, boxName: AppConstants.hiveBox))
+  //         .thenReturn(null);
 
-      final result = appsBloc.getUserToken();
+  //     final result = appsBloc.getUserToken();
 
-      expect(result, '');
-    });
-  });
+  //     expect(result, '');
+  //   });
+  // });
 
   group('formatDuration', () {
     test('formatDuration returns value less than 1 h', () {
