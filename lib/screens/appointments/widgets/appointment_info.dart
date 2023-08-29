@@ -1,3 +1,4 @@
+import 'package:countries_app/utils/formater.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -5,17 +6,10 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../enum/appoint_state.dart';
 import '../../../enum/appoint_type.dart';
 import '../../../models/apointments_model.dart';
-import '../appointment_bloc.dart';
 
 class AppointmentInfo extends StatefulWidget {
   final Appoint appoint;
-  final ValueNotifier<String> noteValuesNotifier;
-  final AppointmentsBloc appointmentsBloc;
-  const AppointmentInfo(
-      {super.key,
-      required this.appoint,
-      required this.appointmentsBloc,
-      required this.noteValuesNotifier});
+  const AppointmentInfo({super.key, required this.appoint});
 
   @override
   State<AppointmentInfo> createState() => AppointmentInfoState();
@@ -59,9 +53,7 @@ class AppointmentInfoState extends State<AppointmentInfo> {
             children: <Widget>[
               Text(AppLocalizations.of(context)!.sessionTypeText),
               Text(
-                AppointmentTypeConverter.getTypeFromNumber(
-                        widget.appoint.appointmentType!)
-                    .name,
+                AppointmentTypeConverter.getTypeFromNumber(widget.appoint.appointmentType!).name,
                 style: const TextStyle(fontWeight: FontWeight.bold),
               )
             ],
@@ -87,9 +79,7 @@ class AppointmentInfoState extends State<AppointmentInfo> {
             children: <Widget>[
               Text(AppLocalizations.of(context)!.sessionDurationText),
               Text(
-                AppointmentsBloc.formatDuration(
-                    dateFrom: widget.appoint.dateFrom!,
-                    dateTo: widget.appoint.dateTo!),
+                Formater.formatDuration(dateFrom: widget.appoint.dateFrom!, dateTo: widget.appoint.dateTo!),
                 style: const TextStyle(fontWeight: FontWeight.bold),
               )
             ],
@@ -102,13 +92,9 @@ class AppointmentInfoState extends State<AppointmentInfo> {
             children: <Widget>[
               Text(AppLocalizations.of(context)!.sessionStatus),
               Text(
-                AppointmentStatusConverter.getStatusFromNumber(
-                        widget.appoint.state!)
-                    .name,
+                AppointmentStatusConverter.getStatusFromNumber(widget.appoint.state!).name,
                 style: TextStyle(
-                    color: AppointmentStatusConverter.getStatusFromNumber(
-                            widget.appoint.state!)
-                        .textColor,
+                    color: AppointmentStatusConverter.getStatusFromNumber(widget.appoint.state!).textColor,
                     fontWeight: FontWeight.bold),
               )
             ],
@@ -124,16 +110,14 @@ class AppointmentInfoState extends State<AppointmentInfo> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: <Widget>[
                   Text(
-                    "${widget.appoint.priceBeforeDiscount} ${AppLocalizations.of(context)!.jdText}"
-                        .toString(),
+                    "${widget.appoint.priceBeforeDiscount} ${AppLocalizations.of(context)!.jdText}".toString(),
                     style: const TextStyle(
                       color: Colors.grey,
                       decoration: TextDecoration.lineThrough,
                     ),
                   ),
                   Text(
-                    " ${widget.appoint.priceAfterDiscount} ${AppLocalizations.of(context)!.jdText}"
-                        .toString(),
+                    " ${widget.appoint.priceAfterDiscount} ${AppLocalizations.of(context)!.jdText}".toString(),
                     style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
                 ],
@@ -141,30 +125,21 @@ class AppointmentInfoState extends State<AppointmentInfo> {
             ],
           ),
         ),
-        ValueListenableBuilder<String>(
-            valueListenable: widget.noteValuesNotifier,
-            builder: (context, value, child) {
-              return Padding(
-                padding: const EdgeInsets.symmetric(vertical: 8),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Text(AppLocalizations.of(context)!.clientNoteText),
-                    Text(
-                      widget.appoint.noteFromClient ??
-                          AppLocalizations.of(context)!.noNotesToShowText,
-                      style: TextStyle(
-                          color: widget.appoint.noteFromClient == null
-                              ? Colors.grey
-                              : Colors.black,
-                          fontWeight: widget.appoint.noteFromClient == null
-                              ? FontWeight.normal
-                              : FontWeight.bold),
-                    )
-                  ],
-                ),
-              );
-            }),
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Text(AppLocalizations.of(context)!.clientNoteText),
+              Text(
+                widget.appoint.noteFromClient ?? AppLocalizations.of(context)!.noNotesToShowText,
+                style: TextStyle(
+                    color: widget.appoint.noteFromClient == null ? Colors.grey : Colors.black,
+                    fontWeight: widget.appoint.noteFromClient == null ? FontWeight.normal : FontWeight.bold),
+              )
+            ],
+          ),
+        ),
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 8),
           child: Row(
@@ -172,15 +147,10 @@ class AppointmentInfoState extends State<AppointmentInfo> {
             children: <Widget>[
               Text(AppLocalizations.of(context)!.mentorNoteText),
               Text(
-                widget.appoint.noteFromMentor ??
-                    AppLocalizations.of(context)!.noNotesToShowText,
+                widget.appoint.noteFromMentor ?? AppLocalizations.of(context)!.noNotesToShowText,
                 style: TextStyle(
-                    color: widget.appoint.noteFromMentor == null
-                        ? Colors.grey
-                        : Colors.black,
-                    fontWeight: widget.appoint.noteFromMentor == null
-                        ? FontWeight.normal
-                        : FontWeight.bold),
+                    color: widget.appoint.noteFromMentor == null ? Colors.grey : Colors.black,
+                    fontWeight: widget.appoint.noteFromMentor == null ? FontWeight.normal : FontWeight.bold),
               )
             ],
           ),

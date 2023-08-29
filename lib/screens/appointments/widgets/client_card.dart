@@ -19,7 +19,6 @@ class ClientCard extends StatelessWidget {
               color: AppConstants.primaryColor,
             ),
           ),
-          // margin: const EdgeInsets.all(10),
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Row(
@@ -32,29 +31,21 @@ class ClientCard extends StatelessWidget {
                     width: 80,
                     child: Stack(
                       fit: StackFit.loose,
-
-                      // alignment: Alignment.center,
                       children: [
                         Card(
                           elevation: 0,
                           color: AppConstants.secendaryColor,
-                          child: (appoint.profileImg == null ||
-                                  appoint.profileImg == "")
+                          child: (appoint.profileImg == null || appoint.profileImg == "")
                               ? const CircleAvatar(
-                                  radius: 50,
-                                  backgroundImage:
-                                      AssetImage(AppConstants.defaultUserImage))
+                                  radius: 50, backgroundImage: AssetImage(AppConstants.defaultUserImage))
                               : CircleAvatar(
                                   radius: 50,
-                                  backgroundImage: NetworkImage(
-                                      '${AppConstants.mentorImageUrl}${appoint.profileImg}')),
+                                  backgroundImage: NetworkImage('${AppConstants.mentorImageUrl}${appoint.profileImg}')),
                         ),
                         Align(
-                          alignment: Alignment
-                              .bottomLeft, // Adjust the right position as needed
+                          alignment: Alignment.bottomLeft, // Adjust the right position as needed
                           child: Container(
-                            padding: const EdgeInsets.only(
-                                right: 20.0, left: 20, bottom: 10),
+                            padding: const EdgeInsets.only(right: 20.0, left: 20, bottom: 10),
                             child: const CircleAvatar(
                               radius: 9.0,
                               backgroundColor: Colors.transparent,
@@ -77,8 +68,7 @@ class ClientCard extends StatelessWidget {
                           height: 3,
                         ),
                         Text(AppLocalizations.of(context)!.genderText),
-                        Text(
-                            "${AppLocalizations.of(context)!.dobText}: 5/5/2005")
+                        Text("${AppLocalizations.of(context)!.dobText}: 5/5/2005")
                       ],
                     ),
                   )
