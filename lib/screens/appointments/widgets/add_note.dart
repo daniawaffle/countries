@@ -4,6 +4,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 Future<void> displayTextInputDialog(
     {required BuildContext context,
+    required ValueNotifier<String> noteValuesNotifier,
     required Appoint appointment,
     required Function({required int appointmentID, required String note})
         addNote,
@@ -50,6 +51,7 @@ Future<void> displayTextInputDialog(
                             note: noteController.text)
                         .then((value) {
                       appointment.noteFromClient = noteController.text;
+                      noteValuesNotifier.value = noteController.text;
                     });
                     Navigator.pop(context);
                   }

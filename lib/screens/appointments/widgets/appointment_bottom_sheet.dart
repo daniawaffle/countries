@@ -68,6 +68,7 @@ Future<void> showAppoitmentDetails(
                     onPressed: appoint.state == 1
                         ? () {
                             displayTextInputDialog(
+                                noteValuesNotifier: bloc.noteValuesNotifier,
                                 formKey: bloc.addNoteFormKey,
                                 noteController: bloc.noteTextFieldController,
                                 appointment: appoint,
@@ -90,6 +91,7 @@ Future<void> showAppoitmentDetails(
                     onPressed: appoint.state == 1
                         ? () {
                             showAlertDialog(
+                                fetchAppointments: bloc.fetchAppointments,
                                 context: context,
                                 cancelAppointment: bloc.cancelAppointment,
                                 appoitmentID: appoint.id!);

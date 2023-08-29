@@ -1,9 +1,9 @@
-import 'package:countries_app/screens/appointments/appointments_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 Future<void> showAlertDialog(
     {required Function(int id) cancelAppointment,
+    required Function() fetchAppointments,
     required int appoitmentID,
     required BuildContext context}) async {
   return showDialog<void>(
@@ -31,12 +31,8 @@ Future<void> showAlertDialog(
             onPressed: () {
               cancelAppointment(appoitmentID);
               int count = 0;
-
-              Navigator.of(context).popUntil((_) => count++ >= 3);
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const AppointmentsScreen()));
+              fetchAppointments();
+              Navigator.of(context).popUntil((_) => count++ >= 2);
             },
           ),
         ],
