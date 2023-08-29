@@ -1,6 +1,5 @@
 import 'package:countries_app/constants.dart';
 import 'package:countries_app/locater.dart';
-import 'package:countries_app/screens/main_container/main_container.dart';
 import 'package:countries_app/screens/startup/startup_screen.dart';
 import 'package:countries_app/services/hive.dart';
 import 'package:flutter/material.dart';
@@ -45,7 +44,7 @@ class MainAppState extends State<MainApp> {
         Locale(AppConstants.arLocale),
       ],
       debugShowCheckedModeBanner: false,
-      home: const MainContainer(),
+      home: const StartupScreen(),
     );
   }
 
