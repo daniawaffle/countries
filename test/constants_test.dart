@@ -1,6 +1,6 @@
 import 'package:countries_app/constants.dart';
-import 'package:test/test.dart';
-import 'package:flutter/material.dart'; // You might not need this import for the variables themselves
+import 'package:flutter/material.dart';
+import 'package:flutter_test/flutter_test.dart'; // You might not need this import for the variables themselves
 
 void main() {
   test('Check colors are assigned correctly', () {

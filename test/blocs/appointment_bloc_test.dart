@@ -2,6 +2,7 @@ import 'package:countries_app/constants.dart';
 import 'package:countries_app/locater.dart';
 import 'package:countries_app/screens/appointments/appointment_bloc.dart';
 import 'package:countries_app/services/hive.dart';
+import 'package:flutter/foundation.dart';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -39,7 +40,9 @@ void main() {
               key: key, boxName: AppConstants.hiveBox))
           .thenReturn(expectedValue);
       var x = mockBox.get(key);
-      print(x);
+      if (kDebugMode) {
+        print(x);
+      }
 
       final result = appsBloc.getLan();
 

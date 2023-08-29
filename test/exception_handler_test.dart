@@ -1,6 +1,6 @@
 import 'package:countries_app/utils/exception_handler.dart';
-import 'package:test/test.dart';
-import 'package:dio/dio.dart'; // Import DioException if not already imported
+import 'package:dio/dio.dart';
+import 'package:flutter_test/flutter_test.dart'; // Import DioException if not already imported
 
 void main() {
   test('handleException should return correct HttpResultStatus', () {

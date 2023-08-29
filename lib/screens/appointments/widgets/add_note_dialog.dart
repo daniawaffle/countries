@@ -26,8 +26,9 @@ Future<void> addNoteDialog(
               decoration: InputDecoration(
                 hintText: AppLocalizations.of(context)!.addNotesText,
               ),
-              validator: (value) =>
-                  noteValidation(note: value!) ? null : AppLocalizations.of(context)!.alertEmptyNoteText,
+              validator: (value) => noteValidation(note: value!)
+                  ? null
+                  : AppLocalizations.of(context)!.alertEmptyNoteText,
             ),
             actions: <Widget>[
               MaterialButton(
@@ -45,7 +46,7 @@ Future<void> addNoteDialog(
                 onPressed: () {
                   if (addNoteFormKey.currentState!.validate()) {
                     addNote(appointment.id!, noteController.text);
-
+                    Navigator.pop(context);
                     Navigator.pop(context);
                   }
                 },
