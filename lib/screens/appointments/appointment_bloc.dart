@@ -11,6 +11,8 @@ import '../../services/hive.dart';
 class AppointmentsBloc {
   StreamController<List<Appoint>> appointmentsStreamController =
       StreamController<List<Appoint>>();
+  StreamController<AppointmentsModel> appointmentModelStreamController =
+      StreamController<AppointmentsModel>();
   final TextEditingController noteTextFieldController = TextEditingController();
   final addNoteFormKey = GlobalKey<FormState>();
   ValueNotifier<String> noteValuesNotifier = ValueNotifier<String>(""); // ?
@@ -101,7 +103,7 @@ class AppointmentsBloc {
 
     dataSource = MeetingDataSource(appointmentsModel);
     allAppointmentsModel = appointmentsModel;
-
+    appointmentModelStreamController.sink.add(appointmentsModel);
     return appointmentsModel;
   }
 }

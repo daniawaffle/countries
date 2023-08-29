@@ -1,5 +1,5 @@
 import 'package:countries_app/constants.dart';
-import 'package:flutter/material.dart';
+
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 import '../models/apointments_model.dart';
 
@@ -26,30 +26,5 @@ class MeetingDataSource extends CalendarDataSource {
       color: AppConstants.primaryColor, // Replace with the appropriate color
       isAllDay: false, // Modify this as needed
     );
-  }
-
-  @override
-  DateTime getStartTime(int index) {
-    return appointments![index].startTime;
-  }
-
-  @override
-  DateTime getEndTime(int index) {
-    return appointments![index].endTime;
-  }
-
-  @override
-  String getSubject(int index) {
-    return appointments![index].subject;
-  }
-
-  @override
-  Color getColor(int index) {
-    return appointments![index].color;
-  }
-
-  @override
-  bool isAllDay(int index) {
-    return appointments![index].isAllDay;
   }
 }
