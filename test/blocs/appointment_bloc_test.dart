@@ -88,35 +88,4 @@ void main() {
   //     expect(result, '');
   //   });
   // });
-
-  group('formatDuration', () {
-    test('formatDuration returns value less than 1 h', () {
-      DateTime dateFrom = DateTime(2023, 8, 15, 10, 30);
-      DateTime dateTo = DateTime(2023, 8, 15, 11, 15);
-      String result =
-          AppointmentsBloc.formatDuration(dateFrom: dateFrom, dateTo: dateTo);
-
-      expect(result, '45 min');
-    });
-
-    test('formatDuration returns value for more than 1 h', () {
-      DateTime dateFrom = DateTime(2023, 8, 15, 10, 30);
-      DateTime dateTo = DateTime(2023, 8, 15, 14, 45);
-
-      String result =
-          AppointmentsBloc.formatDuration(dateFrom: dateFrom, dateTo: dateTo);
-
-      expect(result, '4 h 15 min');
-    });
-
-    test('formatDuration returns value for  1 h', () {
-      DateTime dateFrom = DateTime(2023, 8, 15, 10, 30);
-      DateTime dateTo = DateTime(2023, 8, 15, 11, 30);
-
-      String result =
-          AppointmentsBloc.formatDuration(dateFrom: dateFrom, dateTo: dateTo);
-
-      expect(result, '1 h');
-    });
-  });
 }

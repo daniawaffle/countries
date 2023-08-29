@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-Future<void> showAlertDialog(
-    {required Function(int id) cancelAppointment,
-    required Function() fetchAppointments,
-    required int appoitmentID,
-    required BuildContext context}) async {
+Future<void> showAlertDialog({
+  required int appoitmentID,
+  required BuildContext context,
+  required Function() cancelAppointment,
+}) async {
   return showDialog<void>(
     context: context,
     barrierDismissible: false, // user must tap button!
@@ -29,9 +29,8 @@ Future<void> showAlertDialog(
           TextButton(
             child: Text(AppLocalizations.of(context)!.yesText),
             onPressed: () {
-              cancelAppointment(appoitmentID);
+              cancelAppointment();
               int count = 0;
-              fetchAppointments();
               Navigator.of(context).popUntil((_) => count++ >= 2);
             },
           ),
