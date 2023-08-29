@@ -13,18 +13,21 @@ class MainContainer extends StatefulWidget {
 }
 
 class _MainContainerState extends State<MainContainer> {
-  final List<Widget> _pages = [const EquitiAcademyScreen(), const AppointmentsScreen()];
+  final List<Widget> _pages = [
+    const EquitiAcademyScreen(),
+    const AppointmentsScreen()
+  ];
 
-  int index = 0;
+  int currentIndex = 0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _pages[index],
+      body: _pages[currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         selectedItemColor: AppConstants.primaryColor,
         selectedIconTheme: IconThemeData(color: AppConstants.primaryColor),
-        currentIndex: index,
+        currentIndex: currentIndex,
         items: [
           BottomNavigationBarItem(
             icon: const Icon(Icons.home),
@@ -33,7 +36,7 @@ class _MainContainerState extends State<MainContainer> {
           const BottomNavigationBarItem(icon: Icon(Icons.menu), label: ''),
         ],
         onTap: (index) {
-          index = index;
+          currentIndex = index;
           setState(() {});
         },
       ),

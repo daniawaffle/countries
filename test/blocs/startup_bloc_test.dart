@@ -4,7 +4,6 @@ import 'package:countries_app/screens/startup/startup_bloc.dart';
 import 'package:countries_app/services/hive.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:mockito/mockito.dart';
 
 import '../hive_test.mocks.dart';
