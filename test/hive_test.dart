@@ -1,4 +1,5 @@
 import 'package:countries_app/constants.dart';
+import 'package:countries_app/locater.dart';
 import 'package:countries_app/services/hive.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -22,9 +23,13 @@ void main() {
 
     mockBox = MockBox();
     mockHiveService = MockHiveService();
+    locator.registerSingleton<HiveService>(MockHiveService());
+
+    mockHiveService.languageBox = mockBox;
   });
   test('box is open', () async {
     await mockHiveService.openBoxes();
+    // when(mockHiveService.openBoxes()).thenReturn(true);
     expect(mockHiveService.languageBox.isOpen, true);
   });
   test('setValue should put value in the box', () async {
