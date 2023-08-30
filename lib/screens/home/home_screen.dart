@@ -7,15 +7,15 @@ import 'equiti_bloc.dart';
 import 'widgets/mentor_list_widget.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class EquitiAcademyScreen extends StatefulWidget {
-  const EquitiAcademyScreen({super.key});
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
 
   @override
-  State<EquitiAcademyScreen> createState() => _EquitiAcademyScreenState();
+  State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _EquitiAcademyScreenState extends State<EquitiAcademyScreen> {
-  EquitiAcademyBloc bloc = EquitiAcademyBloc();
+class _HomeScreenState extends State<HomeScreen> {
+  HomeBloc bloc = HomeBloc();
   @override
   void initState() {
     bloc.getCategories();

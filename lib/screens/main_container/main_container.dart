@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../constants.dart';
 import '../appointments/appointments_screen.dart';
-import '../equiti/equiti_academy_screen.dart';
+import '../home/home_screen.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class MainContainer extends StatefulWidget {
@@ -13,10 +13,7 @@ class MainContainer extends StatefulWidget {
 }
 
 class _MainContainerState extends State<MainContainer> {
-  final List<Widget> _pages = [
-    const EquitiAcademyScreen(),
-    const AppointmentsScreen()
-  ];
+  final List<Widget> _pages = [const HomeScreen(), const AppointmentsScreen()];
 
   int currentIndex = 0;
 

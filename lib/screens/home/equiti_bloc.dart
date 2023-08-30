@@ -9,7 +9,7 @@ import '../../models/mentor_model.dart';
 import '../../services/api.dart';
 import '../../services/hive.dart';
 
-class EquitiAcademyBloc {
+class HomeBloc {
   StreamController<List<Category>> categoriesStreamController =
       StreamController<List<Category>>();
   StreamController<List<Mentor>> mentorsStreamController =
