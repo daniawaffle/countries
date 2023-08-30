@@ -18,11 +18,10 @@ class EquitiAcademyBloc {
   String? language = locator<HiveService>().getValue(
           boxName: AppConstants.hiveBox, key: AppConstants.languageHiveKey) ??
       "en";
-  List<Category> categories = [];
-  List<Mentor> mentors = [];
+
   int selectedItemIndex = 0;
 
-  Future<List<Category>> getCategories() async {
+  Future<void> getCategories() async {
     final response = await locator<ApiService>().apiRequest(
       path: "categories",
       method: AppConstants.getMethod,
@@ -33,13 +32,11 @@ class EquitiAcademyBloc {
 
     CategoriesModel categoriesModel = CategoriesModel.fromJson(response);
     if (categoriesModel.categoryData != null) {
-      categories = categoriesModel.categoryData!;
+      categoriesStreamController.sink.add(categoriesModel.categoryData!);
     }
-    categoriesStreamController.sink.add(categories);
-    return categories;
   }
 
-  Future<List<Mentor>> getMentors(int categoryID) async {
+  Future<void> getMentors(int categoryID) async {
     final response = await locator<ApiService>().apiRequest(
       path: "mentor-list",
       method: AppConstants.getMethod,
@@ -51,9 +48,7 @@ class EquitiAcademyBloc {
 
     MentorsModel mentorsModel = MentorsModel.fromJson(response);
     if (mentorsModel.mentors != null) {
-      mentors = mentorsModel.mentors!;
+      mentorsStreamController.sink.add(mentorsModel.mentors!);
     }
-    mentorsStreamController.sink.add(mentors);
-    return mentors;
   }
 }

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../models/mentor_model.dart';
+import '../../../models/mentor_model.dart';
 
 class MentorCard extends StatelessWidget {
   final Mentor mentor;

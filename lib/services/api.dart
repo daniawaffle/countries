@@ -2,6 +2,7 @@ import 'package:countries_app/constants.dart';
 import 'package:countries_app/utils/exception_handler.dart';
 
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 
 class ApiService {
   final Dio _dio = Dio(BaseOptions(baseUrl: AppConstants.baseUrl));
@@ -16,9 +17,11 @@ class ApiService {
       Response response;
 
       if (method == AppConstants.getMethod) {
-        response = await _dio.get(path, options: options, queryParameters: queryParameters);
+        response = await _dio.get(path,
+            options: options, queryParameters: queryParameters);
       } else if (method == AppConstants.postMethod) {
-        response = await _dio.post(path, data: body, options: options, queryParameters: queryParameters);
+        response = await _dio.post(path,
+            data: body, options: options, queryParameters: queryParameters);
       } else {
         throw Exception('Unsupported HTTP method: $method');
       }
@@ -30,7 +33,10 @@ class ApiService {
       }
     } catch (e) {
       var tt = HttpExceptionHandler.handleException(e);
-      throw Exception(HttpExceptionHandler.generateExceptionMessage(tt));
+
+      if (kDebugMode) {
+        print(Exception(HttpExceptionHandler.generateExceptionMessage(tt)));
+      }
     }
   }
 }
