@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../constants.dart';
 
-import 'equiti_bloc.dart';
+import 'home_bloc.dart';
 import 'widgets/mentor_list_widget.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
