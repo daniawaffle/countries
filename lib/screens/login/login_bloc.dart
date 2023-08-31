@@ -20,6 +20,7 @@ class LoginBLoc {
   validateNumber(String value, int minLen) {
     if (value.length != minLen) {
       errorMessage.value = 'Please enter $minLen digits number';
+      showButtonNotifer.value = true;
     } else {
       showButtonNotifer.value = false;
       errorMessage.value = null;

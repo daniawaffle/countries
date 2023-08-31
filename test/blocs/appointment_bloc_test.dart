@@ -3,12 +3,11 @@ import 'package:countries_app/locater.dart';
 import 'package:countries_app/screens/appointments/appointment_bloc.dart';
 import 'package:countries_app/services/hive.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:mockito/mockito.dart';
-
-import '../hive_test.dart';
 
 import '../hive_test.mocks.dart';
 
@@ -91,4 +90,13 @@ void main() {
   //     expect(result, '');
   //   });
   // });
+}
+
+void mockMethodChannel() {
+  const MethodChannel channel =
+      MethodChannel('plugins.flutter.io/path_provider');
+  TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
+      .setMockMethodCallHandler(channel, (method) {
+    return null;
+  });
 }
