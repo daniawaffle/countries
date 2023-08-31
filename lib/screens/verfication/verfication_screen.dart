@@ -28,14 +28,6 @@ class VerificationScreen extends StatefulWidget {
 class _VerificationScreenState extends State<VerificationScreen> {
   VerificationBloc bloc = VerificationBloc();
 
-  void sendOtp() {
-    bloc.requestNewOtp(
-        phoneNumber: widget.phoneNumber, countryId: widget.countryId);
-    bloc.otpButtonVisible.value = false;
-    bloc.currentSeconds.value = 0;
-    bloc.startTimeout();
-  }
-
   // String otpp = '';
   @override
   Widget build(BuildContext context) {
@@ -101,14 +93,21 @@ class _VerificationScreenState extends State<VerificationScreen> {
                           style: ButtonStyle(
                               backgroundColor: MaterialStateProperty.all(
                                   AppConstants.primaryColor)),
-                          onPressed: sendOtp,
+                          onPressed: () {
+                            bloc.sendOtp(widget.phoneNumber, widget.countryId);
+                          },
                           child:
                               Text(AppLocalizations.of(context)!.resendOtpText),
                         )
-                      : Text(
-                          bloc.timerText,
-                          style: const TextStyle(fontSize: 15),
-                        );
+                      : ValueListenableBuilder(
+                          valueListenable: bloc.currentSeconds,
+                          builder: (BuildContext context, int counterValue,
+                              Widget? child) {
+                            return Text(
+                              bloc.timerText,
+                              style: const TextStyle(fontSize: 15),
+                            );
+                          });
                 },
               )
             ],

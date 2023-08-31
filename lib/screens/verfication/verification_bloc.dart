@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:countries_app/constants.dart';
 import 'package:countries_app/models/verify_model.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:otp_text_field/otp_field.dart';
@@ -25,6 +26,14 @@ class VerificationBloc {
 
   String get timerText =>
       '${((timerMaxSeconds - currentSeconds.value) ~/ 60).toString().padLeft(2, '0')}: ${((timerMaxSeconds - currentSeconds.value) % 60).toString().padLeft(2, '0')}';
+
+  void sendOtp(String phoneNumber, int countryId) async {
+    requestNewOtp(phoneNumber: phoneNumber, countryId: countryId);
+
+    otpButtonVisible.value = false;
+    currentSeconds.value = 0;
+    startTimeout();
+  }
 
   void startTimeout() {
     final duration = interval;
@@ -55,7 +64,9 @@ class VerificationBloc {
       method: AppConstants.postMethod,
       body: body,
     );
-
+    if (kDebugMode) {
+      print('OTP  ${LoginApiModel.fromJson(response).loginModel!.lastOtp}');
+    }
     return LoginApiModel.fromJson(response);
   }
 
