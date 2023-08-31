@@ -29,7 +29,8 @@ class _VerificationScreenState extends State<VerificationScreen> {
   VerificationBloc bloc = VerificationBloc();
 
   void sendOtp() {
-    bloc.requestNewOtp(phoneNumber: widget.phoneNumber, countryId: widget.countryId);
+    bloc.requestNewOtp(
+        phoneNumber: widget.phoneNumber, countryId: widget.countryId);
     bloc.otpButtonVisible.value = false;
     bloc.currentSeconds.value = 0;
     bloc.startTimeout();
@@ -71,14 +72,18 @@ class _VerificationScreenState extends State<VerificationScreen> {
                 height: 20,
               ),
               ElevatedButton(
-                style: ButtonStyle(backgroundColor: MaterialStateProperty.all(AppConstants.primaryColor)),
+                style: ButtonStyle(
+                    backgroundColor:
+                        MaterialStateProperty.all(AppConstants.primaryColor)),
                 onPressed: () async {
                   var response = await bloc.verify(
                       phoneNumber: widget.phoneNumber,
                       countryId: widget.countryId,
                       userId: widget.userId,
                       lastOTP: bloc.enteredOTP);
-                  if (context.mounted && response.verifyModel != null) {
+                  if (context.mounted &&
+                      response != null &&
+                      response.verifyModel != null) {
                     Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
@@ -93,9 +98,12 @@ class _VerificationScreenState extends State<VerificationScreen> {
                 builder: (context, isVisible, child) {
                   return isVisible
                       ? ElevatedButton(
-                          style: ButtonStyle(backgroundColor: MaterialStateProperty.all(AppConstants.primaryColor)),
+                          style: ButtonStyle(
+                              backgroundColor: MaterialStateProperty.all(
+                                  AppConstants.primaryColor)),
                           onPressed: sendOtp,
-                          child: Text(AppLocalizations.of(context)!.resendOtpText),
+                          child:
+                              Text(AppLocalizations.of(context)!.resendOtpText),
                         )
                       : Text(
                           bloc.timerText,

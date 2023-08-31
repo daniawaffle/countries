@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:countries_app/constants.dart';
 import 'package:countries_app/models/verify_model.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:otp_text_field/otp_field.dart';
 
 import '../../locater.dart';
@@ -58,8 +59,11 @@ class VerificationBloc {
     return LoginApiModel.fromJson(response);
   }
 
-  Future<VerifyApiModel> verify(
-      {required String phoneNumber, required int countryId, required int userId, required String lastOTP}) async {
+  Future<VerifyApiModel?> verify(
+      {required String phoneNumber,
+      required int countryId,
+      required int userId,
+      required String lastOTP}) async {
     Map<String, dynamic> body = {
       "mobile_number": phoneNumber,
       "user_id": userId,
@@ -77,11 +81,21 @@ class VerificationBloc {
       method: AppConstants.postMethod,
       body: body,
     );
-    locator<HiveService>().setValue(
-        boxName: AppConstants.hiveBox,
-        key: AppConstants.userTokenKey,
-        value: VerifyApiModel.fromJson(response).verifyModel!.token);
+    if (response == null) {
+      Fluttertoast.showToast(
+          msg: "Wrong OTP",
+          toastLength: Toast.LENGTH_LONG,
+          gravity: ToastGravity.BOTTOM,
+          backgroundColor: AppConstants.primaryColor,
+          textColor: Colors.white);
+      return null;
+    } else {
+      locator<HiveService>().setValue(
+          boxName: AppConstants.hiveBox,
+          key: AppConstants.userTokenKey,
+          value: VerifyApiModel.fromJson(response).verifyModel!.token);
 
-    return VerifyApiModel.fromJson(response);
+      return VerifyApiModel.fromJson(response);
+    }
   }
 }
