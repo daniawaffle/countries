@@ -47,6 +47,7 @@ class _StartupScreenState extends State<StartupScreen> {
                     localLanguage: AppConstants.enLocale,
                     saveLanguage: () {
                       bloc.saveLanguageToHive(context, AppConstants.enLocale);
+                      bloc.getCountries();
                     },
                   ),
                   LanguageButton(
@@ -55,6 +56,7 @@ class _StartupScreenState extends State<StartupScreen> {
                     localLanguage: AppConstants.arLocale,
                     saveLanguage: () {
                       bloc.saveLanguageToHive(context, AppConstants.arLocale);
+                      bloc.getCountries();
                     },
                   ),
                 ],

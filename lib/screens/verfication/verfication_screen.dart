@@ -28,13 +28,6 @@ class VerificationScreen extends StatefulWidget {
 class _VerificationScreenState extends State<VerificationScreen> {
   VerificationBloc bloc = VerificationBloc();
 
-  void sendOtp() {
-    bloc.requestNewOtp(phoneNumber: widget.phoneNumber, countryId: widget.countryId);
-    bloc.otpButtonVisible.value = false;
-    bloc.currentSeconds.value = 0;
-    bloc.startTimeout();
-  }
-
   // String otpp = '';
   @override
   Widget build(BuildContext context) {
@@ -71,14 +64,18 @@ class _VerificationScreenState extends State<VerificationScreen> {
                 height: 20,
               ),
               ElevatedButton(
-                style: ButtonStyle(backgroundColor: MaterialStateProperty.all(AppConstants.primaryColor)),
+                style: ButtonStyle(
+                    backgroundColor:
+                        MaterialStateProperty.all(AppConstants.primaryColor)),
                 onPressed: () async {
                   var response = await bloc.verify(
                       phoneNumber: widget.phoneNumber,
                       countryId: widget.countryId,
                       userId: widget.userId,
                       lastOTP: bloc.enteredOTP);
-                  if (context.mounted && response.verifyModel != null) {
+                  if (context.mounted &&
+                      response != null &&
+                      response.verifyModel != null) {
                     Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
@@ -93,14 +90,24 @@ class _VerificationScreenState extends State<VerificationScreen> {
                 builder: (context, isVisible, child) {
                   return isVisible
                       ? ElevatedButton(
-                          style: ButtonStyle(backgroundColor: MaterialStateProperty.all(AppConstants.primaryColor)),
-                          onPressed: sendOtp,
-                          child: Text(AppLocalizations.of(context)!.resendOtpText),
+                          style: ButtonStyle(
+                              backgroundColor: MaterialStateProperty.all(
+                                  AppConstants.primaryColor)),
+                          onPressed: () {
+                            bloc.sendOtp(widget.phoneNumber, widget.countryId);
+                          },
+                          child:
+                              Text(AppLocalizations.of(context)!.resendOtpText),
                         )
-                      : Text(
-                          bloc.timerText,
-                          style: const TextStyle(fontSize: 15),
-                        );
+                      : ValueListenableBuilder(
+                          valueListenable: bloc.currentSeconds,
+                          builder: (BuildContext context, int counterValue,
+                              Widget? child) {
+                            return Text(
+                              bloc.timerText,
+                              style: const TextStyle(fontSize: 15),
+                            );
+                          });
                 },
               )
             ],
