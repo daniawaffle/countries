@@ -4,12 +4,12 @@ import 'package:countries_app/screens/startup/startup_bloc.dart';
 import 'package:countries_app/services/hive.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
-
+import 'package:mockito/annotations.dart';
 import '../hive_test.mocks.dart';
 
 late MockHiveService mockHiveService;
 late MockBox mockBox;
-
+@GenerateMocks([HiveService])
 Future<void> main() async {
   TestWidgetsFlutterBinding.ensureInitialized();
 
