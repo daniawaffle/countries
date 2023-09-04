@@ -3,7 +3,6 @@ import 'package:countries_app/locater.dart';
 import 'package:countries_app/screens/startup/startup_bloc.dart';
 import 'package:countries_app/services/hive.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
@@ -16,7 +15,6 @@ Future<void> main() async {
   TestWidgetsFlutterBinding.ensureInitialized();
 
   setUpAll(() async {
-    mockMethodChannel();
     mockBox = MockBox();
     hiveService = HiveService();
     if (!locator.isRegistered<HiveService>()) {
@@ -85,14 +83,5 @@ Future<void> main() async {
 
       verify(mockBox.put(AppConstants.languageHiveKey, value)).called(1);
     });
-  });
-}
-
-void mockMethodChannel() {
-  const MethodChannel channel =
-      MethodChannel('plugins.flutter.io/path_provider');
-  TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
-      .setMockMethodCallHandler(channel, (method) {
-    return null;
   });
 }

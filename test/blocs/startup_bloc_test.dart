@@ -2,13 +2,11 @@ import 'package:countries_app/constants.dart';
 import 'package:countries_app/locater.dart';
 import 'package:countries_app/screens/startup/startup_bloc.dart';
 import 'package:countries_app/services/hive.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
 import '../hive_test.mocks.dart';
 
-//late HiveService hiveService;
 late MockHiveService mockHiveService;
 late MockBox mockBox;
 
@@ -16,8 +14,6 @@ Future<void> main() async {
   TestWidgetsFlutterBinding.ensureInitialized();
 
   setUpAll(() async {
-    mockMethodChannel();
-
     mockBox = MockBox();
     mockHiveService = MockHiveService();
     locator.registerSingleton<HiveService>(MockHiveService());
@@ -47,36 +43,5 @@ Future<void> main() async {
 
       expect(result, 'en');
     });
-  });
-
-  group('saveLanguageToHive', () {
-    // test('saveLanguageToHive', () async {
-    //   const value = 'testValue';
-
-    //   final startupBloc = StartupBloc();
-
-    //   when(locator<HiveService>().setValue<String>(
-    //           key: AppConstants.languageHiveKey,
-    //           boxName: AppConstants.hiveBox,
-    //           value: value))
-    //       .thenAnswer((_) => Future.value());
-
-    //   startupBloc.saveLanguageToHive(value);
-
-    //   verify(locator<HiveService>().setValue<String>(
-    //           key: AppConstants.languageHiveKey,
-    //           boxName: AppConstants.hiveBox,
-    //           value: value))
-    //       .called(1);
-    // });
-  });
-}
-
-void mockMethodChannel() {
-  const MethodChannel channel =
-      MethodChannel('plugins.flutter.io/path_provider');
-  TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
-      .setMockMethodCallHandler(channel, (method) {
-    return null;
   });
 }
